@@ -34,11 +34,15 @@ i-suggest-example__options
                 dt
                     "placeholder"
                 dd
-                    "Placeholder for input. Empty string by default"
+                    "Placeholder for input. An empty string by default"
                 dt
                     "option"
                 dd
-                    "If your suggested data contains neither 'label', nor 'value' fields you can explicitly specify a field 'name' or callback to use instead."
+                    "String or Function. If your suggested data contains neither 'label', nor 'value' fields you can explicitly specify a field 'name' or callback to use instead."
+                dt
+                    "filter"
+                dd
+                    "Function. A callback for filtering existing options."
                 dt
                     "min"
                 dd
@@ -51,6 +55,18 @@ i-suggest-example__options
                     "viewOption"
                 dd
                     "Template name for i-select option customization."
+                dt
+                    "loading"
+                dd
+                    "Boolean. false by default"
+                dt
+                    "debounce"
+                dd
+                    "Number. Debounce value in milliseconds, 150 by default"
+                dt
+                    "size"
+                dd
+                    "String. L, M or S. M by default"
 
 i-suggest-example__data
     li.i-example__list-item
