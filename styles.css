@@ -1193,6 +1193,25 @@ body.i-popup__noscroll {
   left: 0.8em;
 }
 
+.i-example__button-sizing {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  -webkit-align-items: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  padding: 1em 0;
+}
+
+.i-button__custom-badge {
+  padding-left: 1em;
+  font-size: .8em;
+  color: red;
+}
+
 .i-button-group {
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -1247,25 +1266,6 @@ body.i-popup__noscroll {
 .i-button-group .i-button.i-button__disabled,
 .i-button-group .i-button.i-button__loading {
   z-index: -1;
-}
-
-.i-example__button-sizing {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-justify-content: space-around;
-      -ms-flex-pack: distribute;
-          justify-content: space-around;
-  -webkit-align-items: baseline;
-      -ms-flex-align: baseline;
-          align-items: baseline;
-  padding: 1em 0;
-}
-
-.i-button__custom-badge {
-  padding-left: 1em;
-  font-size: .8em;
-  color: red;
 }
 
 .i-input {
