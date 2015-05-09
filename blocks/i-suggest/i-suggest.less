@@ -1,0 +1,51 @@
+.i-suggest {
+    display: inline-flex;
+    align-items: baseline;
+}
+
+.i-suggest > .i-select > .i-button > .i-button__face > .i-input > .i-input__input:focus {
+    box-shadow: none;
+}
+.i-suggest > .i-select > .i-button > .i-button__face > .i-input > .i-input__input {
+    border: 0;
+    padding: 0;
+    background: transparent;
+}
+
+.i-suggest > .i-select > .i-button > .i-button__face > .i-input > .i-input__clear{
+    display: none;
+}
+
+.i-suggest.i-suggest__param > .i-select > .i-button{
+    cursor: hand;
+}
+
+.i-suggest.i-suggest__param > .i-select > .i-button.i-button__disabled{
+    cursor: hand;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: #FFF;
+}
+
+.i-suggest.i-suggest__param > .i-select:after{
+    display: none;
+}
+
+.i-suggest.i-suggest__param.i-suggest__loading > .i-select:after{
+    content: '';
+    position: absolute;
+    height: 1em;
+    width:  1em;
+    transform-origin: 50% 50%;
+    border-right:   2px solid gray;
+    border-left:    2px solid gray;
+    border-top:     2px solid white;
+    border-bottom:  2px solid white;
+    border-radius: 1em;
+    transform: initial;
+    animation: spin 2s linear infinite;
+    display: block;
+    bottom: calc(~"50% - .5rem");
+    right: calc(.5rem);
+}
+
+@keyframes spin { 100% { transform:rotate(360deg); } }

@@ -1,0 +1,67 @@
+@border-color: rgba(0,0,0,0.2);
+@hover-border-color: fadein(@border-color, 10%);
+@focus-color: #fc0;
+@checked-color: #ffeba0;
+@pressed-color: #f3f1ed;
+@disabled-color: rgba(0, 0, 0, .08);
+@action-color: #ffdb4d;
+@action-pressed-color: #fc0;
+
+.striped(@color: rgba(255,255,255,.15); @angle: 45deg) {
+    background-image: linear-gradient(@angle, @color 25%, transparent 25%, transparent 50%, @color 50%, @color 75%, transparent 75%, transparent);
+}
+
+.loading(@color: rgba(255,255,255,0.15) ){
+    .striped(@color);
+    background-color: @color;
+    background-size: 40px 40px;
+    transition: width 0.6s ease 0s;
+    animation: progress-bar-stripes 2s linear infinite;
+}
+
+@keyframes progress-bar-stripes {
+    from {
+        background-position: 40px 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+
+.check{
+    box-sizing: border-box;
+    content: '';
+    position: absolute;
+    height: 1em;
+    width: .4em;
+    transform: rotate(35deg) skewY(15deg);
+    border-right: .13em solid black;
+    border-bottom: .13em solid black;
+}
+
+
+.arrow(@scale: .5; @angle: 45deg) {
+    box-sizing: border-box;
+    content: '';
+    position: absolute;
+    height: 1rem;
+    width: 1rem;
+    transform-origin: 70% 70%;
+    border-right:  .2rem solid black;
+    border-bottom: .2rem solid black;
+    transform: scale(@scale) rotateZ(@angle);
+    cursor: pointer;
+
+    /* 
+        transition: transform .1s linear;
+    */
+}
+
+.line{
+    box-sizing: border-box;
+    content: '';
+    position: absolute;
+    height: 2rem;
+    width: .15rem;
+    background-color: #000;
+}

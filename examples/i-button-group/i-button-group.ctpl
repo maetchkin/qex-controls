@@ -1,0 +1,166 @@
+i-button-group-example
+    ul.i-example__list
+        li.i-example__list-item
+            p
+                "Constructor can recognize following types of input data: String, Array and Object"
+            CTPL-SHOW Usage
+                i::button-group ( buttons ) /* ( options ) */
+                // or
+                i::button-group ( options )
+
+        CALL i-button-group-example__options
+        CALL i-button-group-example__string
+        CALL i-button-group-example__array
+        CALL i-button-group-example__collection
+        CALL i-button-group-example__object
+        CALL i-button-group-example__sizing
+        CALL i-button-group-example__customization
+
+i-button-group-example__options
+    li.i-example__list-item
+        h4
+            "Options"
+        p
+            dl
+                dt
+                    "buttons"
+                dd
+                    "String, Array or Backbone.Collection"
+                dt
+                    "radiocheck"
+                dd
+                    "Boolean. false by default"
+                dt
+                    "delim"
+                dd
+                    "String. ',' by default"
+
+i-button-group-example__string
+    li.i-example__list-item
+        CTPL-SUITE String
+            CTPL-CODE radio
+                span AS $container
+                    i::button-group ('One,Two,Three') AS $group
+                SET $node ($($container.firstChild))
+                SET $buttons ($node.find(".i-button"))
+                SET $collection ($group.get('buttons'))
+                CTPL-TEST must return a Backbone.Model
+                    // check $group is a Backbone.Model
+                    expect( $group ).to.be.an.instanceof(Backbone.Model);
+                    // and has a Backbone.Collection of buttons
+                    expect( $collection ).to.be.an.instanceof(Backbone.Collection);
+                    expect( $collection.length ).to.be.equal(3);
+                    expect( $collection.models.length ).to.be.equal(3);
+
+                    // check children
+                    var $button_1 = $collection.at(0),
+                        $button_2 = $collection.at(1),
+                        $button_3 = $collection.at(2);
+
+                    expect( $button_1.get('label') ).to.be.equal('One');
+                    expect( $button_2.get('label') ).to.be.equal('Two');
+                    expect( $button_3.get('label') ).to.be.equal('Three');
+
+                    // check DOM
+                    expect( $buttons.length ).to.be.equal(3);
+                    // check buttons labels
+                    expect( $($buttons.get(0)).text() ).to.be.equal( 'One' );
+                    expect( $($buttons.get(1)).text() ).to.be.equal( 'Two' );
+                    expect( $($buttons.get(2)).text() ).to.be.equal( 'Three' );
+
+                    // check group state
+                    expect( $group.get('selected') ).to.be.a.null;
+
+            CTPL-CODE radiocheck
+                i::button-group ('One,Two,Three') ({'radiocheck':true}) AS $radiocheck
+                CTPL-TEST must return a Backbone.Model
+                    expect( $radiocheck ).to.be.an.instanceof(Backbone.Model);
+
+i-button-group-example__array
+    li.i-example__list-item
+        CTPL-SUITE Array
+
+            CTPL-CODE radio
+                i::button-group (['One','Two','Three']) AS $group
+                CTPL-TEST must return a Backbone.Model
+                    expect( $group ).to.be.an.instanceof(Backbone.Model);
+
+            CTPL-CODE radiocheck
+                i::button-group (['One','Two','Three']) ({'radiocheck':true}) AS $radiocheck
+                CTPL-TEST must return a Backbone.Model
+                    expect( $radiocheck ).to.be.an.instanceof(Backbone.Model);
+
+i-button-group-example__collection
+    li.i-example__list-item
+        CTPL-SUITE Backbone.Collection
+            CTPL-CODE Define object
+                SET $collection (
+                    new Backbone.Collection([
+                        {'label': 'One', 'value': '1'},
+                        {'label': 'Two', 'value': '2'},
+                        {'label': 'Three', 'value': '3'}
+                    ])
+                )
+
+            CTPL-CODE radio
+                i::button-group ($collection) AS $group
+                CTPL-TEST must return a Backbone.Model
+                    expect( $group ).to.be.an.instanceof(Backbone.Model);
+
+i-button-group-example__object
+    li.i-example__list-item
+        CTPL-SUITE Object
+            CTPL-CODE Define object
+                SET $object ({
+                    "buttons": "One; Two; Three",
+                    "delim":   "; "
+                })
+
+            CTPL-CODE Object param
+                i::button-group ($object) AS $group
+                CTPL-TEST must return a Backbone.Model
+                    expect( $group ).to.be.an.instanceof(Backbone.Model);
+
+i-button-group-example__sizing
+    li.i-example__list-item
+        CTPL-SUITE Sizing
+            CTPL-CODE sizing
+                div.i-example__button-sizing
+                    div
+                        span
+                            "M size"
+                        i::button-group ('One,Two,Three') ({'size':'M'})
+                    div
+                        span
+                            "S size"
+                        i::button-group ('One,Two,Three') ({'size':'S'})
+                    div
+                        span
+                            "XS size"
+                        i::button-group ('One,Two,Three') ({'size':'XS'})
+
+i-button-group-example__customization
+    li.i-example__list-item
+        CTPL-SUITE Customization
+            CTPL-CODE Template with array
+                i::button-group ([
+                    {'label': 'One', 'value': '1'},
+                    {'label': 'Two', 'value': '2', 'disabled': true},
+                    {'label': 'Three', 'value': '3', 'loading': true}
+                ]) ({
+                    'radiocheck': true,
+                    'template':'i-button__custom'
+                })
+            CTPL-CODE Template with object
+                i::button-group ({
+                        'size': 'S',
+                        'template':'i-button__custom',
+                        'buttons':[
+                            {'label': 'One', 'value': '1'},
+                            {'label': 'Two', 'value': '2'},
+                            {'label': 'Three', 'value': '3'}
+                        ]})
+
+
+
+

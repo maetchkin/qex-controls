@@ -1,0 +1,131 @@
+examples-content $set
+    &"./examples-application.less"
+
+    SET $packageName ($set.meta.qex.name)
+
+    li.i-examples-content-item
+        a.i-examples-content-item__title.package-name
+            @name 'Top'
+            $packageName
+        p
+            "This is a library of UI blocks based on a number of modern front-end technologies which transparently demonstrates our approach to Single Page Applications. We are providing this library with documentation, examples and tests which are built on qex-controls library and should give explanations to various aspects of a block's architecture from within, so feel free to look inside. Additionally, you can run all of the tests with button 'run tests' on the left menu, with 'gulp test' CLI command or test blocks separately clicking on links under examples."
+
+        p
+            "The project is hosted on "
+            a
+                @href "https://github.com"
+                "GitHub"
+            " and is available for use under the MIT software license."
+
+    li.i-examples-content-item
+        a.i-examples-content-item__title
+            @name 'Dependencies'
+            'Dependencies'
+        p
+            "Qex-controls should be configured with last versions of "
+            a
+                @href "http://backbonejs.org"
+                "Backbone.js"
+            " and "
+            a
+                @href "https://github.com/hoho/conkitty"
+                "Conkitty"
+            ". Backbone.js could be replaced with lightweight "
+            a
+                @href "http://exosjs.com"
+                "Exoskeleton"
+            " if needed. Conkitty is a DOM-constructor with pretty syntax indented like "
+            a
+                @href "http://jade-lang.com/"
+                "Jade"
+            ", compiler, "
+            a
+                @href "https://github.com/hoho/grunt-conkitty"
+                "grunt"
+            " and "
+            a
+                @href "https://github.com/hoho/gulp-conkitty"
+                "gulp"
+            " plugins, syntax highlighters for "
+            a
+                @href "http://plugins.jetbrains.com/plugin/7348"
+                "IntelliJ IDEA"
+            " and "
+            a
+                @href "https://github.com/maetchkin/conkitty-st3-yaml"
+                "Sublime Text"
+            "."
+
+    li.i-examples-content-item
+        a.i-examples-content-item__title
+            @name 'Introduction'
+            'Introduction'
+        p
+            "Web applications we are building, maintaining and scaling make demands to components we are choosing. At first, let's separate macro- and micro- levels of an application where we use blocks and where we build them for futher usage, respectively."
+        p
+            "Single Page Application could have a complex nature, process a wide range of states and needs an easy way to consume components through clear and stable API. On the top of business-logic of an application we want to have a deal with well-structured, tested components not taking care about dependencies and internal implementation. In this respect, blocks' abstraction based on Backbone API seems to be a good choice to use it as a kind of MVVM design pattern."
+        p
+            "Persistent need of independent blocks grows out the current state of web architecture used to build an application that typically was only desktop earlier. Serving such objectives requires clear rules for managing dependencies, explicit declarations for each block and it's better to be flexible and modular."
+        p
+            "So we shall keep in mind these requirements while building blocks and block libraries to keep them simple, customizable and independent."
+        p
+            "The concept of blocks is pretty clear and could be defined with a pair of theses"
+            ul.definitions
+                li
+                    b
+                        "Blocks are independent components"
+                    p
+                        "Common meaning of blocks architecture is close to "
+                        a
+                            @href "https://en.bem.info/method/definitions/"
+                            "BEM method"
+                        ", generalizing some of decomposition principles and naming conventions."
+                li
+                    b
+                        "Blocks have flexible structure and provide stable interface"
+                    p
+                        "Each block may be implemented with any HTML, CSS, JS, images, fonts and other native or transpilled technologies. The block's heterogeneous nature is hidden behind stable API which is abstracting such low-level details as dependencies inside block-specific file structure and contained technologies used for build."
+
+
+        p
+            "And some theses about block's libraries"
+            ul.definitions
+                li
+                    "Libraries of blocks have dependency management system, custom file naming rules"
+                li
+                    "Libraries of blocks are integrated into project's build system"
+                li
+                    "Libraries of blocks are distributed with tests and docs"
+        p
+            " So, let's construct top-level block using an existing one, like in example below with  i::button:"
+
+        CTPL-CODE Example block
+            // example container
+            div.example-block AS $container
+                // title container
+                span.example-block__title AS $title
+                    // title text
+                    "Hello, bro"
+                // create a button controling state
+                i::button ('run') AS $run
+                JS
+                    // $run points to a Backbone.Model contains a button state
+                    // Handle an event
+                    $run.on(
+                        // Subscribe to event 'action'
+                        // It doesn't matter here what kind of UI event was happened
+                        // click, mouseup or touch
+                        'action',
+                        function(){
+                            $run.set("loading", true); // set button state
+                            $title.textContent += ", I'm running"; // modify block
+                            $container.classList.add("example-block__running");
+                        }
+                    );
+
+    li.i-examples-content-item
+        a.i-examples-content-item__title
+            @name "Blocks"
+            "Blocks"
+
+

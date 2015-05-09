@@ -1,0 +1,114 @@
+.i-button{
+    @import (reference) "../i/i.less";
+
+    cursor: pointer;
+
+    display: inline-flex;
+    flex-direction: row;
+
+    box-sizing: border-box;
+    user-select: none;
+    white-space: nowrap;
+
+    font-size: 1em;
+    border-radius: 3px;
+
+    border: 1px solid @border-color;
+    padding: 0 1em;
+
+    background: #FFF;
+
+    &__action{
+        background: @action-color;
+    }
+
+    &__hover{
+        border-color: @hover-border-color;
+    }
+
+    &__pseudofocus{
+        border-color: @focus-color;
+        box-shadow: inset 0 0 0 1px @focus-color;
+        outline:none;
+    }
+
+    &::-moz-focus-inner {
+        border: 0;
+    }
+
+    &__disabled,
+    &__loading{
+        &:focus,
+        &:hover{
+            border-color: transparent;
+            box-shadow: none;
+        }
+    }
+
+    &__pressed{
+        background: @pressed-color;
+    }
+
+    &__checked&__pressed{
+        background: darken(@checked-color, 10%);
+    }
+    &__action&__pressed{
+        background: @action-pressed-color;
+    }
+
+    &__label{
+        margin: 0;
+        line-height: 2em;
+        font-family: arial, sans-serif;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__checked{
+        background: @checked-color;
+    }
+
+    &__disabled, &__loading{
+        border-color: transparent;
+        .text{
+            color: #999;
+        }
+    }
+
+    &__disabled{
+        cursor: default;
+
+        background-color: @disabled-color;
+    }
+
+    &__loading{
+        .loading(@disabled-color);
+        cursor: progress;
+    }
+
+    &__size{
+        &-L{
+            font-size: 1.25rem;
+        }
+        &-M{
+            font-size: 1rem;
+        }
+        &-S{
+            font-size: .75rem;
+        }
+        &-XS{
+            border-radius: 2px;
+            font-size: .75rem;
+            padding: 0 .5em;
+            line-height: 1.5em;
+            .i-button__label{
+                line-height: 1em;
+            }
+        }
+    }
+}
+
+.selectable{
+    -webkit-user-select:text;
+    user-select:text;
+}

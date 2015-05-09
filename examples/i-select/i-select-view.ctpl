@@ -1,0 +1,40 @@
+i-select__view
+    &"./i-select-example.less"
+
+i-select__view-button__check $selected $select
+    SET $arr ($selected.split(','))
+    CHOOSE
+        WHEN ($arr.length)
+            EACH $option ($arr)
+                CALL i-select__view-button $option $select (true)
+        OTHERWISE
+            CALL i-select__view-button 'empty' $select
+
+
+
+i-select__view-button $selected $select $check
+    SET $label  ($selected || 'empty')
+    div.i-select__view-button
+        span.i-select__view-button-label
+            ($label)
+        TEST ($label!='empty')
+            span.i-select__view-button-delete AS $delete
+                "×"
+            JS
+                $delete.addEventListener(
+                    "mouseup",
+                    function(e){
+                        e.stopPropagation();
+                        if($check){
+                            $select.select($label);
+                        } else {
+                            $select.reset();
+                        }
+                    }
+                )
+
+i-select__view-option $model
+    div.i-select__view-option
+        "→ "
+        ($model.get('label'))
+        " ←"

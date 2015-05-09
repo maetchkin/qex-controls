@@ -1,0 +1,261 @@
+i-select-example
+    ul.i-example__list
+        li.i-example__list-item
+            p
+                "Constructor can recognize following types of input data: String, Array, "
+                a
+                    @href "http://backbonejs.org/#Collection"
+                    "Backbone.Collection"
+                " and Object"
+            CTPL-SHOW Usage
+                i::select ( options ) /* ( options ) */
+
+            CALL i-select-example__options
+            CALL i-select-example__string
+            CALL i-select-example__array
+            CALL i-select-example__collection
+            CALL i-select-example__object
+            CALL i-select-example__disabled
+            CALL i-select-example__customization
+
+i-select-example__options
+    h4
+        "Options"
+    p
+        dl
+            dt
+                "size"
+            dd
+                "String. Values: S, M (default), L"
+            dt
+                "placeholder"
+            dd
+                "String. none (default)"
+            dt
+                "options"
+            dd
+                "String, Array, Object or Backbone.Collection"
+            dt
+                "mode"
+            dd
+                "String. Values: radio (default) or check"
+            dt
+                "delim"
+            dd
+                "String. ',' by default"
+            dt
+                "disabled"
+            dd
+                "Boolean. false by default"
+            dt
+                "viewButton"
+            dd
+                "Template name for i-select button customization."
+            dt
+                "viewOption"
+            dd
+                "Template name for i-select option customization."
+
+i-select-example__string
+    CTPL-SUITE String
+        CTPL-CODE radio mode
+            i::select ('One,Two,Three') AS $stringSelect
+            CTPL-TEST test selected
+                expect($stringSelect.get("selected"))
+                    .to.be.a("string").and
+                    .to.be.empty();
+                expect($stringSelect.get("label"))
+                    .to.equal($stringSelect.get("placeholder"));
+                $stringSelect.select("One");
+                expect($stringSelect.get("selected"))
+                    .to.be.a("string").and
+                    .to.equal("One");
+                expect($stringSelect.get("label"))
+                    .to.equal("One");
+                $stringSelect.select("Two");
+                expect($stringSelect.get("selected"))
+                    .to.be.a("string").and
+                    .to.equal("Two");
+                expect($stringSelect.get("label"))
+                    .to.equal("Two");
+                $stringSelect.reset();
+                expect($stringSelect.get("selected"))
+                    .to.be.a("string").and
+                    .to.be.empty();
+                expect($stringSelect.get("label"))
+                    .to.equal($stringSelect.get("placeholder"));
+
+        CTPL-CODE check mode
+            i::select ("One, Two, Three") ({"mode":"check", "delim": ", "}) AS $stringCheckSelect
+            CTPL-TEST test selected
+                expect($stringCheckSelect.get("selected"))
+                    .to.be.a("string").and
+                    .to.be.empty();
+                expect($stringCheckSelect.get("label"))
+                    .to.equal($stringCheckSelect.get("placeholder"));
+                $stringCheckSelect.select("One");
+                $stringCheckSelect.select("Two");
+                expect($stringCheckSelect.get("selected"))
+                    .to.be.a("string").and
+                    .to.be.equal("One, Two").and
+                    .to.be.equal($stringCheckSelect.get("label"));
+                $stringCheckSelect.reset();
+                expect($stringCheckSelect.get("selected"))
+                    .to.be.a("string").and
+                    .to.be.empty();
+
+i-select-example__array
+    CTPL-SUITE Array
+        CTPL-CODE radio mode
+            i::select (["One", "Two", "Three"]) AS $arraySelect
+            CTPL-TEST radio mode
+                expect($arraySelect.get("selected"))
+                    .to.be.a('null');
+                expect($arraySelect.get("label"))
+                    .to.equal($arraySelect.get("placeholder"));
+                $arraySelect.select("One");
+                expect($arraySelect.get("selected"))
+                    .to.be.a("string").and
+                    .to.be.equal("One");
+                $arraySelect.select("Two");
+                expect($arraySelect.get("selected"))
+                    .to.be.an("string").and
+                    .to.be.deep.equal("Two");
+                $arraySelect.reset();
+                expect($arraySelect.get("selected"))
+                    .to.be.a('null');
+        CTPL-CODE check mode
+            i::select (["One", "Two", "Three"]) ({"mode":"check"}) AS $arrayCheckSelect
+            CTPL-TEST check mode
+                expect($arrayCheckSelect.get("selected"))
+                    .to.be.an("array").and
+                    .to.be.empty();
+                $arrayCheckSelect.select("One");
+                $arrayCheckSelect.select("Two");
+                expect($arrayCheckSelect.get("selected"))
+                    .to.be.an("array").and
+                    .to.be.deep.equal(["One", "Two"]);
+                $arrayCheckSelect.reset();
+                expect($arrayCheckSelect.get("selected"))
+                    .to.be.an("array").and
+                    .to.be.empty();
+
+i-select-example__collection
+    CTPL-SUITE Backbone.Collection
+        CTPL-CODE Define collection
+            SET $collection (new Backbone.Collection([
+                            {"value":"1", "label":"One"},
+                            {"value":"2", "label":"Two"},
+                            {"value":"3", "label":"Three"}
+                        ]))
+
+        CTPL-CODE radio mode
+            i::select ($collection) AS $collectionSelect
+            CTPL-TEST radio mode
+                expect($collectionSelect.get("selected"))
+                    .to.be.a('null');
+                $collectionSelect.select($collection.at(0))
+                expect($collectionSelect.get("selected"))
+                    .to.be.an.instanceof(Backbone.Model).and
+                    .to.be.equal($collection.at(0));
+                $collection.reset([
+                    {"value":"1", "label":"One"},
+                    {"value":"2", "label":"Two"},
+                    {"value":"3", "label":"Four"}
+                ]);
+                $collectionSelect.reset();
+                expect($collectionSelect.get("selected"))
+                    .to.be.a('null');
+
+
+        CTPL-CODE check mode
+            i::select ($collection) ({"mode":"check"}) AS $collectionCheckSelect
+            CTPL-TEST check mode
+                expect($collectionCheckSelect.get("selected"))
+                    .to.be.an('array').and
+                    .to.be.empty();
+                $collectionCheckSelect.select($collection.at(0))
+                $collectionCheckSelect.select($collection.at(1))
+                expect($collectionCheckSelect.get("selected"))
+                    .to.be.an('array').and
+                    .to.be.deep.equal([$collection.at(0),$collection.at(1)]);
+                $collectionCheckSelect.reset();
+                expect($collectionCheckSelect.get("selected"))
+                    .to.be.an('array').and
+                    .to.be.empty();
+
+i-select-example__object
+    CTPL-SUITE Object
+        CTPL-CODE radio mode
+            i::select ({
+                "options":      "One; Two; Three",
+                "size":         "S",
+                "placeholder":  "numbers",
+                "delim":        "; ",
+                "mode":         "check"
+            })
+
+i-select-example__disabled
+    CTPL-SUITE Disabled
+        CTPL-CODE disabled
+            i::select ('One,Two,Three') ({'disabled':true})
+
+i-select-example__customization
+    CTPL-SUITE Customization
+        p
+            "It's easy to modify "
+            b
+                "i-select"
+            " view with custom templates. "
+        CTPL-SHOW Define custom templates
+            i-select__view-button $selected $select $check
+                SET $label  ($selected || 'empty')
+                div.i-select__view-button
+                    span.i-select__view-button-label
+                        ($label)
+                    TEST ($label!='empty')
+                        span.i-select__view-button-delete AS $delete
+                            "×"
+                        JS
+                            $delete.addEventListener(
+                                "mouseup",
+                                function(e){
+                                    e.stopPropagation();
+                                    if($check){
+                                        $select.select($label);
+                                    } else {
+                                        $select.reset();
+                                    }
+                                }
+                            )
+            i-select__view-option $model
+                div.i-select__view-option
+                    "→ "
+                    ($model.get('label'))
+                    " ←"
+
+        CTPL-CODE radio mode
+            i::select (
+                {
+                    "options":    "One,Two,Three",
+                    "viewButton": "i-select__view-button",
+                    "viewOption": "i-select__view-option"
+                }
+            ) AS $radioSelect
+            CTPL-TEST must return a Backbone.Model
+                expect( $radioSelect ).to.be.an('object');
+                expect( $radioSelect ).to.be.an.instanceof(Backbone.Model);
+
+
+        CTPL-CODE check mode
+            i::select (
+                {
+                    "options":    "One,Two,Three",
+                    "viewButton": "i-select__view-button",
+                    "viewOption": "i-select__view-option",
+                    "mode":       "check"
+                }
+            ) AS $checkSelect
+            CTPL-TEST "test type"
+                expect( $checkSelect ).to.be.an('object')
+

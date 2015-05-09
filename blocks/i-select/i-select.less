@@ -1,0 +1,68 @@
+.i-select{
+    @import (reference) "../i/i.less";
+    display: inline-block;
+    position: relative;
+
+    > .i-button{
+        padding-right: 2em;
+        position: relative;
+    }
+
+    &__size{
+        &-L{
+            font-size: 1.25rem;
+
+            &:after{
+                .arrow-down(.625);
+            }
+
+            &.i-select__open:after{
+                .arrow-up(.625);
+            }
+        }
+        &-M{
+            font-size: 1rem;
+
+            &:after{
+                .arrow-down;
+            }
+
+            &.i-select__open:after{
+                .arrow-up;
+            }
+        }
+        &-S{
+            font-size: .75rem;
+
+            &:after{
+                .arrow-down(.375);
+            }
+
+            &.i-select__open:after{
+                .arrow-up(.375);
+            }
+        }
+
+        &-XS{
+            font-size: .75rem;
+
+            &:after{
+                .arrow-down(.375);
+            }
+
+            &.i-select__open:after{
+                .arrow-up(.375);
+            }
+        }
+    }
+
+    .arrow-down(@scale: .5, @angle: 45deg){
+        .arrow(@scale, @angle);
+        bottom: ~"calc(50% - .3rem)";
+        right: ~"calc(1.1em - .3rem)";
+    }
+
+    .arrow-up(@scale: .5){
+        .arrow-down(@scale, -135deg);
+    }
+}

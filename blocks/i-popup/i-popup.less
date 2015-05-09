@@ -1,0 +1,26 @@
+.i-popup{
+    display: none;
+    position: absolute;
+    z-index: 100;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 10px 20px -5px rgba(0,0,0,.4);
+    background: #fff;
+    margin: 0;
+    padding: 0;
+
+    &__tail{
+        position: absolute;
+        background: linear-gradient(
+                to bottom right,
+                #fff,
+                #fff 55%,
+                transparent 55%
+            );
+        box-shadow: -1px -1px 0 0 rgba(0,0,0,.1);
+    }
+}
+
+body.i-popup__noscroll{
+    position:fixed;
+    overflow:hidden;
+}
+

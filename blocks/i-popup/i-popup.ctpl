@@ -1,0 +1,14 @@
+i::popup $data
+    &"i-popup.less"
+    &"i-popup-model.js"
+    &"i-popup-view.js"
+    SET $model ("get" in $data ? $data : new ns.models.popup($data))
+    div.i-popup AS $popup
+        TEST ($model.get('tail'))
+            div.i-popup__tail
+        PAYLOAD
+    SET $view (new ns.views.popup({
+            'model': $model,
+            'el': $popup
+        }))
+    EXPOSE $view

@@ -1,0 +1,28 @@
+i-suggest__custom-button  $selected $select
+    CHOOSE
+        WHEN ($selected)
+            SET $custom
+            CALL i-suggest__custom ($selected) AS $custom
+            JS
+                $($custom).one(
+                    'mousedown',
+                    function(e){
+                        e.stopPropagation();
+                        $select.set("selected", void(0) );
+                    }
+                );
+                $select.set('input', false);
+
+        OTHERWISE
+            i::input AS $input
+            JS
+                $select.set('input', $input);
+
+
+i-suggest__custom $option
+    div.i-suggest__custom AS $container
+        span.i-suggest__custom-capital
+            ($option.get('capital'))
+        span.i-suggest__custom-code
+            ($option.get('code'))
+    EXPOSE $container

@@ -1,0 +1,44 @@
+.i-select{
+	@import (reference) "../i/i.less";
+	&__options-list{
+		
+		box-sizing: border-box;
+		white-space: nowrap;
+		cursor: default;
+		user-select: none;
+		text-align: left;
+		list-style-type: none;
+		overflow-y: auto;
+		overflow-x: hidden;
+		max-height: 50vh;
+		display: flex;
+		flex-direction: column;
+
+		&__item{
+			
+			flex-shrink: 0;
+			padding: 0 1em 0 2em;
+			line-height: 2em;
+			position: relative;
+			cursor: pointer;
+
+			&-focus{
+				background-color: @checked-color;
+			}
+
+			&:first-child{
+				margin-top: 0.3em;
+			}
+
+			&:last-child{
+				margin-bottom: 0.3em;
+			}
+
+			&-selected:before{
+				.check;
+				top: ~"calc(50% - .6em)";
+				left: 0.8em;
+			}
+		}
+	}
+}

@@ -1,0 +1,5 @@
+i-button__custom $model
+    span.i-button__custom-label
+        ($model.get("label"))
+    span.i-button__custom-badge
+        ($model.get("value"))

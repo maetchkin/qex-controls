@@ -1,0 +1,35 @@
+i::input $data
+    &"../i/i.js"
+    &"../i/i.less"
+    &"i-input.less"
+    &"i-input-fabric.js"
+    &"i-input-model.js"
+    &"i-input-view.js"
+    SET $block ("i-input")
+    SET $model (ns.input($data))
+    div AS $wrapper
+        @class $block
+        @class +($block + "__size-" + $model.get("size"))
+        TEST (!$model.get('value'))
+            @class +($block + '__empty')
+        TEST ($model.get('disabled'))
+            @class +($block + '__disabled')
+        input AS $input
+            @class ($block + '__input')
+            @placeholder ($model.get('placeholder'))
+            @value ($model.get('value'))
+            TEST ($model.get('disabled'))
+                @disabled
+        div AS $clear
+            @class ($block + '__clear')
+            
+    JS
+        new ns.views.input(
+            {
+                'el': $wrapper,
+                'model': $model
+            }
+        );
+
+    EXPOSE $model
+                

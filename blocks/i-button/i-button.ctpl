@@ -1,0 +1,48 @@
+i::button $data
+    &"../i/i.js"
+    &"../i/i.less"
+    &"i-button-fabric.js"
+    &"i-button-model.js"
+    &"i-button-view.js"
+    &"i-button.less"
+    SET $block ("i-button")
+    SET $model (ns.button($data))
+    div AS $button
+        @tabindex '0'
+        @class $block
+        @class +($block + "__size-" + $model.get("size"))
+        TEST ($model.get("loading"))
+            @class +($block+"__loading")
+            @disabled
+            @tabindex '-1'
+        TEST ($model.get("action"))
+            @class +($block+"__action")
+        TEST ($model.get("pressed"))
+            @class +($block+"__pressed")
+        TEST ($model.get("checked"))
+            @class +($block+"__checked")
+        TEST ($model.get("disabled"))
+            @class +($block+"__disabled")
+            @disabled
+            @tabindex '-1'
+        div
+            @class ($block+"__face")
+            CHOOSE
+                WHEN ($model.get("template"))
+                    CALL ($model.get("template")) ($model)
+                OTHERWISE
+                    CALL i-button__label ($model)
+
+    JS
+        new ns.views.button(
+            {
+                'el': $button,
+                'model': $model
+            }
+        );
+
+    EXPOSE $model
+
+i-button__label $model
+    span.i-button__label
+        ($model.get("label"))

@@ -1,0 +1,198 @@
+i-suggest-example
+    &"./capitals.json"
+    &"./i-suggest__custom.less"
+    ul.i-example__list
+        li.i-example__list-item
+
+            p
+                "The i::suggest contains some js glue between i::input and i::select. "
+                "Suggest object also provides access to 'data' object via corresponding model's property. "
+                "Constructor can recognize following types of input data: String, Array, "
+                a
+                    @href "http://backbonejs.org/#Collection"
+                    "Backbone.Collection"
+                " and Object"
+            CTPL-SHOW Usage
+                i::suggest ( options )
+
+            CALL i-suggest-example__options
+            CALL i-suggest-example__data
+            CALL i-suggest-example__url
+            CALL i-suggest-example__sizing
+            CALL i-suggest-example__customization
+
+i-suggest-example__options
+    li.i-example__list-item
+        h4
+            "Options"
+        p
+            dl
+                dt
+                    "delim"
+                dd
+                    "String. ',' by default"
+                dt
+                    "placeholder"
+                dd
+                    "Placeholder for input. Empty string by default"
+                dt
+                    "option"
+                dd
+                    "If your suggested data contains neither 'label', nor 'value' fields you can explicitly specify a field 'name' or callback to use instead."
+                dt
+                    "min"
+                dd
+                    "minimum number of characters required to request data"
+                dt
+                    "viewButton"
+                dd
+                    "Template name for i-select button customization."
+                dt
+                    "viewOption"
+                dd
+                    "Template name for i-select option customization."
+
+i-suggest-example__data
+    li.i-example__list-item
+        CTPL-SUITE Data
+            CTPL-CODE String
+                i::suggest ('One,Two,Three') AS $suggestString
+                CTPL-TEST set 'value'
+                    expect( $suggestString ).to.be.an.instanceof(Backbone.Model);
+                    expect( $suggestString.get('data') ).to.be.an.instanceof(Backbone.Collection);
+            CTPL-CODE Array
+                i::suggest (['One','Two','Three']) AS $suggestArray
+                CTPL-TEST set 'value'
+                    expect( $suggestArray ).to.be.an.instanceof(Backbone.Model);
+                    expect( $suggestArray.get('data') ).to.be.an.instanceof(Backbone.Collection);
+
+i-suggest-example__url
+    li.i-example__list-item
+        CTPL-SUITE URL
+            "Suggest element by URL with remote data request."
+            CTPL-CODE set path to json
+                i::suggest ('/examples/i-suggest/capitals.json') AS $suggestURL
+                CTPL-TEST type checking, test data length
+                    expect( $suggestURL ).to.be.an.instanceof(Backbone.Model);
+                    expect( $suggestURL.get('data') ).to.be.an.instanceof(Backbone.Collection);
+                    if ($suggestURL.get('data').length === 0) {
+                        describe('$suggestURL check async', function(){
+                            it('on fetch', function(done){
+                                $suggestURL.get('data').once(
+                                    'sync',
+                                    function(){
+                                        expect( $suggestURL.get('data').length ).to.be.ok;
+                                        done();
+                                    }
+                                );
+                            });
+                        });
+                    }
+            CTPL-CODE pass value through a http request
+                i::suggest ({
+                    'data': '/examples/i-suggest/capitals.json?search=%%input%%',
+                    'min': 1
+                }) AS $suggestURL_input
+                CTPL-TEST type checking
+                    expect( $suggestURL_input ).to.be.an.instanceof(Backbone.Model);
+                    expect( $suggestURL_input.get('data') ).to.be.an.instanceof(Backbone.Collection);
+
+i-suggest-example__sizing
+    li.i-example__list-item
+        CTPL-SUITE Sizing
+            CTPL-CODE Sizing scale
+                div.i-example__button-sizing
+                    div
+                        @style "width:32%"
+                        i::suggest ('One,Two,Three') ({"size": "L", "placeholder": "L-size"})
+                    div
+                        @style "width:32%"
+                        i::suggest ('One,Two,Three') ({"size": "M", "placeholder": "M-size"})
+                    div
+                        @style "width:32%"
+                        i::suggest ('One,Two,Three') ({"size": "S", "placeholder": "S-size"})
+
+i-suggest-example__customization
+    li.i-example__list-item
+        CTPL-SUITE Customization
+
+            CTPL-CODE set option as a String
+                i::suggest ({
+                    'data': '/examples/i-suggest/capitals.json',
+                    'option': 'country'
+                }) AS $suggestURL__country
+                CTPL-TEST type checking
+                    expect( $suggestURL__country ).to.be.an.instanceof(Backbone.Model);
+                    expect( $suggestURL__country.get('data') ).to.be.an.instanceof(Backbone.Collection);
+
+            CTPL-CODE set option as a Function
+                i::suggest ({
+                    'data': '/examples/i-suggest/capitals.json',
+                    'option': function(option){
+                        return option.get('capital') + " " + option.get('code');
+                    }
+                }) AS $suggestURL__func
+                CTPL-TEST type checking
+                    expect( $suggestURL__func ).to.be.an.instanceof(Backbone.Model);
+                    expect( $suggestURL__func.get('data') ).to.be.an.instanceof(Backbone.Collection);
+
+            CTPL-CODE set filter (only European Union)
+                i::suggest ({
+                    'data': '/examples/i-suggest/capitals.json',
+                    'filter': function(option, input){
+                        var EU  = !!option.get("EU"),
+                            val = option.get('capital').toLowerCase(),
+                            str = input.toLowerCase();
+                        return EU && (val.indexOf(str) === 0);
+                    },
+                    'option': function(option){
+                        return option.get('code') + " " + option.get('capital');
+                    }
+                }) AS $suggestURL__func
+                CTPL-TEST type checking
+                    expect( $suggestURL__func ).to.be.an.instanceof(Backbone.Model);
+                    expect( $suggestURL__func.get('data') ).to.be.an.instanceof(Backbone.Collection);
+
+            CTPL-SHOW Define custom templates
+                i-suggest__custom-button  $selected $select
+                    CHOOSE
+                        WHEN ($selected)
+                            SET $custom
+                            CALL i-suggest__custom ($selected) AS $custom
+                            JS
+                                $($custom).one(
+                                    'mousedown',
+                                    function(e){
+                                        e.stopPropagation();
+                                        $select.set("selected", void(0) );
+                                    }
+                                );
+                                $select.set('input', false);
+
+                        OTHERWISE
+                            i::input AS $input
+                            JS
+                                $select.set('input', $input);
+
+
+                i-suggest__custom $option
+                    div.i-suggest__custom AS $container
+                        span.i-suggest__custom-capital
+                            ($option.get('capital'))
+                        span.i-suggest__custom-code
+                            ($option.get('code'))
+                    EXPOSE $container
+
+
+            CTPL-CODE Set custom templates for input and option
+                i::suggest ({
+                    'data': '/examples/i-suggest/capitals.json',
+                    'viewButton': 'i-suggest__custom-button',
+                    'viewOption': 'i-suggest__custom'
+                }) AS $suggestCustom
+                CTPL-TEST check type
+                    expect( $suggestCustom ).to.be.an.instanceof(Backbone.Model);
+                    expect( $suggestCustom.get('data') ).to.be.an.instanceof(Backbone.Collection);
+
+
+

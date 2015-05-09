@@ -1,0 +1,285 @@
+i-button-example
+    &"./i-example__button.less"
+    &"./i-button__custom.ctpl"
+    &"./i-button__custom.less"
+    ul.i-example__list
+        li.i-example__list-item
+            p
+                "Button state is represented by Backbone.Model. Constructor can recognize following types of input data: String or Object"
+            CTPL-SHOW Usage
+                i::button ( /* label string  */ )
+                // or
+                i::button ( /* options hash */ )
+
+            CALL i-button-example__options
+            CALL i-button-example__label
+            CALL i-button-example__sizing
+            CALL i-button-example__action
+            CALL i-button-example__checked
+            CALL i-button-example__disabled
+            CALL i-button-example__loading
+            CALL i-button-example__custom
+
+i-button-example__options
+    h4
+        "Options"
+    p
+        dl
+            dt
+                "label"
+            dd
+                "String. Required."
+            dt
+                "size"
+            dd
+                "L, M, S or XS. M by default"
+            dt
+                "action"
+            dd
+                "Boolean. false by default. Use to highlight button with action color."
+            dt
+                "disabled"
+            dd
+                "Boolean. false by default"
+            dt
+                "loading"
+            dd
+                "Boolean. false by default"
+            dt
+                "checked"
+            dd
+                "Boolean. false by default"
+            dt
+                "template"
+            dd
+                "String. Custom template name instead default"
+
+i-button-example__label
+    CTPL-SUITE Label
+        CTPL-CODE set label with string
+            span AS $container
+                i::button ("click me") AS $button
+            SET $node ($($container.firstChild))
+
+            CTPL-TEST must return a Backbone.Model
+                // must return a Backbone.Model
+                expect( $button ).to.be.an.instanceof(Backbone.Model);
+                // check label exists in Model
+                expect( $button.get('label') ).to.be.equal('click me');
+                // check label exists in DOM
+                expect( $node.find('.i-button__label').text() ).to.be.equal('click me');
+                // buttons view initialization is asynchronous and delayed until mouseover,
+                expect( $button.get('init') ).to.be.false;
+                // let's fire it on DOM node for further tests
+                $node.trigger( $.Event('mouseover') );
+                // check button is inited
+                expect( $button.get('init') ).to.be.true;
+                // check buttons pressed and callback binding
+                // create callback spy with Sinon.js
+                var action = sinon.spy();
+                // subscripe spy on button 'action' event
+                $button.on('action', action);
+                // fire mousedown
+                $node.trigger($.Event('mousedown'));
+                // check button is 'pressed'
+                expect( $node.hasClass('i-button__pressed') ).to.be.a.true;
+                // check mousedown do not produce callback invocation
+                expect( action.called ).to.be.a.false;
+                // fire mouseup
+                $node.trigger($.Event('mouseup'));
+                // check button is not 'pressed'
+                expect( $node.hasClass('i-button__pressed') ).to.be.a.false;
+                // also check if action was triggered
+                expect( action.called ).to.be.a.true;
+                expect( action.calledOnce ).to.be.a.true;
+                expect( action.calledOn($button) ).to.be.a.true;
+
+        CTPL-CODE set label with options object
+            i::button ({"label": "click me"}) AS $buttonOptions
+            CTPL-TEST must return a Backbone.Model
+                expect( $buttonOptions ).to.be.an.instanceof(Backbone.Model);
+                expect( $buttonOptions.get("label") ).to.be.equal("click me");
+
+i-button-example__sizing
+    CTPL-SUITE Sizing
+        CTPL-CODE Sizing scale
+            div.i-example__button-sizing
+                div AS $Lsize
+                    i::button ({"label":"L-size",  "size": "L"})
+                div AS $Msize
+                    i::button ({"label":"M-size",  "size": "M"})
+                div AS $Ssize
+                    i::button ({"label":"S-size",  "size": "S"})
+                div AS $XSsize
+                    i::button ({"label":"XS-size", "size": "XS"})
+        CTPL-TEST test L > M > S > XS
+            var $L  = $($Lsize.firstChild),
+                $M  = $($Msize.firstChild),
+                $S  = $($Ssize.firstChild),
+                $XS = $($XSsize.firstChild);
+            // check classes
+            expect( $L.hasClass('i-button__size-L' )).to.be.true;
+            expect( $M.hasClass('i-button__size-M' )).to.be.true;
+            expect( $S.hasClass('i-button__size-S' )).to.be.true;
+            expect($XS.hasClass('i-button__size-XS')).to.be.true;
+            // check size
+            expect($L.height() > $M.height() ).to.be.true;
+            expect($M.height() > $S.height() ).to.be.true;
+            expect($S.height() > $XS.height()).to.be.true;
+
+i-button-example__action
+    CTPL-SUITE Action
+        p
+            "Buttons with 'action' state should be used to show user his way to succeed"
+        CTPL-CODE set "action"
+            span AS $container
+                i::button ({
+                    "label": "action",
+                    "action": true
+                }) AS $button
+            SET $node ($($container.firstChild))
+            CTPL-TEST property "action" must be "true"
+                expect( $button.get("action") ).to.be.true();
+                expect( $node.hasClass('i-button__action') ).to.be.a.true;
+                $button.set("action", false);
+                expect( $button.get("action") ).to.be.false();
+                expect( $node.hasClass('i-button__action') ).to.be.a.false;
+
+i-button-example__checked
+    CTPL-SUITE Checked
+        p
+            "Buttons with 'checked' state could be used the same way as a checkbox."
+        CTPL-CODE set "checked"
+            span AS $container
+                i::button ({
+                    "label": "checked",
+                    "checked": true
+                }) AS $button
+            SET $node ($($container.firstChild))
+            CTPL-TEST "checked" must be "true"
+                expect( $button.get('checked') ).to.be.true();
+                expect( $node.hasClass('i-button__checked') ).to.be.a.true;
+                $button.set("checked", false);
+                expect( $button.get("checked") ).to.be.false();
+                expect( $node.hasClass('i-button__checked') ).to.be.a.false;
+
+i-button-example__disabled
+    CTPL-SUITE Disabled
+        p
+            "User can not interact with disabled buttons"
+        CTPL-CODE set "disabled"
+            span AS $container
+                i::button ({
+                    "label": "disabled",
+                    "disabled": true
+                }) AS $button
+            SET $node ($($container.firstChild))
+            CTPL-TEST check "disabled" state
+                // model state
+                expect( $button.get('disabled') ).to.be.true();
+
+                // DOM state
+                expect( $node.attr('tabindex') ).to.equal('-1');
+                expect( $node.attr('disabled') ).to.be.ok;
+                expect( $node.hasClass('i-button__disabled') ).to.be.a.true;
+
+                // init button
+                $node.trigger($.Event('mouseover'));
+                var action = sinon.spy();
+                $button.on('action', action);
+
+                // fire mousedown and check if pressed state is not set
+                $node.trigger($.Event('mousedown'));
+                expect( $node.hasClass('i-button__pressed') ).to.be.false;
+                // check 'action' will not firing on mouse up
+                $node.trigger($.Event('mouseup'));
+                expect( action.called ).to.be.false;
+
+                // check binding
+                $button.set('disabled', false);
+                // DOM state
+                expect( $node.attr('tabindex') ).to.equal('0');
+                expect( $node.attr('disabled') ).to.be.not.ok;
+                expect( $node.hasClass('i-button__disabled') ).to.be.a.false;
+
+                // fire mousedown and check if pressed state was set
+                $node.trigger($.Event('mousedown'));
+                expect( $node.hasClass('i-button__pressed') ).to.be.true;
+                // check 'action' will not firing on mouse up
+                $node.trigger($.Event('mouseup'));
+                expect( action.calledOnce ).to.be.a.true;
+                expect( action.calledOn($button) ).to.be.a.true;
+
+
+i-button-example__loading
+    CTPL-SUITE Loading
+        p
+            "If user's actions have started a long-term process like an asynchronous request we should indicate the loading state."
+        CTPL-CODE set "loading"
+            span AS $container
+                i::button ({
+                    "label": "loading",
+                    "loading": true
+                }) AS $button
+            SET $node ($($container.firstChild))
+            CTPL-TEST check "loading" state
+                expect( $button.get('loading') ).to.be.true();
+
+                // DOM state
+                expect( $node.attr('tabindex') ).to.equal('-1');
+                expect( $node.attr('disabled') ).to.be.ok;
+                expect( $node.hasClass('i-button__loading') ).to.be.a.true;
+                // init
+                $node.trigger($.Event('mouseover'));
+                var action = sinon.spy();
+                $button.on('action', action);
+                // fire mousedown and check if pressed state is not set
+                $node.trigger($.Event('mousedown'));
+                expect( $node.hasClass('i-button__pressed') ).to.be.false;
+                // check if 'action' was not triggered
+                $node.trigger($.Event('mouseup'));
+                expect( action.called ).to.be.false;
+
+                // check binding
+                $button.set('loading', false);
+                // DOM state
+                expect( $node.attr('tabindex') ).to.equal('0');
+                expect( $node.attr('disabled') ).to.be.not.ok;
+                expect( $node.hasClass('i-button__loading') ).to.be.a.false;
+
+                // fire mousedown and check if pressed state was set
+                $node.trigger($.Event('mousedown'));
+                expect( $node.hasClass('i-button__pressed') ).to.be.true;
+                // check 'action' will not firing on mouse up
+                $node.trigger($.Event('mouseup'));
+                expect( action.calledOnce ).to.be.a.true;
+                expect( action.calledOn($button) ).to.be.a.true;
+
+i-button-example__custom
+    CTPL-SUITE Customization
+        p
+            "It's easy to customize button with 'template' option"
+        CTPL-SHOW define template
+            i-button__custom $model
+                span.i-button__custom-label
+                    ($model.get("label"))
+                span.i-button__custom-badge
+                    ($model.get("value"))
+
+        CTPL-CODE set 'template' option with its name
+            span AS $container
+                i::button ({
+                    "label":"custom",
+                    "value": "123",
+                    "template": "i-button__custom"
+                })
+            SET $node ($($container.firstChild))
+            CTPL-TEST check customization
+                var $label = $node.find('.i-button__custom-label'),
+                    $badge = $node.find('.i-button__custom-badge');
+                // check custom templates was used
+                expect( $label.length ).to.be.equal(1);
+                expect( $badge.length ).to.be.equal(1);
+                // check values
+                expect( $label.text() ).to.be.equal("custom");
+                expect( $badge.text() ).to.be.equal("123");

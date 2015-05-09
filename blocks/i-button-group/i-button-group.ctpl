@@ -1,0 +1,25 @@
+i::button-group $data $options
+    &"../i/i.js"
+    &"../i/i.less"
+    &"i-button-group-fabric.js"
+    &"i-button-group.js"
+    &"i-button-group.less"
+    SET $block ("i-button-group")
+    SET $model (new ns.buttongroup($data, $options))
+    SET $set   ($model.get('buttons'))
+    div AS $buttonGroup
+        @class $block
+        CHOOSE
+            WHEN ($set.length > 0)
+                EACH $item ($set.models)
+                    CALL i::button $item AS $button
+            OTHERWISE
+                @class +($block + "__empty")
+    JS
+        new ns.views.buttongroup(
+            {
+                'el': $buttonGroup,
+                'model': $model
+            }
+        );
+    EXPOSE $model

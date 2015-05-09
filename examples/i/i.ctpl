@@ -1,0 +1,21 @@
+i-example
+    div.i-example
+        h4
+            "Namespace declaration"
+        p
+            "Dependencies are managed by declarations inside templates and could be effectively used within "
+            a
+                @href "https://github.com/hoho/conkitty#namespaced-templates"
+                "Conkitty namespaces"
+            "."
+        CTPL-SHOW Including block's dependencies
+            namespace::
+                &"./namespace.less"
+                &"./namespace.js"
+
+        CTPL-SHOW Including third-party libraries
+            namespace::
+                &"./libs/lib.js"
+                &"./node_modules/lib-npm-distributed/framework.js"
+        p
+            "See examples below"

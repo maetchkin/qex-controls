@@ -1,0 +1,43 @@
+i::suggest $data $options
+    &"../i/i.js"
+    &"../i/i.less"
+    &"i-suggest-fabric.js"
+    &"i-suggest-model.js"
+    &"i-suggest-view.js"
+    &"i-suggest.less"
+    SET $block ("i-suggest")
+    SET $model (ns.suggest($data, $options))
+    div.i-suggest AS $suggest
+        TEST ($model.get('param'))
+            @class +.i-suggest__param
+        CALL i-suggest-select ($model) AS $select
+        JS
+            $model.set('select', $select);
+            new ns.views.suggest(
+                {
+                    'el': $suggest,
+                    'model': $model
+                }
+            );
+
+    EXPOSE $model
+
+i-suggest-select $model
+    SET $options ({
+        "options":    $model.get('data'),
+        "size":       $model.get('size'),
+        "viewButton": $model.get('viewButton'),
+        "viewOption": $model.get('viewOption')
+    })
+    i::select ($options) AS $select
+    EXPOSE $select
+
+i-suggest-input $selected $select
+    SET $input
+    SET $value ($selected ? $select.getOptionLabel($selected) : '')
+    i::input ({
+        'value': $value,
+        'size': $select.get('size')
+    }) AS $input
+    JS
+        $select.set('input', $input);

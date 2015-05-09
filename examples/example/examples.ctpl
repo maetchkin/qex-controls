@@ -1,0 +1,148 @@
+i-examples $set
+    &"./examples.css"
+    &"./examples-mocha.css"
+    &"./examples-prism.less"
+    &"./examples-content.less"
+    &"./examples.less"
+    &"./examples-state.js"
+    &"./examples-set.js"
+    &"./examples-view.js"
+    &"./examples.html"
+
+    div.i-examples
+        ul.i-examples-content
+            li#mocha.mocha.i-examples-content-item AS $mocha
+            TEST (!exampleState.params.one)
+                CALL examples-content $set
+            EACH $block ($set.models)
+                TEST ($block.get("code").length && (exampleState.params.one ? $block.id=== exampleState.params.one : true ) )
+                    CALL i-examples__content-item $block
+    EXPOSE ({'mocha': $mocha})
+
+i-examples__sidebar $set
+    SET $sidebar ({})
+    TEST ($set.meta.qex)
+        ul.i-examples-menu
+
+            li.i-examples-menu-item
+                CALL i-examples__toc-section $set
+
+            li.i-examples-menu-item
+                a.toc-title
+                    @href (exampleState.url({'section': 'Dependencies'}))
+                    'Dependencies'
+
+            CALL i-examples__packages-selector ($set.meta.frameworks) (exampleState.params.framework) AS $bePackagesSelector
+            CALL i-examples__packages-selector ($set.meta.$)          (exampleState.params.$)         AS $jzPackagesSelector
+            CALL i-examples__packages-kitty    ($set.meta.kitty)
+
+            li.i-examples-menu-item
+                a.toc-title
+                    @href (exampleState.url({'section': 'Introduction'}))
+                    'Introduction'
+
+            li.i-examples-menu-item
+                CALL i-examples__blocks-section $set AS $runTest
+        JS
+            $sidebar.be     = $bePackagesSelector;
+            $sidebar.jz     = $jzPackagesSelector;
+            $sidebar.test   = $runTest;
+    EXPOSE ($sidebar)
+
+i-examples__packages-kitty $kitty
+    li AS $kittyItem
+        @class +.i-examples-menu-item
+        @class +.i-examples-menu-item__packages-selector
+        @class +.i-examples-menu-item__packages-kitty
+        CALL i-examples__packages-selector-option (new Backbone.Model($kitty))
+
+i-examples__packages-selector $options $selected
+    li.i-examples-menu-item.i-examples-menu-item__packages-selector
+        SET $packages (new Backbone.Collection($options))
+        i::select ({
+                'options': $packages,
+                'size': 'S',
+                "viewButton": "i-examples__packages-selector-option",
+                "viewOption": "i-examples__packages-selector-option"
+            }) AS $packagesSelector
+    JS
+        $packagesSelector.select(
+            $packages.findWhere({name: $selected})
+        );
+    EXPOSE ($packagesSelector)
+
+i-examples__packages-selector-option $option
+    CHOOSE
+        WHEN ($option)
+            div.i-examples-menu-item__packages-selector-option
+                span.name
+                    ($option.get('name'))
+                span.version
+                    ($option.get('version'))
+        OTHERWISE
+            '''&nbsp;'''
+
+
+i-examples__toc-section $set
+    a.toc-title
+        @href (exampleState.url({'section': 'Top'}))
+        ($set.meta.qex.name || "")
+        span.version
+            ( $set.meta.qex.version ? " (" + $set.meta.qex.version + ")" : "" )
+    ul.i-examples-menu.toc_section
+        li
+            a.toc-link
+                @href "https://github.com/maetchkin/qex-controls"
+                "GitHub Repository"
+
+i-examples__blocks-section $set
+    a.toc-title
+        @href (exampleState.url({'section': 'Blocks'}))
+        "Blocks"
+    " "
+    i::button ({'label':'run tests', 'size':'XS'}) AS $runTest
+    ul.i-examples-menu.toc-section
+        EACH $block ($set.models)
+            TEST ($block.get("code").length && $block.id.indexOf('i')===0)
+                CALL i-examples__menu-item $block
+    EXPOSE ($runTest)
+
+i-examples__menu-item $block
+    li.i-examples-menu-item
+        a.toc-link.toc-link-section
+            @href (exampleState.url({'block': $block.id}))
+            ($block.id)
+        ul.i-examples-menu.toc-section.block
+            EACH $sub ($block.get("code").filter(function(sub){return sub.type==='SUITE'}))
+                CALL i-examples__menu-item-sub $sub
+
+i-examples__menu-item-sub $sub
+    li.i-examples-menu-item
+        a.toc-link
+            @href (exampleState.url({'sub': $sub.opts, 'block': $sub.name}))
+            " - "
+            ($sub.opts)
+
+
+i-examples__content-item $block
+    TEST ($block.id.indexOf('i')===0)
+        li.i-examples-content-item
+            CALL i-examples__content-item__title ($block.id)
+            CALL ($block.id+"-example") $block
+
+i-examples__content-item__title $id
+    div.i-examples-content-item__title
+        a.i-examples-content-item__title-head
+            @name (exampleState.name($id))
+            ($id)
+        a.i-examples-content-item__title-one
+            CHOOSE
+                WHEN (location.search.match(/(?:\&|\?)one=(?:[^&]*)/))
+                    @href (location.search.replace(/(?:\&|\?)one=(?:[^&]*)/,'') || '?' )
+                    "«"
+                OTHERWISE
+                    @href ((location.search ? location.search + "&" : "?") + "one="+$id)
+                    "»"
+
+
+

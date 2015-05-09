@@ -1,0 +1,42 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    height: 100%;
+}
+
+
+body
+{
+    font-size: 14px;
+    line-height: 22px;
+    font-family: Helvetica Neue, Helvetica, Arial;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAAAAAA7VNdtAAADVklEQVR4AZWWza6oNwgD8/6va4QxzKKbVurP+dR795GIyHic13JxdJdWCOKLgSnNoQro2l1eVBdei0t2LKBMLJi+RsRRN3StOAXXwEvmTJBMtiCLbxyaTNIESMqSgO3niuMEM6cuMw6YDEiUe5tVHeh6ep6829MV5JGCD8QONdcajgNDxxiixxEzuVpfnxnomWuwmONQzVEUKwjvh8mQ04ptVgyLh2662IO3SKmqqTNXCmuPZLkykk5toNkLFPVqsKXsaJjoZNpFuhkowoBLIdPnvsdgAEQ3BBrc50K7lSkoKcBQyeWNe5PriPYalDsEXU3GsHeacBwRxZsBeunW4T3uIOkJNVdCca1UnumomVcnJRioRaYrW0WCt3eBwQsaccXUA5hsgaVMtisqoivdNpi2tnBRbZqH8fqWvmWmO2TZaeBQK1xAsHeY0isf5WkC22yBhaspC0glV+Fo7tLL+yaWspfOQKsWijrgQRcA0MkgTE6c2AGg3Bt8E84nveozZkJTpuvmf/LwjlydN6oKWqp37ZNXFBySA50rWOAdAJlQsGmPSjNme4VmBMAVUdi23j/Sw4niuBmuM7dU4bltMcAN83KEmQUOA5dhtr418toJ6d+A4Hln2YbiKGWIOQ64mCm8K5TdSS/Tzz4DkTaYg8XIVdoOVaVWbzKaLKYfv63LR5tDs02LrT/PpovdViDqusGdhep9X+r6Xv4bcd3FoplJURhKB+Z6BN4NFUyz7LudZG6XMKVaUDtAZg8u58sajWUwb1ihWbpjyeMCRplT1QoPdWjZlGp073P+EcrUXNf8Pbtv3MdQ4OLUdBjkcL2zrDBLszDN9b7iGmapE1TCOmyRqsVN01FGRdWFq/eXN3ZhXddXM8Ws4Bp62a2tzlZvUXlf1/5WzmvMmZ0m23VV9EwR6W77h/p5TJbgge6uuRE3TUHmR2G/Aiqr7MXt66ZvruGyCC3OHoZJXdBr6jAW0xSAh2Oa6einwnp7QMOcTe6yu1NV3+X+/r1Cw9pzYnctdXUR2nYpHXhflVDphoVCoCGr8rTz/sODYCJ2UhiYRscBTNT4feP49a6Pgyl5IetfsdoDu5ce7raGnIrQDt1my7e+Zo2FAg/5gFyL0fwCP+9m8nvfhT8Ai7p8fDSsDVAAAAAASUVORK5CYII=);
+    height: 100%;
+}
+
+
+p{
+    margin-bottom: 1em;
+}
+
+dt{
+    padding: .2em .5em;
+    border-radius: .2em;
+    background-color: rgba(0, 152, 255, 0.15);
+    display: inline-block;
+}
+
+dd{
+    padding: 0 1em;
+    margin-top: .2em;
+    margin-bottom: 1em;
+}
+
+#mocha{
+    display: none;
+}
+

@@ -1,0 +1,125 @@
+i-popup-example
+    &"./i-popup-example.less"
+
+    ul.i-example__list
+        li.i-example__list-item
+            p
+                "Popup used in many block elements."
+            h4
+                "Options"
+            p
+                dl
+                    dt
+                        "owner"
+                    dd
+                        "DOM element. document.body by default"
+                    dt
+                        "mode"
+                    dd
+                        "click or hover"
+                    dt
+                        "side"
+                    dd
+                        "top, right, bottom or left. bottom by default"
+                    dt
+                        "align"
+                    dd
+                        "start, center or end. start by default"
+                    dt
+                        "adaptive"
+                    dd
+                        "Boolean or space-separated ordered subset of top, right, bottom and left. false by default"
+                    dt
+                        "sideOffset"
+                    dd
+                        "CSS length value. .5em by default"
+                    dt
+                        "alignOffset"
+                    dd
+                        "CSS length value. 1px by default"
+                    dt
+                        "tail"
+                    dd
+                        "Boolean. false by default"
+                    dt
+                        "tailWidth"
+                    dd
+                        "CSS length value. .5em by default"
+                    dt
+                        "tailHeight"
+                    dd
+                        "CSS length value. 1px by default"
+                    dt
+                        "tailAlign"
+                    dd
+                        "start, center or end. start by default"
+                    dt
+                        "tailOffset"
+                    dd
+                        "CSS length value. 1px by default"
+                    dt
+                        "autoclose"
+                    dd
+                        "Boolean. true by default"
+                    dt
+                        "delay"
+                    dd
+                        "Time in ms. 500 by default"
+
+
+
+        li.i-example__list-item
+            CTPL-SUITE normal
+                CTPL-CODE normal
+                    div.container AS $container
+                        span.i-popup-example__owner AS $owner
+                            'owner'
+                            span.sibling AS $sibling
+                            i::popup ({
+                                'owner': this,
+                                'mode': 'click',
+                                'tail': 'true',
+                                'side': 'top',
+                                'adaptive': 'left bottom',
+                            }) AS $popup
+                                div.i-popup-example__content
+                                    'some text'
+                    CTPL-TEST must destroy on owner's removal
+                        $popup.show();
+                        $($sibling).remove();
+                        expect(document.body.contains($popup.el)).to.be.true();
+                        $($container).parent().empty();
+                        expect(document.body.contains($popup.el)).to.be.false();
+
+
+        li.i-example__list-item
+            CTPL-SUITE nested
+                CTPL-CODE nested
+                    span.i-popup-example__owner
+                        'owner'
+                        i::popup ({
+                            'owner': this,
+                            'mode': 'click'
+                        })
+                            div.i-popup-example__content
+                                span.i-popup-example__owner
+                                    'owner'
+                                    i::popup ({
+                                        'owner': this,
+                                        'mode': 'click',
+                                        'side': 'right',
+                                        'align': 'start'
+                                    })
+                                        div.i-popup-example__content
+                                            'some text'
+        li.i-example__list-item
+            CTPL-SUITE hover
+                CTPL-CODE hover
+                    span.i-popup-example__owner
+                        'owner'
+                        i::popup ({
+                            'owner': this,
+                            'mode': 'hover'
+                        })
+                            div.i-popup-example__content
+                                'some text'
