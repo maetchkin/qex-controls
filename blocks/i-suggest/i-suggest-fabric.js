@@ -7,7 +7,7 @@ ns.suggest = function(data, _options){
             return {'value':item};
         },
 
-        reURL = /^((?:(?:http|https):\/)?\/.*)$/ ,
+        reURL = /^((?:(?:http|https):\/)?\.?\/.*)$/ ,
 
         parseURL = function(string){
             return string.match(reURL);

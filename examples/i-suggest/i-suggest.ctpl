@@ -71,7 +71,7 @@ i-suggest-example__url
         CTPL-SUITE URL
             "Suggest element by URL with remote data request."
             CTPL-CODE set path to json
-                i::suggest ('/examples/i-suggest/capitals.json') AS $suggestURL
+                i::suggest ('./examples/i-suggest/capitals.json') AS $suggestURL
                 CTPL-TEST type checking, test data length
                     expect( $suggestURL ).to.be.an.instanceof(Backbone.Model);
                     expect( $suggestURL.get('data') ).to.be.an.instanceof(Backbone.Collection);
@@ -90,7 +90,7 @@ i-suggest-example__url
                     }
             CTPL-CODE pass value through a http request
                 i::suggest ({
-                    'data': '/examples/i-suggest/capitals.json?search=%%input%%',
+                    'data': './examples/i-suggest/capitals.json?search=%%input%%',
                     'min': 1
                 }) AS $suggestURL_input
                 CTPL-TEST type checking
@@ -118,7 +118,7 @@ i-suggest-example__customization
 
             CTPL-CODE set option as a String
                 i::suggest ({
-                    'data': '/examples/i-suggest/capitals.json',
+                    'data': './examples/i-suggest/capitals.json',
                     'option': 'country'
                 }) AS $suggestURL__country
                 CTPL-TEST type checking
@@ -127,7 +127,7 @@ i-suggest-example__customization
 
             CTPL-CODE set option as a Function
                 i::suggest ({
-                    'data': '/examples/i-suggest/capitals.json',
+                    'data': './examples/i-suggest/capitals.json',
                     'option': function(option){
                         return option.get('capital') + " " + option.get('code');
                     }
@@ -138,7 +138,7 @@ i-suggest-example__customization
 
             CTPL-CODE set filter (only European Union)
                 i::suggest ({
-                    'data': '/examples/i-suggest/capitals.json',
+                    'data': './examples/i-suggest/capitals.json',
                     'filter': function(option, input){
                         var EU  = !!option.get("EU"),
                             val = option.get('capital').toLowerCase(),
@@ -186,7 +186,7 @@ i-suggest-example__customization
 
             CTPL-CODE Set custom templates for input and option
                 i::suggest ({
-                    'data': '/examples/i-suggest/capitals.json',
+                    'data': './examples/i-suggest/capitals.json',
                     'viewButton': 'i-suggest__custom-button',
                     'viewOption': 'i-suggest__custom'
                 }) AS $suggestCustom

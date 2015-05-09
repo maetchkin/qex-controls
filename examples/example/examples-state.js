@@ -48,7 +48,7 @@ window.exampleState = (function (location) {
                 result += '&runtest';
             }
 
-            return '/' + result;
+            return './' + result;
         }
     };
 

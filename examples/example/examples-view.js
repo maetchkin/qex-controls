@@ -119,6 +119,8 @@ window.ExamplesView = Backbone.View.extend({
             }
         );
 
+        Prism.highlightAll();
+
         return true;
     },
 
