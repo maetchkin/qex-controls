@@ -31,7 +31,7 @@
           "name": "examples-content",
           "type": "CODE",
           "opts": "Example block",
-          "sign": "2306421510875225"
+          "sign": "34042722126469016"
         }
       ]
     },
@@ -47,7 +47,7 @@
           "name": "i",
           "type": "CODE",
           "opts": "Including block's dependencies",
-          "sign": "6131367278285325"
+          "sign": "5774934936780483"
         },
         {
           "code": [
@@ -58,7 +58,7 @@
           "name": "i",
           "type": "CODE",
           "opts": "Including third-party libraries",
-          "sign": "76435596938245"
+          "sign": "46243858546949923"
         }
       ]
     },
@@ -74,13 +74,13 @@
           "name": "i-button",
           "type": "CODE",
           "opts": "Usage",
-          "sign": "015372171998023987"
+          "sign": "19669796829111874"
         },
         {
           "name": "i-button",
           "type": "SUITE",
           "opts": "Label",
-          "sign": "9887495348230004"
+          "sign": "16840086900629103"
         },
         {
           "code": [
@@ -91,7 +91,7 @@
           "name": "i-button, Label",
           "type": "CODE",
           "opts": "set label with string",
-          "sign": "2322828967589885"
+          "sign": "15488501824438572"
         },
         {
           "code": [
@@ -130,7 +130,7 @@
           "name": "i-button, Label, set label with string",
           "type": "TEST",
           "opts": "must return a Backbone.Model",
-          "sign": "532376911258325"
+          "sign": "10906766494736075"
         },
         {
           "code": [
@@ -139,7 +139,7 @@
           "name": "i-button, Label",
           "type": "CODE",
           "opts": "set label with options object",
-          "sign": "950157661922276"
+          "sign": "797269037226215"
         },
         {
           "code": [
@@ -149,13 +149,13 @@
           "name": "i-button, Label, set label with options object",
           "type": "TEST",
           "opts": "must return a Backbone.Model",
-          "sign": "23090587090700865"
+          "sign": "29786723712459207"
         },
         {
           "name": "i-button",
           "type": "SUITE",
           "opts": "Sizing",
-          "sign": "427459743572399"
+          "sign": "1427299666684121"
         },
         {
           "code": [
@@ -172,7 +172,7 @@
           "name": "i-button, Sizing",
           "type": "CODE",
           "opts": "Sizing scale",
-          "sign": "03578547388315201"
+          "sign": "9225474228151143"
         },
         {
           "code": [
@@ -193,13 +193,13 @@
           "name": "i-button, Sizing",
           "type": "TEST",
           "opts": "test L > M > S > XS",
-          "sign": "9611338304821402"
+          "sign": "7299162473063916"
         },
         {
           "name": "i-button",
           "type": "SUITE",
           "opts": "Action",
-          "sign": "5667984175961465"
+          "sign": "7962081918958575"
         },
         {
           "code": [
@@ -213,7 +213,7 @@
           "name": "i-button, Action",
           "type": "CODE",
           "opts": "set \"action\"",
-          "sign": "1799818640574813"
+          "sign": "232139824423939"
         },
         {
           "code": [
@@ -226,13 +226,13 @@
           "name": "i-button, Action, set \"action\"",
           "type": "TEST",
           "opts": "property \"action\" must be \"true\"",
-          "sign": "8853873747866601"
+          "sign": "9692829174455255"
         },
         {
           "name": "i-button",
           "type": "SUITE",
           "opts": "Checked",
-          "sign": "5254026225302368"
+          "sign": "5134869760368019"
         },
         {
           "code": [
@@ -246,7 +246,7 @@
           "name": "i-button, Checked",
           "type": "CODE",
           "opts": "set \"checked\"",
-          "sign": "7097479589283466"
+          "sign": "9717139115091413"
         },
         {
           "code": [
@@ -259,13 +259,13 @@
           "name": "i-button, Checked, set \"checked\"",
           "type": "TEST",
           "opts": "\"checked\" must be \"true\"",
-          "sign": "3591747796162963"
+          "sign": "20374206989072263"
         },
         {
           "name": "i-button",
           "type": "SUITE",
           "opts": "Disabled",
-          "sign": "1537323195952922"
+          "sign": "127018817467615"
         },
         {
           "code": [
@@ -279,7 +279,7 @@
           "name": "i-button, Disabled",
           "type": "CODE",
           "opts": "set \"disabled\"",
-          "sign": "2504645411390811"
+          "sign": "9865720234811306"
         },
         {
           "code": [
@@ -316,13 +316,13 @@
           "name": "i-button, Disabled, set \"disabled\"",
           "type": "TEST",
           "opts": "check \"disabled\" state",
-          "sign": "6575843945611268"
+          "sign": "39159402321092784"
         },
         {
           "name": "i-button",
           "type": "SUITE",
           "opts": "Loading",
-          "sign": "9837632088456303"
+          "sign": "731603434542194"
         },
         {
           "code": [
@@ -336,7 +336,7 @@
           "name": "i-button, Loading",
           "type": "CODE",
           "opts": "set \"loading\"",
-          "sign": "23593766172416508"
+          "sign": "5976170338690281"
         },
         {
           "code": [
@@ -372,13 +372,13 @@
           "name": "i-button, Loading, set \"loading\"",
           "type": "TEST",
           "opts": "check \"loading\" state",
-          "sign": "4487142371945083"
+          "sign": "3401694856584072"
         },
         {
           "name": "i-button",
           "type": "SUITE",
           "opts": "Customization",
-          "sign": "1599947011563927"
+          "sign": "9867816283367574"
         },
         {
           "code": [
@@ -391,7 +391,7 @@
           "name": "i-button, Customization",
           "type": "CODE",
           "opts": "define template",
-          "sign": "5932148408610374"
+          "sign": "35455710464157164"
         },
         {
           "code": [
@@ -406,7 +406,7 @@
           "name": "i-button, Customization",
           "type": "CODE",
           "opts": "set 'template' option with its name",
-          "sign": "6006998510565609"
+          "sign": "026179231703281403"
         },
         {
           "code": [
@@ -422,7 +422,7 @@
           "name": "i-button, Customization, set 'template' option with its name",
           "type": "TEST",
           "opts": "check customization",
-          "sign": "6239979851525277"
+          "sign": "28178050299175084"
         }
       ]
     },
@@ -438,13 +438,13 @@
           "name": "i-button-group",
           "type": "CODE",
           "opts": "Usage",
-          "sign": "3901108601130545"
+          "sign": "7685583024285734"
         },
         {
           "name": "i-button-group",
           "type": "SUITE",
           "opts": "String",
-          "sign": "584608028177172"
+          "sign": "8783673557918519"
         },
         {
           "code": [
@@ -457,7 +457,7 @@
           "name": "i-button-group, String",
           "type": "CODE",
           "opts": "radio",
-          "sign": "40820815064944327"
+          "sign": "43052733154036105"
         },
         {
           "code": [
@@ -486,7 +486,7 @@
           "name": "i-button-group, String, radio",
           "type": "TEST",
           "opts": "must return a Backbone.Model",
-          "sign": "2587072318419814"
+          "sign": "2599115567281842"
         },
         {
           "code": [
@@ -495,7 +495,7 @@
           "name": "i-button-group, String",
           "type": "CODE",
           "opts": "radiocheck",
-          "sign": "29342401307076216"
+          "sign": "3267283507157117"
         },
         {
           "code": [
@@ -504,13 +504,13 @@
           "name": "i-button-group, String, radiocheck",
           "type": "TEST",
           "opts": "must return a Backbone.Model",
-          "sign": "5760025340132415"
+          "sign": "2488082235213369"
         },
         {
           "name": "i-button-group",
           "type": "SUITE",
           "opts": "Array",
-          "sign": "12458898779004812"
+          "sign": "3140221331268549"
         },
         {
           "code": [
@@ -519,7 +519,7 @@
           "name": "i-button-group, Array",
           "type": "CODE",
           "opts": "radio",
-          "sign": "7573695185128599"
+          "sign": "9854313586838543"
         },
         {
           "code": [
@@ -528,7 +528,7 @@
           "name": "i-button-group, Array, radio",
           "type": "TEST",
           "opts": "must return a Backbone.Model",
-          "sign": "17783079366199672"
+          "sign": "8107704240828753"
         },
         {
           "code": [
@@ -537,7 +537,7 @@
           "name": "i-button-group, Array",
           "type": "CODE",
           "opts": "radiocheck",
-          "sign": "6243548246566206"
+          "sign": "3013448074925691"
         },
         {
           "code": [
@@ -546,13 +546,13 @@
           "name": "i-button-group, Array, radiocheck",
           "type": "TEST",
           "opts": "must return a Backbone.Model",
-          "sign": "6851518279872835"
+          "sign": "43950922158546746"
         },
         {
           "name": "i-button-group",
           "type": "SUITE",
           "opts": "Backbone.Collection",
-          "sign": "9227043273858726"
+          "sign": "04744499642401934"
         },
         {
           "code": [
@@ -567,7 +567,7 @@
           "name": "i-button-group, Backbone.Collection",
           "type": "CODE",
           "opts": "Define object",
-          "sign": "6693995837122202"
+          "sign": "9859151691198349"
         },
         {
           "code": [
@@ -576,7 +576,7 @@
           "name": "i-button-group, Backbone.Collection",
           "type": "CODE",
           "opts": "radio",
-          "sign": "9808603711426258"
+          "sign": "37998253433033824"
         },
         {
           "code": [
@@ -585,13 +585,13 @@
           "name": "i-button-group, Backbone.Collection, radio",
           "type": "TEST",
           "opts": "must return a Backbone.Model",
-          "sign": "26269973325543106"
+          "sign": "5464724292978644"
         },
         {
           "name": "i-button-group",
           "type": "SUITE",
           "opts": "Object",
-          "sign": "5049435920082033"
+          "sign": "624585728161037"
         },
         {
           "code": [
@@ -603,7 +603,7 @@
           "name": "i-button-group, Object",
           "type": "CODE",
           "opts": "Define object",
-          "sign": "6333584478124976"
+          "sign": "9702968993224204"
         },
         {
           "code": [
@@ -612,7 +612,7 @@
           "name": "i-button-group, Object",
           "type": "CODE",
           "opts": "Object param",
-          "sign": "2824268250260502"
+          "sign": "30410388205200434"
         },
         {
           "code": [
@@ -621,13 +621,13 @@
           "name": "i-button-group, Object, Object param",
           "type": "TEST",
           "opts": "must return a Backbone.Model",
-          "sign": "9272852262947708"
+          "sign": "9511020581703633"
         },
         {
           "name": "i-button-group",
           "type": "SUITE",
           "opts": "Sizing",
-          "sign": "20426047779619694"
+          "sign": "4543332299217582"
         },
         {
           "code": [
@@ -648,13 +648,13 @@
           "name": "i-button-group, Sizing",
           "type": "CODE",
           "opts": "sizing",
-          "sign": "594640489667654"
+          "sign": "2453942543361336"
         },
         {
           "name": "i-button-group",
           "type": "SUITE",
           "opts": "Customization",
-          "sign": "8224936318583786"
+          "sign": "17188629088923335"
         },
         {
           "code": [
@@ -670,7 +670,7 @@
           "name": "i-button-group, Customization",
           "type": "CODE",
           "opts": "Template with array",
-          "sign": "3290909822098911"
+          "sign": "7403054779861122"
         },
         {
           "code": [
@@ -686,7 +686,7 @@
           "name": "i-button-group, Customization",
           "type": "CODE",
           "opts": "Template with object",
-          "sign": "6233612184878439"
+          "sign": "46595397125929594"
         }
       ]
     },
@@ -702,13 +702,13 @@
           "name": "i-input",
           "type": "CODE",
           "opts": "Usage",
-          "sign": "6037856447510421"
+          "sign": "3715799795463681"
         },
         {
           "name": "i-input",
           "type": "SUITE",
           "opts": "Sizing",
-          "sign": "9548232334200293"
+          "sign": "7695550546050072"
         },
         {
           "code": [
@@ -726,7 +726,7 @@
           "name": "i-input, Sizing",
           "type": "CODE",
           "opts": "Sizing scale",
-          "sign": "5709224669262767"
+          "sign": "026951513718813658"
         },
         {
           "code": [
@@ -744,13 +744,13 @@
           "name": "i-input, Sizing",
           "type": "TEST",
           "opts": "test L > M > S",
-          "sign": "460666959406808"
+          "sign": "6174942513462156"
         },
         {
           "name": "i-input",
           "type": "SUITE",
           "opts": "Value",
-          "sign": "8512984742410481"
+          "sign": "4511786724906415"
         },
         {
           "code": [
@@ -763,7 +763,7 @@
           "name": "i-input, Value",
           "type": "CODE",
           "opts": "Value",
-          "sign": "7111731269396842"
+          "sign": "4358371151611209"
         },
         {
           "code": [
@@ -812,13 +812,13 @@
           "name": "i-input, Value",
           "type": "TEST",
           "opts": "ASYNC set 'value'",
-          "sign": "3806523592211306"
+          "sign": "17149696522392333"
         },
         {
           "name": "i-input",
           "type": "SUITE",
           "opts": "Disabled",
-          "sign": "7381186038255692"
+          "sign": "8228029068559408"
         },
         {
           "code": [
@@ -831,7 +831,7 @@
           "name": "i-input, Disabled",
           "type": "CODE",
           "opts": "Disabled",
-          "sign": "6523442137986422"
+          "sign": "06641866872087121"
         },
         {
           "code": [
@@ -852,13 +852,13 @@
           "name": "i-input, Disabled",
           "type": "TEST",
           "opts": "set 'disabled'",
-          "sign": "48315252363681793"
+          "sign": "6708252087701112"
         },
         {
           "name": "i-input",
           "type": "SUITE",
           "opts": "Placeholder",
-          "sign": "5815401456784457"
+          "sign": "9515512727666646"
         },
         {
           "code": [
@@ -869,7 +869,7 @@
           "name": "i-input, Placeholder",
           "type": "CODE",
           "opts": "Placeholder",
-          "sign": "3905602979939431"
+          "sign": "6424738781061023"
         },
         {
           "code": [
@@ -885,13 +885,13 @@
           "name": "i-input, Placeholder",
           "type": "TEST",
           "opts": "set 'placeholder'",
-          "sign": "6586519563570619"
+          "sign": "14361683558672667"
         },
         {
           "name": "i-input",
           "type": "SUITE",
           "opts": "Debounce",
-          "sign": "5404848142061383"
+          "sign": "4692459595389664"
         },
         {
           "code": [
@@ -906,7 +906,7 @@
           "name": "i-input, Debounce",
           "type": "CODE",
           "opts": "Debounce",
-          "sign": "4033300580922514"
+          "sign": "4311523833312094"
         },
         {
           "code": [
@@ -950,7 +950,7 @@
           "name": "i-input, Debounce",
           "type": "TEST",
           "opts": "ASYNC set 'debounce'",
-          "sign": "02277747611515224"
+          "sign": "5776089665014297"
         }
       ]
     },
@@ -961,7 +961,7 @@
           "name": "i-popup",
           "type": "SUITE",
           "opts": "normal",
-          "sign": "11764890467748046"
+          "sign": "7183356166351587"
         },
         {
           "code": [
@@ -982,7 +982,7 @@
           "name": "i-popup, normal",
           "type": "CODE",
           "opts": "normal",
-          "sign": "738263700157404"
+          "sign": "07273752987384796"
         },
         {
           "code": [
@@ -995,13 +995,13 @@
           "name": "i-popup, normal, normal",
           "type": "TEST",
           "opts": "must destroy on owner's removal",
-          "sign": "08843031642027199"
+          "sign": "07478004577569664"
         },
         {
           "name": "i-popup",
           "type": "SUITE",
           "opts": "nested",
-          "sign": "9900674389209598"
+          "sign": "25715856440365314"
         },
         {
           "code": [
@@ -1026,13 +1026,13 @@
           "name": "i-popup, nested",
           "type": "CODE",
           "opts": "nested",
-          "sign": "5103212262038141"
+          "sign": "03923078812658787"
         },
         {
           "name": "i-popup",
           "type": "SUITE",
           "opts": "hover",
-          "sign": "2609839418437332"
+          "sign": "9278353694826365"
         },
         {
           "code": [
@@ -1048,7 +1048,7 @@
           "name": "i-popup, hover",
           "type": "CODE",
           "opts": "hover",
-          "sign": "8666496148798615"
+          "sign": "17411022377200425"
         }
       ]
     },
@@ -1062,13 +1062,13 @@
           "name": "i-select",
           "type": "CODE",
           "opts": "Usage",
-          "sign": "1522857705131173"
+          "sign": "6388605069369078"
         },
         {
           "name": "i-select",
           "type": "SUITE",
           "opts": "String",
-          "sign": "9036971973255277"
+          "sign": "8456085852812976"
         },
         {
           "code": [
@@ -1077,7 +1077,7 @@
           "name": "i-select, String",
           "type": "CODE",
           "opts": "radio mode",
-          "sign": "10630512959323823"
+          "sign": "7595571521669626"
         },
         {
           "code": [
@@ -1108,7 +1108,7 @@
           "name": "i-select, String, radio mode",
           "type": "TEST",
           "opts": "test selected",
-          "sign": "5389281350653619"
+          "sign": "5295012472197413"
         },
         {
           "code": [
@@ -1117,7 +1117,7 @@
           "name": "i-select, String",
           "type": "CODE",
           "opts": "check mode",
-          "sign": "8092810572125018"
+          "sign": "678288007620722"
         },
         {
           "code": [
@@ -1140,13 +1140,13 @@
           "name": "i-select, String, check mode",
           "type": "TEST",
           "opts": "test selected",
-          "sign": "13092480413615704"
+          "sign": "4255302152596414"
         },
         {
           "name": "i-select",
           "type": "SUITE",
           "opts": "Array",
-          "sign": "5343133646529168"
+          "sign": "7498946262057871"
         },
         {
           "code": [
@@ -1155,7 +1155,7 @@
           "name": "i-select, Array",
           "type": "CODE",
           "opts": "radio mode",
-          "sign": "33252288587391376"
+          "sign": "9168798851314932"
         },
         {
           "code": [
@@ -1178,7 +1178,7 @@
           "name": "i-select, Array, radio mode",
           "type": "TEST",
           "opts": "radio mode",
-          "sign": "27836629026569426"
+          "sign": "17673998419195414"
         },
         {
           "code": [
@@ -1187,7 +1187,7 @@
           "name": "i-select, Array",
           "type": "CODE",
           "opts": "check mode",
-          "sign": "6762553772423416"
+          "sign": "5935200427193195"
         },
         {
           "code": [
@@ -1207,13 +1207,13 @@
           "name": "i-select, Array, check mode",
           "type": "TEST",
           "opts": "check mode",
-          "sign": "27193713770247996"
+          "sign": "18185243476182222"
         },
         {
           "name": "i-select",
           "type": "SUITE",
           "opts": "Backbone.Collection",
-          "sign": "10843948763795197"
+          "sign": "909336801385507"
         },
         {
           "code": [
@@ -1226,7 +1226,7 @@
           "name": "i-select, Backbone.Collection",
           "type": "CODE",
           "opts": "Define collection",
-          "sign": "39812727668322623"
+          "sign": "2793591187801212"
         },
         {
           "code": [
@@ -1235,7 +1235,7 @@
           "name": "i-select, Backbone.Collection",
           "type": "CODE",
           "opts": "radio mode",
-          "sign": "8233675898518413"
+          "sign": "9606387589592487"
         },
         {
           "code": [
@@ -1257,7 +1257,7 @@
           "name": "i-select, Backbone.Collection, radio mode",
           "type": "TEST",
           "opts": "radio mode",
-          "sign": "4460791579913348"
+          "sign": "7123433903325349"
         },
         {
           "code": [
@@ -1266,7 +1266,7 @@
           "name": "i-select, Backbone.Collection",
           "type": "CODE",
           "opts": "check mode",
-          "sign": "36607969645410776"
+          "sign": "8805828157346696"
         },
         {
           "code": [
@@ -1286,13 +1286,13 @@
           "name": "i-select, Backbone.Collection, check mode",
           "type": "TEST",
           "opts": "check mode",
-          "sign": "38742494327016175"
+          "sign": "8443173631094396"
         },
         {
           "name": "i-select",
           "type": "SUITE",
           "opts": "Object",
-          "sign": "4396904173772782"
+          "sign": "4057472723070532"
         },
         {
           "code": [
@@ -1307,13 +1307,13 @@
           "name": "i-select, Object",
           "type": "CODE",
           "opts": "radio mode",
-          "sign": "41733125830069184"
+          "sign": "4404793633148074"
         },
         {
           "name": "i-select",
           "type": "SUITE",
           "opts": "Disabled",
-          "sign": "9549587562214583"
+          "sign": "9212892642244697"
         },
         {
           "code": [
@@ -1322,13 +1322,13 @@
           "name": "i-select, Disabled",
           "type": "CODE",
           "opts": "disabled",
-          "sign": "028341711033135653"
+          "sign": "6705517924856395"
         },
         {
           "name": "i-select",
           "type": "SUITE",
           "opts": "Customization",
-          "sign": "042167269391939044"
+          "sign": "17107653827406466"
         },
         {
           "code": [
@@ -1361,7 +1361,7 @@
           "name": "i-select, Customization",
           "type": "CODE",
           "opts": "Define custom templates",
-          "sign": "39821932977065444"
+          "sign": "08118870574980974"
         },
         {
           "code": [
@@ -1376,7 +1376,7 @@
           "name": "i-select, Customization",
           "type": "CODE",
           "opts": "radio mode",
-          "sign": "47783435112796724"
+          "sign": "3906073940452188"
         },
         {
           "code": [
@@ -1386,7 +1386,7 @@
           "name": "i-select, Customization, radio mode",
           "type": "TEST",
           "opts": "must return a Backbone.Model",
-          "sign": "4799773746635765"
+          "sign": "35561718279495835"
         },
         {
           "code": [
@@ -1402,7 +1402,7 @@
           "name": "i-select, Customization",
           "type": "CODE",
           "opts": "check mode",
-          "sign": "5375189941842109"
+          "sign": "09879318159073591"
         },
         {
           "code": [
@@ -1411,7 +1411,7 @@
           "name": "i-select, Customization, check mode",
           "type": "TEST",
           "opts": "\"test type\"",
-          "sign": "9828638688195497"
+          "sign": "20478370832279325"
         }
       ]
     },
@@ -1425,13 +1425,13 @@
           "name": "i-suggest",
           "type": "CODE",
           "opts": "Usage",
-          "sign": "7518504681065679"
+          "sign": "8436500406824052"
         },
         {
           "name": "i-suggest",
           "type": "SUITE",
           "opts": "Data",
-          "sign": "7617246152367443"
+          "sign": "9490802718792111"
         },
         {
           "code": [
@@ -1440,7 +1440,7 @@
           "name": "i-suggest, Data",
           "type": "CODE",
           "opts": "String",
-          "sign": "0963508824352175"
+          "sign": "5212007001973689"
         },
         {
           "code": [
@@ -1450,7 +1450,7 @@
           "name": "i-suggest, Data, String",
           "type": "TEST",
           "opts": "set 'value'",
-          "sign": "706194757251069"
+          "sign": "050950635923072696"
         },
         {
           "code": [
@@ -1459,7 +1459,7 @@
           "name": "i-suggest, Data",
           "type": "CODE",
           "opts": "Array",
-          "sign": "2735794270411134"
+          "sign": "13817612058483064"
         },
         {
           "code": [
@@ -1469,13 +1469,13 @@
           "name": "i-suggest, Data, Array",
           "type": "TEST",
           "opts": "set 'value'",
-          "sign": "22976670879870653"
+          "sign": "7641917336732149"
         },
         {
           "name": "i-suggest",
           "type": "SUITE",
           "opts": "URL",
-          "sign": "3270336592104286"
+          "sign": "0946972796227783"
         },
         {
           "code": [
@@ -1484,7 +1484,7 @@
           "name": "i-suggest, URL",
           "type": "CODE",
           "opts": "set path to json",
-          "sign": "8168743131682277"
+          "sign": "5939098054077476"
         },
         {
           "code": [
@@ -1507,7 +1507,7 @@
           "name": "i-suggest, URL, set path to json",
           "type": "TEST",
           "opts": "type checking, test data length",
-          "sign": "6473067214246839"
+          "sign": "408396131824702"
         },
         {
           "code": [
@@ -1519,7 +1519,7 @@
           "name": "i-suggest, URL",
           "type": "CODE",
           "opts": "pass value through a http request",
-          "sign": "21441061794757843"
+          "sign": "6071819430217147"
         },
         {
           "code": [
@@ -1529,13 +1529,13 @@
           "name": "i-suggest, URL, pass value through a http request",
           "type": "TEST",
           "opts": "type checking",
-          "sign": "9344329982995987"
+          "sign": "07260249205864966"
         },
         {
           "name": "i-suggest",
           "type": "SUITE",
           "opts": "Sizing",
-          "sign": "9536811683792621"
+          "sign": "8131987708620727"
         },
         {
           "code": [
@@ -1553,13 +1553,13 @@
           "name": "i-suggest, Sizing",
           "type": "CODE",
           "opts": "Sizing scale",
-          "sign": "7513269560877234"
+          "sign": "37981195584870875"
         },
         {
           "name": "i-suggest",
           "type": "SUITE",
           "opts": "Customization",
-          "sign": "9947658109012991"
+          "sign": "43125803070142865"
         },
         {
           "code": [
@@ -1571,7 +1571,7 @@
           "name": "i-suggest, Customization",
           "type": "CODE",
           "opts": "set option as a String",
-          "sign": "2940702084451914"
+          "sign": "2256254197563976"
         },
         {
           "code": [
@@ -1581,7 +1581,7 @@
           "name": "i-suggest, Customization, set option as a String",
           "type": "TEST",
           "opts": "type checking",
-          "sign": "7706526548136026"
+          "sign": "8097251660656184"
         },
         {
           "code": [
@@ -1595,7 +1595,7 @@
           "name": "i-suggest, Customization",
           "type": "CODE",
           "opts": "set option as a Function",
-          "sign": "08065975154750049"
+          "sign": "1294648691546172"
         },
         {
           "code": [
@@ -1605,7 +1605,7 @@
           "name": "i-suggest, Customization, set option as a Function",
           "type": "TEST",
           "opts": "type checking",
-          "sign": "07776337256655097"
+          "sign": "7673459788784385"
         },
         {
           "code": [
@@ -1625,7 +1625,7 @@
           "name": "i-suggest, Customization",
           "type": "CODE",
           "opts": "set filter (only European Union)",
-          "sign": "9088589728344232"
+          "sign": "5299931555055082"
         },
         {
           "code": [
@@ -1635,7 +1635,7 @@
           "name": "i-suggest, Customization, set filter (only European Union)",
           "type": "TEST",
           "opts": "type checking",
-          "sign": "327980873407796"
+          "sign": "6028155446983874"
         },
         {
           "code": [
@@ -1668,7 +1668,7 @@
           "name": "i-suggest, Customization",
           "type": "CODE",
           "opts": "Define custom templates",
-          "sign": "29329819954000413"
+          "sign": "3628926486708224"
         },
         {
           "code": [
@@ -1681,7 +1681,7 @@
           "name": "i-suggest, Customization",
           "type": "CODE",
           "opts": "Set custom templates for input and option",
-          "sign": "36472755181603134"
+          "sign": "15694607351906598"
         },
         {
           "code": [
@@ -1691,7 +1691,7 @@
           "name": "i-suggest, Customization, Set custom templates for input and option",
           "type": "TEST",
           "opts": "check type",
-          "sign": "5295094074681401"
+          "sign": "8045118672307581"
         }
       ]
     }
