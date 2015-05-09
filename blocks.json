@@ -1,0 +1,1729 @@
+{
+  "blocks": [
+    {
+      "id": "examples-content",
+      "code": [
+        {
+          "code": [
+            "// example container",
+            "div.example-block AS $container",
+            "    // title container",
+            "    span.example-block__title AS $title",
+            "        // title text",
+            "        \"Hello, bro\"",
+            "    // create a button controling state",
+            "    i::button ('run') AS $run",
+            "    JS",
+            "        // $run points to a Backbone.Model contains a button state",
+            "        // Handle an event",
+            "        $run.on(",
+            "            // Subscribe to event 'action'",
+            "            // It doesn't matter here what kind of UI event was happened",
+            "            // click, mouseup or touch",
+            "            'action',",
+            "            function(){",
+            "                $run.set(\"loading\", true); // set button state",
+            "                $title.textContent += \", I'm running\"; // modify block",
+            "                $container.classList.add(\"example-block__running\");",
+            "            }",
+            "        );"
+          ],
+          "name": "examples-content",
+          "type": "CODE",
+          "opts": "Example block",
+          "sign": "7781066577881575"
+        }
+      ]
+    },
+    {
+      "id": "i",
+      "code": [
+        {
+          "code": [
+            "namespace::",
+            "    &\"./namespace.less\"",
+            "    &\"./namespace.js\""
+          ],
+          "name": "i",
+          "type": "CODE",
+          "opts": "Including block's dependencies",
+          "sign": "29569326573982835"
+        },
+        {
+          "code": [
+            "namespace::",
+            "    &\"./libs/lib.js\"",
+            "    &\"./node_modules/lib-npm-distributed/framework.js\""
+          ],
+          "name": "i",
+          "type": "CODE",
+          "opts": "Including third-party libraries",
+          "sign": "2655692077241838"
+        }
+      ]
+    },
+    {
+      "id": "i-button-group",
+      "code": [
+        {
+          "code": [
+            "i::button-group ( buttons ) /* ( options ) */",
+            "// or",
+            "i::button-group ( options )"
+          ],
+          "name": "i-button-group",
+          "type": "CODE",
+          "opts": "Usage",
+          "sign": "7327845026738942"
+        },
+        {
+          "name": "i-button-group",
+          "type": "SUITE",
+          "opts": "String",
+          "sign": "03191621974110603"
+        },
+        {
+          "code": [
+            "span AS $container",
+            "    i::button-group ('One,Two,Three') AS $group",
+            "SET $node ($($container.firstChild))",
+            "SET $buttons ($node.find(\".i-button\"))",
+            "SET $collection ($group.get('buttons'))"
+          ],
+          "name": "i-button-group, String",
+          "type": "CODE",
+          "opts": "radio",
+          "sign": "22500421456061304"
+        },
+        {
+          "code": [
+            "// check $group is a Backbone.Model",
+            "expect( $group ).to.be.an.instanceof(Backbone.Model);",
+            "// and has a Backbone.Collection of buttons",
+            "expect( $collection ).to.be.an.instanceof(Backbone.Collection);",
+            "expect( $collection.length ).to.be.equal(3);",
+            "expect( $collection.models.length ).to.be.equal(3);",
+            "// check children",
+            "var $button_1 = $collection.at(0),",
+            "    $button_2 = $collection.at(1),",
+            "    $button_3 = $collection.at(2);",
+            "expect( $button_1.get('label') ).to.be.equal('One');",
+            "expect( $button_2.get('label') ).to.be.equal('Two');",
+            "expect( $button_3.get('label') ).to.be.equal('Three');",
+            "// check DOM",
+            "expect( $buttons.length ).to.be.equal(3);",
+            "// check buttons labels",
+            "expect( $($buttons.get(0)).text() ).to.be.equal( 'One' );",
+            "expect( $($buttons.get(1)).text() ).to.be.equal( 'Two' );",
+            "expect( $($buttons.get(2)).text() ).to.be.equal( 'Three' );",
+            "// check group state",
+            "expect( $group.get('selected') ).to.be.a.null;"
+          ],
+          "name": "i-button-group, String, radio",
+          "type": "TEST",
+          "opts": "must return a Backbone.Model",
+          "sign": "2666139549110085"
+        },
+        {
+          "code": [
+            "i::button-group ('One,Two,Three') ({'radiocheck':true}) AS $radiocheck"
+          ],
+          "name": "i-button-group, String",
+          "type": "CODE",
+          "opts": "radiocheck",
+          "sign": "6730931459460407"
+        },
+        {
+          "code": [
+            "expect( $radiocheck ).to.be.an.instanceof(Backbone.Model);"
+          ],
+          "name": "i-button-group, String, radiocheck",
+          "type": "TEST",
+          "opts": "must return a Backbone.Model",
+          "sign": "2732990107033402"
+        },
+        {
+          "name": "i-button-group",
+          "type": "SUITE",
+          "opts": "Array",
+          "sign": "9228751896880567"
+        },
+        {
+          "code": [
+            "i::button-group (['One','Two','Three']) AS $group"
+          ],
+          "name": "i-button-group, Array",
+          "type": "CODE",
+          "opts": "radio",
+          "sign": "6216198960319161"
+        },
+        {
+          "code": [
+            "expect( $group ).to.be.an.instanceof(Backbone.Model);"
+          ],
+          "name": "i-button-group, Array, radio",
+          "type": "TEST",
+          "opts": "must return a Backbone.Model",
+          "sign": "9834154897835106"
+        },
+        {
+          "code": [
+            "i::button-group (['One','Two','Three']) ({'radiocheck':true}) AS $radiocheck"
+          ],
+          "name": "i-button-group, Array",
+          "type": "CODE",
+          "opts": "radiocheck",
+          "sign": "09179001860320568"
+        },
+        {
+          "code": [
+            "expect( $radiocheck ).to.be.an.instanceof(Backbone.Model);"
+          ],
+          "name": "i-button-group, Array, radiocheck",
+          "type": "TEST",
+          "opts": "must return a Backbone.Model",
+          "sign": "3996793443802744"
+        },
+        {
+          "name": "i-button-group",
+          "type": "SUITE",
+          "opts": "Backbone.Collection",
+          "sign": "2587639163248241"
+        },
+        {
+          "code": [
+            "SET $collection (",
+            "    new Backbone.Collection([",
+            "        {'label': 'One', 'value': '1'},",
+            "        {'label': 'Two', 'value': '2'},",
+            "        {'label': 'Three', 'value': '3'}",
+            "    ])",
+            ")"
+          ],
+          "name": "i-button-group, Backbone.Collection",
+          "type": "CODE",
+          "opts": "Define object",
+          "sign": "4063271270133555"
+        },
+        {
+          "code": [
+            "i::button-group ($collection) AS $group"
+          ],
+          "name": "i-button-group, Backbone.Collection",
+          "type": "CODE",
+          "opts": "radio",
+          "sign": "8725213035941124"
+        },
+        {
+          "code": [
+            "expect( $group ).to.be.an.instanceof(Backbone.Model);"
+          ],
+          "name": "i-button-group, Backbone.Collection, radio",
+          "type": "TEST",
+          "opts": "must return a Backbone.Model",
+          "sign": "5399997984059155"
+        },
+        {
+          "name": "i-button-group",
+          "type": "SUITE",
+          "opts": "Object",
+          "sign": "5405922164209187"
+        },
+        {
+          "code": [
+            "SET $object ({",
+            "    \"buttons\": \"One; Two; Three\",",
+            "    \"delim\":   \"; \"",
+            "})"
+          ],
+          "name": "i-button-group, Object",
+          "type": "CODE",
+          "opts": "Define object",
+          "sign": "3220180170610547"
+        },
+        {
+          "code": [
+            "i::button-group ($object) AS $group"
+          ],
+          "name": "i-button-group, Object",
+          "type": "CODE",
+          "opts": "Object param",
+          "sign": "17049457249231637"
+        },
+        {
+          "code": [
+            "expect( $group ).to.be.an.instanceof(Backbone.Model);"
+          ],
+          "name": "i-button-group, Object, Object param",
+          "type": "TEST",
+          "opts": "must return a Backbone.Model",
+          "sign": "38868927326984704"
+        },
+        {
+          "name": "i-button-group",
+          "type": "SUITE",
+          "opts": "Sizing",
+          "sign": "5275395987555385"
+        },
+        {
+          "code": [
+            "div.i-example__button-sizing",
+            "    div",
+            "        span",
+            "            \"M size\"",
+            "        i::button-group ('One,Two,Three') ({'size':'M'})",
+            "    div",
+            "        span",
+            "            \"S size\"",
+            "        i::button-group ('One,Two,Three') ({'size':'S'})",
+            "    div",
+            "        span",
+            "            \"XS size\"",
+            "        i::button-group ('One,Two,Three') ({'size':'XS'})"
+          ],
+          "name": "i-button-group, Sizing",
+          "type": "CODE",
+          "opts": "sizing",
+          "sign": "6066058229189366"
+        },
+        {
+          "name": "i-button-group",
+          "type": "SUITE",
+          "opts": "Customization",
+          "sign": "5105159871745855"
+        },
+        {
+          "code": [
+            "i::button-group ([",
+            "    {'label': 'One', 'value': '1'},",
+            "    {'label': 'Two', 'value': '2', 'disabled': true},",
+            "    {'label': 'Three', 'value': '3', 'loading': true}",
+            "]) ({",
+            "    'radiocheck': true,",
+            "    'template':'i-button__custom'",
+            "})"
+          ],
+          "name": "i-button-group, Customization",
+          "type": "CODE",
+          "opts": "Template with array",
+          "sign": "7787636965513229"
+        },
+        {
+          "code": [
+            "i::button-group ({",
+            "        'size': 'S',",
+            "        'template':'i-button__custom',",
+            "        'buttons':[",
+            "            {'label': 'One', 'value': '1'},",
+            "            {'label': 'Two', 'value': '2'},",
+            "            {'label': 'Three', 'value': '3'}",
+            "        ]})"
+          ],
+          "name": "i-button-group, Customization",
+          "type": "CODE",
+          "opts": "Template with object",
+          "sign": "4752982931677252"
+        }
+      ]
+    },
+    {
+      "id": "i-button",
+      "code": [
+        {
+          "code": [
+            "i::button ( /* label string  */ )",
+            "// or",
+            "i::button ( /* options hash */ )"
+          ],
+          "name": "i-button",
+          "type": "CODE",
+          "opts": "Usage",
+          "sign": "3013188752811402"
+        },
+        {
+          "name": "i-button",
+          "type": "SUITE",
+          "opts": "Label",
+          "sign": "06715120864100754"
+        },
+        {
+          "code": [
+            "span AS $container",
+            "    i::button (\"click me\") AS $button",
+            "SET $node ($($container.firstChild))"
+          ],
+          "name": "i-button, Label",
+          "type": "CODE",
+          "opts": "set label with string",
+          "sign": "9089693203568459"
+        },
+        {
+          "code": [
+            "// must return a Backbone.Model",
+            "expect( $button ).to.be.an.instanceof(Backbone.Model);",
+            "// check label exists in Model",
+            "expect( $button.get('label') ).to.be.equal('click me');",
+            "// check label exists in DOM",
+            "expect( $node.find('.i-button__label').text() ).to.be.equal('click me');",
+            "// buttons view initialization is asynchronous and delayed until mouseover,",
+            "expect( $button.get('init') ).to.be.false;",
+            "// let's fire it on DOM node for further tests",
+            "$node.trigger( $.Event('mouseover') );",
+            "// check button is inited",
+            "expect( $button.get('init') ).to.be.true;",
+            "// check buttons pressed and callback binding",
+            "// create callback spy with Sinon.js",
+            "var action = sinon.spy();",
+            "// subscripe spy on button 'action' event",
+            "$button.on('action', action);",
+            "// fire mousedown",
+            "$node.trigger($.Event('mousedown'));",
+            "// check button is 'pressed'",
+            "expect( $node.hasClass('i-button__pressed') ).to.be.a.true;",
+            "// check mousedown do not produce callback invocation",
+            "expect( action.called ).to.be.a.false;",
+            "// fire mouseup",
+            "$node.trigger($.Event('mouseup'));",
+            "// check button is not 'pressed'",
+            "expect( $node.hasClass('i-button__pressed') ).to.be.a.false;",
+            "// also check if action was triggered",
+            "expect( action.called ).to.be.a.true;",
+            "expect( action.calledOnce ).to.be.a.true;",
+            "expect( action.calledOn($button) ).to.be.a.true;"
+          ],
+          "name": "i-button, Label, set label with string",
+          "type": "TEST",
+          "opts": "must return a Backbone.Model",
+          "sign": "5556162758730352"
+        },
+        {
+          "code": [
+            "i::button ({\"label\": \"click me\"}) AS $buttonOptions"
+          ],
+          "name": "i-button, Label",
+          "type": "CODE",
+          "opts": "set label with options object",
+          "sign": "7875619842670858"
+        },
+        {
+          "code": [
+            "expect( $buttonOptions ).to.be.an.instanceof(Backbone.Model);",
+            "expect( $buttonOptions.get(\"label\") ).to.be.equal(\"click me\");"
+          ],
+          "name": "i-button, Label, set label with options object",
+          "type": "TEST",
+          "opts": "must return a Backbone.Model",
+          "sign": "09041436575353146"
+        },
+        {
+          "name": "i-button",
+          "type": "SUITE",
+          "opts": "Sizing",
+          "sign": "2509222461376339"
+        },
+        {
+          "code": [
+            "div.i-example__button-sizing",
+            "    div AS $Lsize",
+            "        i::button ({\"label\":\"L-size\",  \"size\": \"L\"})",
+            "    div AS $Msize",
+            "        i::button ({\"label\":\"M-size\",  \"size\": \"M\"})",
+            "    div AS $Ssize",
+            "        i::button ({\"label\":\"S-size\",  \"size\": \"S\"})",
+            "    div AS $XSsize",
+            "        i::button ({\"label\":\"XS-size\", \"size\": \"XS\"})"
+          ],
+          "name": "i-button, Sizing",
+          "type": "CODE",
+          "opts": "Sizing scale",
+          "sign": "004646602086722851"
+        },
+        {
+          "code": [
+            "var $L  = $($Lsize.firstChild),",
+            "    $M  = $($Msize.firstChild),",
+            "    $S  = $($Ssize.firstChild),",
+            "    $XS = $($XSsize.firstChild);",
+            "// check classes",
+            "expect( $L.hasClass('i-button__size-L' )).to.be.true;",
+            "expect( $M.hasClass('i-button__size-M' )).to.be.true;",
+            "expect( $S.hasClass('i-button__size-S' )).to.be.true;",
+            "expect($XS.hasClass('i-button__size-XS')).to.be.true;",
+            "// check size",
+            "expect($L.height() > $M.height() ).to.be.true;",
+            "expect($M.height() > $S.height() ).to.be.true;",
+            "expect($S.height() > $XS.height()).to.be.true;"
+          ],
+          "name": "i-button, Sizing",
+          "type": "TEST",
+          "opts": "test L > M > S > XS",
+          "sign": "8324213926680386"
+        },
+        {
+          "name": "i-button",
+          "type": "SUITE",
+          "opts": "Action",
+          "sign": "678910813992843"
+        },
+        {
+          "code": [
+            "span AS $container",
+            "    i::button ({",
+            "        \"label\": \"action\",",
+            "        \"action\": true",
+            "    }) AS $button",
+            "SET $node ($($container.firstChild))"
+          ],
+          "name": "i-button, Action",
+          "type": "CODE",
+          "opts": "set \"action\"",
+          "sign": "9417597083374858"
+        },
+        {
+          "code": [
+            "expect( $button.get(\"action\") ).to.be.true();",
+            "expect( $node.hasClass('i-button__action') ).to.be.a.true;",
+            "$button.set(\"action\", false);",
+            "expect( $button.get(\"action\") ).to.be.false();",
+            "expect( $node.hasClass('i-button__action') ).to.be.a.false;"
+          ],
+          "name": "i-button, Action, set \"action\"",
+          "type": "TEST",
+          "opts": "property \"action\" must be \"true\"",
+          "sign": "9186409255489707"
+        },
+        {
+          "name": "i-button",
+          "type": "SUITE",
+          "opts": "Checked",
+          "sign": "5737956361845136"
+        },
+        {
+          "code": [
+            "span AS $container",
+            "    i::button ({",
+            "        \"label\": \"checked\",",
+            "        \"checked\": true",
+            "    }) AS $button",
+            "SET $node ($($container.firstChild))"
+          ],
+          "name": "i-button, Checked",
+          "type": "CODE",
+          "opts": "set \"checked\"",
+          "sign": "14829581486992538"
+        },
+        {
+          "code": [
+            "expect( $button.get('checked') ).to.be.true();",
+            "expect( $node.hasClass('i-button__checked') ).to.be.a.true;",
+            "$button.set(\"checked\", false);",
+            "expect( $button.get(\"checked\") ).to.be.false();",
+            "expect( $node.hasClass('i-button__checked') ).to.be.a.false;"
+          ],
+          "name": "i-button, Checked, set \"checked\"",
+          "type": "TEST",
+          "opts": "\"checked\" must be \"true\"",
+          "sign": "7701929504983127"
+        },
+        {
+          "name": "i-button",
+          "type": "SUITE",
+          "opts": "Disabled",
+          "sign": "6753024973440915"
+        },
+        {
+          "code": [
+            "span AS $container",
+            "    i::button ({",
+            "        \"label\": \"disabled\",",
+            "        \"disabled\": true",
+            "    }) AS $button",
+            "SET $node ($($container.firstChild))"
+          ],
+          "name": "i-button, Disabled",
+          "type": "CODE",
+          "opts": "set \"disabled\"",
+          "sign": "8431562413461506"
+        },
+        {
+          "code": [
+            "// model state",
+            "expect( $button.get('disabled') ).to.be.true();",
+            "// DOM state",
+            "expect( $node.attr('tabindex') ).to.equal('-1');",
+            "expect( $node.attr('disabled') ).to.be.ok;",
+            "expect( $node.hasClass('i-button__disabled') ).to.be.a.true;",
+            "// init button",
+            "$node.trigger($.Event('mouseover'));",
+            "var action = sinon.spy();",
+            "$button.on('action', action);",
+            "// fire mousedown and check if pressed state is not set",
+            "$node.trigger($.Event('mousedown'));",
+            "expect( $node.hasClass('i-button__pressed') ).to.be.false;",
+            "// check 'action' will not firing on mouse up",
+            "$node.trigger($.Event('mouseup'));",
+            "expect( action.called ).to.be.false;",
+            "// check binding",
+            "$button.set('disabled', false);",
+            "// DOM state",
+            "expect( $node.attr('tabindex') ).to.equal('0');",
+            "expect( $node.attr('disabled') ).to.be.not.ok;",
+            "expect( $node.hasClass('i-button__disabled') ).to.be.a.false;",
+            "// fire mousedown and check if pressed state was set",
+            "$node.trigger($.Event('mousedown'));",
+            "expect( $node.hasClass('i-button__pressed') ).to.be.true;",
+            "// check 'action' will not firing on mouse up",
+            "$node.trigger($.Event('mouseup'));",
+            "expect( action.calledOnce ).to.be.a.true;",
+            "expect( action.calledOn($button) ).to.be.a.true;"
+          ],
+          "name": "i-button, Disabled, set \"disabled\"",
+          "type": "TEST",
+          "opts": "check \"disabled\" state",
+          "sign": "15790798515081406"
+        },
+        {
+          "name": "i-button",
+          "type": "SUITE",
+          "opts": "Loading",
+          "sign": "5043199062347412"
+        },
+        {
+          "code": [
+            "span AS $container",
+            "    i::button ({",
+            "        \"label\": \"loading\",",
+            "        \"loading\": true",
+            "    }) AS $button",
+            "SET $node ($($container.firstChild))"
+          ],
+          "name": "i-button, Loading",
+          "type": "CODE",
+          "opts": "set \"loading\"",
+          "sign": "4511849272530526"
+        },
+        {
+          "code": [
+            "expect( $button.get('loading') ).to.be.true();",
+            "// DOM state",
+            "expect( $node.attr('tabindex') ).to.equal('-1');",
+            "expect( $node.attr('disabled') ).to.be.ok;",
+            "expect( $node.hasClass('i-button__loading') ).to.be.a.true;",
+            "// init",
+            "$node.trigger($.Event('mouseover'));",
+            "var action = sinon.spy();",
+            "$button.on('action', action);",
+            "// fire mousedown and check if pressed state is not set",
+            "$node.trigger($.Event('mousedown'));",
+            "expect( $node.hasClass('i-button__pressed') ).to.be.false;",
+            "// check if 'action' was not triggered",
+            "$node.trigger($.Event('mouseup'));",
+            "expect( action.called ).to.be.false;",
+            "// check binding",
+            "$button.set('loading', false);",
+            "// DOM state",
+            "expect( $node.attr('tabindex') ).to.equal('0');",
+            "expect( $node.attr('disabled') ).to.be.not.ok;",
+            "expect( $node.hasClass('i-button__loading') ).to.be.a.false;",
+            "// fire mousedown and check if pressed state was set",
+            "$node.trigger($.Event('mousedown'));",
+            "expect( $node.hasClass('i-button__pressed') ).to.be.true;",
+            "// check 'action' will not firing on mouse up",
+            "$node.trigger($.Event('mouseup'));",
+            "expect( action.calledOnce ).to.be.a.true;",
+            "expect( action.calledOn($button) ).to.be.a.true;"
+          ],
+          "name": "i-button, Loading, set \"loading\"",
+          "type": "TEST",
+          "opts": "check \"loading\" state",
+          "sign": "4042826141230762"
+        },
+        {
+          "name": "i-button",
+          "type": "SUITE",
+          "opts": "Customization",
+          "sign": "563769904198125"
+        },
+        {
+          "code": [
+            "i-button__custom $model",
+            "    span.i-button__custom-label",
+            "        ($model.get(\"label\"))",
+            "    span.i-button__custom-badge",
+            "        ($model.get(\"value\"))"
+          ],
+          "name": "i-button, Customization",
+          "type": "CODE",
+          "opts": "define template",
+          "sign": "8176027794834226"
+        },
+        {
+          "code": [
+            "span AS $container",
+            "    i::button ({",
+            "        \"label\":\"custom\",",
+            "        \"value\": \"123\",",
+            "        \"template\": \"i-button__custom\"",
+            "    })",
+            "SET $node ($($container.firstChild))"
+          ],
+          "name": "i-button, Customization",
+          "type": "CODE",
+          "opts": "set 'template' option with its name",
+          "sign": "09685086831450462"
+        },
+        {
+          "code": [
+            "var $label = $node.find('.i-button__custom-label'),",
+            "    $badge = $node.find('.i-button__custom-badge');",
+            "// check custom templates was used",
+            "expect( $label.length ).to.be.equal(1);",
+            "expect( $badge.length ).to.be.equal(1);",
+            "// check values",
+            "expect( $label.text() ).to.be.equal(\"custom\");",
+            "expect( $badge.text() ).to.be.equal(\"123\");"
+          ],
+          "name": "i-button, Customization, set 'template' option with its name",
+          "type": "TEST",
+          "opts": "check customization",
+          "sign": "9229610846377909"
+        }
+      ]
+    },
+    {
+      "id": "i-input",
+      "code": [
+        {
+          "code": [
+            "i::input ( placeholder ) /* ( options ) */",
+            " // or",
+            "i::input /* ( options ) */"
+          ],
+          "name": "i-input",
+          "type": "CODE",
+          "opts": "Usage",
+          "sign": "24536744318902493"
+        },
+        {
+          "name": "i-input",
+          "type": "SUITE",
+          "opts": "Sizing",
+          "sign": "7448986766394228"
+        },
+        {
+          "code": [
+            "div.i-example__button-sizing",
+            "    div AS $Lsize",
+            "        @style \"width:32%\"",
+            "        i::input ({'size': 'L', 'placeholder':'L size'})",
+            "    div AS $Msize",
+            "        @style \"width:32%\"",
+            "        i::input ({'size': 'M', 'placeholder':'M size'})",
+            "    div AS $Ssize",
+            "        @style \"width:32%\"",
+            "        i::input ({'size': 'S', 'placeholder':'S size'})"
+          ],
+          "name": "i-input, Sizing",
+          "type": "CODE",
+          "opts": "Sizing scale",
+          "sign": "4124149954877794"
+        },
+        {
+          "code": [
+            "var $L  = $($Lsize.firstChild),",
+            "    $M  = $($Msize.firstChild),",
+            "    $S  = $($Ssize.firstChild);",
+            "// check classes",
+            "expect( $L.hasClass('i-input__size-L')  ).to.be.true;",
+            "expect( $M.hasClass('i-input__size-M')  ).to.be.true;",
+            "expect( $S.hasClass('i-input__size-S')  ).to.be.true;",
+            "// check size",
+            "expect( $L.height() > $M.height()  ).to.be.true;",
+            "expect( $M.height() > $S.height()  ).to.be.true;"
+          ],
+          "name": "i-input, Sizing",
+          "type": "TEST",
+          "opts": "test L > M > S",
+          "sign": "2587862939108163"
+        },
+        {
+          "name": "i-input",
+          "type": "SUITE",
+          "opts": "Value",
+          "sign": "688709678594023"
+        },
+        {
+          "code": [
+            "span AS $container",
+            "    i::input ({'value': 'value'}) AS $input",
+            "SET $node ($($container.firstChild))",
+            "SET $nodeInput ($node.find('.i-input__input'))",
+            "SET $nodeClear ($node.find('.i-input__clear'))"
+          ],
+          "name": "i-input, Value",
+          "type": "CODE",
+          "opts": "Value",
+          "sign": "7867313211318105"
+        },
+        {
+          "code": [
+            "var // check initial state",
+            "    checkValue = function(){",
+            "        // check result is a Backbone.Model",
+            "        expect( $input ).to.be.an.instanceof(Backbone.Model);",
+            "        // check model value",
+            "        expect( $input.get('value') ).to.be.equal('value');",
+            "        // check DOM value",
+            "        expect( $nodeInput.val() ).to.be.equal('value');",
+            "        // check style",
+            "        var clearStyle = getComputedStyle( $nodeClear.get(0) , null);",
+            "        // check clear is displayed",
+            "        expect( clearStyle.display !== 'none'  ).to.be.true;",
+            "    },",
+            "    // create empty state checker",
+            "    checkClear = function($input, value){",
+            "        // check models value to be empty",
+            "        expect( value ).to.be.equal('');",
+            "        // check DOM attribute to be empty",
+            "         expect( $nodeInput.val() ).to.be.equal('');",
+            "        // check class",
+            "        expect( $node.hasClass('i-input__empty') ).to.be.true;",
+            "        // check focus",
+            "        expect( $nodeInput.get(0) === document.activeElement ).to.be.true;",
+            "        var clearStyle = getComputedStyle( $nodeClear.get(0) , null);",
+            "        expect( clearStyle.display === 'none'  ).to.be.true;",
+            "        // subscribe checkEnd",
+            "        $input.once('change:value', checkEnd);",
+            "        // set value",
+            "        $input.set('value', 'value');",
+            "    },",
+            "    checkEnd = function($input, value){",
+            "        $nodeInput.blur();",
+            "        checkValue();",
+            "        done();",
+            "    };",
+            "// start check",
+            "checkValue();",
+            "// subscribe checkClear",
+            "$input.once('change:value', checkClear);",
+            "// init clearing value",
+            "$nodeClear.trigger('click');"
+          ],
+          "name": "i-input, Value",
+          "type": "TEST",
+          "opts": "ASYNC set 'value'",
+          "sign": "07103118160739541"
+        },
+        {
+          "name": "i-input",
+          "type": "SUITE",
+          "opts": "Disabled",
+          "sign": "14439698262140155"
+        },
+        {
+          "code": [
+            "span AS $container",
+            "    i::input ({'value': 'value', 'disabled': true}) AS $input",
+            "SET $node ($($container.firstChild))",
+            "SET $nodeInput ($node.find('.i-input__input'))",
+            "SET $nodeClear ($node.find('.i-input__clear'))"
+          ],
+          "name": "i-input, Disabled",
+          "type": "CODE",
+          "opts": "Disabled",
+          "sign": "5299377397168428"
+        },
+        {
+          "code": [
+            "expect( $input ).to.be.an.instanceof(Backbone.Model);",
+            "expect( $input.get('disabled') ).to.be.true();",
+            "var clearStyle = getComputedStyle( $nodeClear.get(0) , null);",
+            "expect( clearStyle.display === 'none'  ).to.be.true;",
+            "expect( $nodeInput.is(\"[disabled]\") ).to.be.true;",
+            "expect( $nodeInput.get(0).disabled  ).to.be.true;",
+            "expect( $node.hasClass('i-input__disabled') ).to.be.true;",
+            "$input.set('disabled', false);",
+            "clearStyle = getComputedStyle( $nodeClear.get(0) , null);",
+            "expect( clearStyle.display !== 'none'  ).to.be.true;",
+            "expect( $nodeInput.is(\"[disabled]\") ).to.be.false;",
+            "expect( $nodeInput.get(0).disabled  ).to.be.false;",
+            "expect( $node.hasClass('i-input__disabled') ).to.be.false;"
+          ],
+          "name": "i-input, Disabled",
+          "type": "TEST",
+          "opts": "set 'disabled'",
+          "sign": "3138335454277694"
+        },
+        {
+          "name": "i-input",
+          "type": "SUITE",
+          "opts": "Placeholder",
+          "sign": "7179403444752097"
+        },
+        {
+          "code": [
+            "span AS $container",
+            "    i::input ({'placeholder': 'placeholder'}) AS $input",
+            "SET $nodeInput ($($container).find('.i-input__input'))"
+          ],
+          "name": "i-input, Placeholder",
+          "type": "CODE",
+          "opts": "Placeholder",
+          "sign": "7497635891195387"
+        },
+        {
+          "code": [
+            "expect( $input ).to.be.an.instanceof(Backbone.Model);",
+            "expect( $input.get('placeholder') ).to.be.equal('placeholder');",
+            "expect( $nodeInput.is(\"[placeholder]\") ).to.be.true;",
+            "expect( $nodeInput.get(0).placeholder  ).to.be.equal('placeholder');",
+            "$input.set('placeholder', '');",
+            "expect( $input.get('placeholder') ).to.be.equal('');",
+            "expect( $nodeInput.is(\"[placeholder]\") ).to.be.false;",
+            "expect( $nodeInput.get(0).placeholder  ).to.be.equal('');"
+          ],
+          "name": "i-input, Placeholder",
+          "type": "TEST",
+          "opts": "set 'placeholder'",
+          "sign": "4889855559449643"
+        },
+        {
+          "name": "i-input",
+          "type": "SUITE",
+          "opts": "Debounce",
+          "sign": "398239130852744"
+        },
+        {
+          "code": [
+            "div.i-example__button-sizing",
+            "    span AS $container_0",
+            "        i::input ({'placeholder': '0 debounce'}) AS $input_0",
+            "    SET $nodeInput_0 ($($container_0).find('.i-input__input'))",
+            "    span AS $container_1000",
+            "        i::input ({'placeholder': '1000 debounce', 'debounce': 1000}) AS $input_1000",
+            "    SET $nodeInput_1000 ($($container_1000).find('.i-input__input'))"
+          ],
+          "name": "i-input, Debounce",
+          "type": "CODE",
+          "opts": "Debounce",
+          "sign": "8812445469666272"
+        },
+        {
+          "code": [
+            "var // count of input events",
+            "    count       = 10,",
+            "    // step delay",
+            "    step        = 50,",
+            "    // test delay",
+            "    delay       = 1000,",
+            "    // spies",
+            "    action_0    = sinon.spy(),",
+            "    action_1000 = sinon.spy(),",
+            "    // counter",
+            "    i = 0,",
+            "    // test callback",
+            "    test = function(){",
+            "        expect( action_0   .callCount ).to.be.equal( 10 );",
+            "        expect( action_1000.callCount ).to.be.equal(  1 );",
+            "        expect( action_0.calledBefore(action_1000) ).to.be.true;",
+            "        done();",
+            "    },",
+            "    // input emulation",
+            "    trigger = function(i, end){",
+            "        $nodeInput_0.val(\"#\" + i);",
+            "        $nodeInput_0.trigger('input');",
+            "        $nodeInput_1000.val(\"#\" + i);",
+            "        $nodeInput_1000.trigger('input');",
+            "        // start check",
+            "        if (end) {",
+            "            setTimeout(test, delay);",
+            "        }",
+            "    };",
+            "// subscribe spies",
+            "$input_0   .on('change:value', action_0);",
+            "$input_1000.on('change:value', action_1000);",
+            "// triggering loop",
+            "while(++i <= count){",
+            "    setTimeout(trigger, i * step, i, i === count);",
+            "}"
+          ],
+          "name": "i-input, Debounce",
+          "type": "TEST",
+          "opts": "ASYNC set 'debounce'",
+          "sign": "024984017480164766"
+        }
+      ]
+    },
+    {
+      "id": "i-popup",
+      "code": [
+        {
+          "name": "i-popup",
+          "type": "SUITE",
+          "opts": "normal",
+          "sign": "6803631847724319"
+        },
+        {
+          "code": [
+            "div.container AS $container",
+            "    span.i-popup-example__owner AS $owner",
+            "        'owner'",
+            "        span.sibling AS $sibling",
+            "        i::popup ({",
+            "            'owner': this,",
+            "            'mode': 'click',",
+            "            'tail': 'true',",
+            "            'side': 'top',",
+            "            'adaptive': 'left bottom',",
+            "        }) AS $popup",
+            "            div.i-popup-example__content",
+            "                'some text'"
+          ],
+          "name": "i-popup, normal",
+          "type": "CODE",
+          "opts": "normal",
+          "sign": "20490303030237556"
+        },
+        {
+          "code": [
+            "$popup.show();",
+            "$($sibling).remove();",
+            "expect(document.body.contains($popup.el)).to.be.true();",
+            "$($container).parent().empty();",
+            "expect(document.body.contains($popup.el)).to.be.false();"
+          ],
+          "name": "i-popup, normal, normal",
+          "type": "TEST",
+          "opts": "must destroy on owner's removal",
+          "sign": "23639920423738658"
+        },
+        {
+          "name": "i-popup",
+          "type": "SUITE",
+          "opts": "nested",
+          "sign": "5962539638858289"
+        },
+        {
+          "code": [
+            "span.i-popup-example__owner",
+            "    'owner'",
+            "    i::popup ({",
+            "        'owner': this,",
+            "        'mode': 'click'",
+            "    })",
+            "        div.i-popup-example__content",
+            "            span.i-popup-example__owner",
+            "                'owner'",
+            "                i::popup ({",
+            "                    'owner': this,",
+            "                    'mode': 'click',",
+            "                    'side': 'right',",
+            "                    'align': 'start'",
+            "                })",
+            "                    div.i-popup-example__content",
+            "                        'some text'"
+          ],
+          "name": "i-popup, nested",
+          "type": "CODE",
+          "opts": "nested",
+          "sign": "38676506699994206"
+        },
+        {
+          "name": "i-popup",
+          "type": "SUITE",
+          "opts": "hover",
+          "sign": "514448570786044"
+        },
+        {
+          "code": [
+            "span.i-popup-example__owner",
+            "    'owner'",
+            "    i::popup ({",
+            "        'owner': this,",
+            "        'mode': 'hover'",
+            "    })",
+            "        div.i-popup-example__content",
+            "            'some text'"
+          ],
+          "name": "i-popup, hover",
+          "type": "CODE",
+          "opts": "hover",
+          "sign": "3752116188406944"
+        }
+      ]
+    },
+    {
+      "id": "i-select",
+      "code": [
+        {
+          "code": [
+            "i::select ( options ) /* ( options ) */"
+          ],
+          "name": "i-select",
+          "type": "CODE",
+          "opts": "Usage",
+          "sign": "14315364137291908"
+        },
+        {
+          "name": "i-select",
+          "type": "SUITE",
+          "opts": "String",
+          "sign": "7511868181172758"
+        },
+        {
+          "code": [
+            "i::select ('One,Two,Three') AS $stringSelect"
+          ],
+          "name": "i-select, String",
+          "type": "CODE",
+          "opts": "radio mode",
+          "sign": "2593505058903247"
+        },
+        {
+          "code": [
+            "expect($stringSelect.get(\"selected\"))",
+            "    .to.be.a(\"string\").and",
+            "    .to.be.empty();",
+            "expect($stringSelect.get(\"label\"))",
+            "    .to.equal($stringSelect.get(\"placeholder\"));",
+            "$stringSelect.select(\"One\");",
+            "expect($stringSelect.get(\"selected\"))",
+            "    .to.be.a(\"string\").and",
+            "    .to.equal(\"One\");",
+            "expect($stringSelect.get(\"label\"))",
+            "    .to.equal(\"One\");",
+            "$stringSelect.select(\"Two\");",
+            "expect($stringSelect.get(\"selected\"))",
+            "    .to.be.a(\"string\").and",
+            "    .to.equal(\"Two\");",
+            "expect($stringSelect.get(\"label\"))",
+            "    .to.equal(\"Two\");",
+            "$stringSelect.reset();",
+            "expect($stringSelect.get(\"selected\"))",
+            "    .to.be.a(\"string\").and",
+            "    .to.be.empty();",
+            "expect($stringSelect.get(\"label\"))",
+            "    .to.equal($stringSelect.get(\"placeholder\"));"
+          ],
+          "name": "i-select, String, radio mode",
+          "type": "TEST",
+          "opts": "test selected",
+          "sign": "09965059324167669"
+        },
+        {
+          "code": [
+            "i::select (\"One, Two, Three\") ({\"mode\":\"check\", \"delim\": \", \"}) AS $stringCheckSelect"
+          ],
+          "name": "i-select, String",
+          "type": "CODE",
+          "opts": "check mode",
+          "sign": "7920687878504395"
+        },
+        {
+          "code": [
+            "expect($stringCheckSelect.get(\"selected\"))",
+            "    .to.be.a(\"string\").and",
+            "    .to.be.empty();",
+            "expect($stringCheckSelect.get(\"label\"))",
+            "    .to.equal($stringCheckSelect.get(\"placeholder\"));",
+            "$stringCheckSelect.select(\"One\");",
+            "$stringCheckSelect.select(\"Two\");",
+            "expect($stringCheckSelect.get(\"selected\"))",
+            "    .to.be.a(\"string\").and",
+            "    .to.be.equal(\"One, Two\").and",
+            "    .to.be.equal($stringCheckSelect.get(\"label\"));",
+            "$stringCheckSelect.reset();",
+            "expect($stringCheckSelect.get(\"selected\"))",
+            "    .to.be.a(\"string\").and",
+            "    .to.be.empty();"
+          ],
+          "name": "i-select, String, check mode",
+          "type": "TEST",
+          "opts": "test selected",
+          "sign": "4951439523138106"
+        },
+        {
+          "name": "i-select",
+          "type": "SUITE",
+          "opts": "Array",
+          "sign": "7760438919067383"
+        },
+        {
+          "code": [
+            "i::select ([\"One\", \"Two\", \"Three\"]) AS $arraySelect"
+          ],
+          "name": "i-select, Array",
+          "type": "CODE",
+          "opts": "radio mode",
+          "sign": "561549955047667"
+        },
+        {
+          "code": [
+            "expect($arraySelect.get(\"selected\"))",
+            "    .to.be.a('null');",
+            "expect($arraySelect.get(\"label\"))",
+            "    .to.equal($arraySelect.get(\"placeholder\"));",
+            "$arraySelect.select(\"One\");",
+            "expect($arraySelect.get(\"selected\"))",
+            "    .to.be.a(\"string\").and",
+            "    .to.be.equal(\"One\");",
+            "$arraySelect.select(\"Two\");",
+            "expect($arraySelect.get(\"selected\"))",
+            "    .to.be.an(\"string\").and",
+            "    .to.be.deep.equal(\"Two\");",
+            "$arraySelect.reset();",
+            "expect($arraySelect.get(\"selected\"))",
+            "    .to.be.a('null');"
+          ],
+          "name": "i-select, Array, radio mode",
+          "type": "TEST",
+          "opts": "radio mode",
+          "sign": "21296971128322184"
+        },
+        {
+          "code": [
+            "i::select ([\"One\", \"Two\", \"Three\"]) ({\"mode\":\"check\"}) AS $arrayCheckSelect"
+          ],
+          "name": "i-select, Array",
+          "type": "CODE",
+          "opts": "check mode",
+          "sign": "7010909055825323"
+        },
+        {
+          "code": [
+            "expect($arrayCheckSelect.get(\"selected\"))",
+            "    .to.be.an(\"array\").and",
+            "    .to.be.empty();",
+            "$arrayCheckSelect.select(\"One\");",
+            "$arrayCheckSelect.select(\"Two\");",
+            "expect($arrayCheckSelect.get(\"selected\"))",
+            "    .to.be.an(\"array\").and",
+            "    .to.be.deep.equal([\"One\", \"Two\"]);",
+            "$arrayCheckSelect.reset();",
+            "expect($arrayCheckSelect.get(\"selected\"))",
+            "    .to.be.an(\"array\").and",
+            "    .to.be.empty();"
+          ],
+          "name": "i-select, Array, check mode",
+          "type": "TEST",
+          "opts": "check mode",
+          "sign": "9001063155010343"
+        },
+        {
+          "name": "i-select",
+          "type": "SUITE",
+          "opts": "Backbone.Collection",
+          "sign": "7357059933710843"
+        },
+        {
+          "code": [
+            "SET $collection (new Backbone.Collection([",
+            "                {\"value\":\"1\", \"label\":\"One\"},",
+            "                {\"value\":\"2\", \"label\":\"Two\"},",
+            "                {\"value\":\"3\", \"label\":\"Three\"}",
+            "            ]))"
+          ],
+          "name": "i-select, Backbone.Collection",
+          "type": "CODE",
+          "opts": "Define collection",
+          "sign": "7430184611584991"
+        },
+        {
+          "code": [
+            "i::select ($collection) AS $collectionSelect"
+          ],
+          "name": "i-select, Backbone.Collection",
+          "type": "CODE",
+          "opts": "radio mode",
+          "sign": "2538016128819436"
+        },
+        {
+          "code": [
+            "expect($collectionSelect.get(\"selected\"))",
+            "    .to.be.a('null');",
+            "$collectionSelect.select($collection.at(0))",
+            "expect($collectionSelect.get(\"selected\"))",
+            "    .to.be.an.instanceof(Backbone.Model).and",
+            "    .to.be.equal($collection.at(0));",
+            "$collection.reset([",
+            "    {\"value\":\"1\", \"label\":\"One\"},",
+            "    {\"value\":\"2\", \"label\":\"Two\"},",
+            "    {\"value\":\"3\", \"label\":\"Four\"}",
+            "]);",
+            "$collectionSelect.reset();",
+            "expect($collectionSelect.get(\"selected\"))",
+            "    .to.be.a('null');"
+          ],
+          "name": "i-select, Backbone.Collection, radio mode",
+          "type": "TEST",
+          "opts": "radio mode",
+          "sign": "8843140942044556"
+        },
+        {
+          "code": [
+            "i::select ($collection) ({\"mode\":\"check\"}) AS $collectionCheckSelect"
+          ],
+          "name": "i-select, Backbone.Collection",
+          "type": "CODE",
+          "opts": "check mode",
+          "sign": "02830651169642806"
+        },
+        {
+          "code": [
+            "expect($collectionCheckSelect.get(\"selected\"))",
+            "    .to.be.an('array').and",
+            "    .to.be.empty();",
+            "$collectionCheckSelect.select($collection.at(0))",
+            "$collectionCheckSelect.select($collection.at(1))",
+            "expect($collectionCheckSelect.get(\"selected\"))",
+            "    .to.be.an('array').and",
+            "    .to.be.deep.equal([$collection.at(0),$collection.at(1)]);",
+            "$collectionCheckSelect.reset();",
+            "expect($collectionCheckSelect.get(\"selected\"))",
+            "    .to.be.an('array').and",
+            "    .to.be.empty();"
+          ],
+          "name": "i-select, Backbone.Collection, check mode",
+          "type": "TEST",
+          "opts": "check mode",
+          "sign": "4648229710292071"
+        },
+        {
+          "name": "i-select",
+          "type": "SUITE",
+          "opts": "Object",
+          "sign": "5400963665451854"
+        },
+        {
+          "code": [
+            "i::select ({",
+            "    \"options\":      \"One; Two; Three\",",
+            "    \"size\":         \"S\",",
+            "    \"placeholder\":  \"numbers\",",
+            "    \"delim\":        \"; \",",
+            "    \"mode\":         \"check\"",
+            "})"
+          ],
+          "name": "i-select, Object",
+          "type": "CODE",
+          "opts": "radio mode",
+          "sign": "09986301721073687"
+        },
+        {
+          "name": "i-select",
+          "type": "SUITE",
+          "opts": "Disabled",
+          "sign": "7738933064974844"
+        },
+        {
+          "code": [
+            "i::select ('One,Two,Three') ({'disabled':true})"
+          ],
+          "name": "i-select, Disabled",
+          "type": "CODE",
+          "opts": "disabled",
+          "sign": "13716901233419776"
+        },
+        {
+          "name": "i-select",
+          "type": "SUITE",
+          "opts": "Customization",
+          "sign": "5633887930307537"
+        },
+        {
+          "code": [
+            "i-select__view-button $selected $select $check",
+            "    SET $label  ($selected || 'empty')",
+            "    div.i-select__view-button",
+            "        span.i-select__view-button-label",
+            "            ($label)",
+            "        TEST ($label!='empty')",
+            "            span.i-select__view-button-delete AS $delete",
+            "                \"×\"",
+            "            JS",
+            "                $delete.addEventListener(",
+            "                    \"mouseup\",",
+            "                    function(e){",
+            "                        e.stopPropagation();",
+            "                        if($check){",
+            "                            $select.select($label);",
+            "                        } else {",
+            "                            $select.reset();",
+            "                        }",
+            "                    }",
+            "                )",
+            "i-select__view-option $model",
+            "    div.i-select__view-option",
+            "        \"→ \"",
+            "        ($model.get('label'))",
+            "        \" ←\""
+          ],
+          "name": "i-select, Customization",
+          "type": "CODE",
+          "opts": "Define custom templates",
+          "sign": "7725278167054057"
+        },
+        {
+          "code": [
+            "i::select (",
+            "    {",
+            "        \"options\":    \"One,Two,Three\",",
+            "        \"viewButton\": \"i-select__view-button\",",
+            "        \"viewOption\": \"i-select__view-option\"",
+            "    }",
+            ") AS $radioSelect"
+          ],
+          "name": "i-select, Customization",
+          "type": "CODE",
+          "opts": "radio mode",
+          "sign": "4510819152928889"
+        },
+        {
+          "code": [
+            "expect( $radioSelect ).to.be.an('object');",
+            "expect( $radioSelect ).to.be.an.instanceof(Backbone.Model);"
+          ],
+          "name": "i-select, Customization, radio mode",
+          "type": "TEST",
+          "opts": "must return a Backbone.Model",
+          "sign": "8061340807471424"
+        },
+        {
+          "code": [
+            "i::select (",
+            "    {",
+            "        \"options\":    \"One,Two,Three\",",
+            "        \"viewButton\": \"i-select__view-button\",",
+            "        \"viewOption\": \"i-select__view-option\",",
+            "        \"mode\":       \"check\"",
+            "    }",
+            ") AS $checkSelect"
+          ],
+          "name": "i-select, Customization",
+          "type": "CODE",
+          "opts": "check mode",
+          "sign": "38989942241460085"
+        },
+        {
+          "code": [
+            "expect( $checkSelect ).to.be.an('object')"
+          ],
+          "name": "i-select, Customization, check mode",
+          "type": "TEST",
+          "opts": "\"test type\"",
+          "sign": "7318542557768524"
+        }
+      ]
+    },
+    {
+      "id": "i-suggest",
+      "code": [
+        {
+          "code": [
+            "i::suggest ( options )"
+          ],
+          "name": "i-suggest",
+          "type": "CODE",
+          "opts": "Usage",
+          "sign": "05832185689359903"
+        },
+        {
+          "name": "i-suggest",
+          "type": "SUITE",
+          "opts": "Data",
+          "sign": "8688313136808574"
+        },
+        {
+          "code": [
+            "i::suggest ('One,Two,Three') AS $suggestString"
+          ],
+          "name": "i-suggest, Data",
+          "type": "CODE",
+          "opts": "String",
+          "sign": "9675982578191906"
+        },
+        {
+          "code": [
+            "expect( $suggestString ).to.be.an.instanceof(Backbone.Model);",
+            "expect( $suggestString.get('data') ).to.be.an.instanceof(Backbone.Collection);"
+          ],
+          "name": "i-suggest, Data, String",
+          "type": "TEST",
+          "opts": "set 'value'",
+          "sign": "02037068596109748"
+        },
+        {
+          "code": [
+            "i::suggest (['One','Two','Three']) AS $suggestArray"
+          ],
+          "name": "i-suggest, Data",
+          "type": "CODE",
+          "opts": "Array",
+          "sign": "4996347336564213"
+        },
+        {
+          "code": [
+            "expect( $suggestArray ).to.be.an.instanceof(Backbone.Model);",
+            "expect( $suggestArray.get('data') ).to.be.an.instanceof(Backbone.Collection);"
+          ],
+          "name": "i-suggest, Data, Array",
+          "type": "TEST",
+          "opts": "set 'value'",
+          "sign": "8139125062152743"
+        },
+        {
+          "name": "i-suggest",
+          "type": "SUITE",
+          "opts": "URL",
+          "sign": "6036016186699271"
+        },
+        {
+          "code": [
+            "i::suggest ('/examples/i-suggest/capitals.json') AS $suggestURL"
+          ],
+          "name": "i-suggest, URL",
+          "type": "CODE",
+          "opts": "set path to json",
+          "sign": "6620760811492801"
+        },
+        {
+          "code": [
+            "expect( $suggestURL ).to.be.an.instanceof(Backbone.Model);",
+            "expect( $suggestURL.get('data') ).to.be.an.instanceof(Backbone.Collection);",
+            "if ($suggestURL.get('data').length === 0) {",
+            "    describe('$suggestURL check async', function(){",
+            "        it('on fetch', function(done){",
+            "            $suggestURL.get('data').once(",
+            "                'sync',",
+            "                function(){",
+            "                    expect( $suggestURL.get('data').length ).to.be.ok;",
+            "                    done();",
+            "                }",
+            "            );",
+            "        });",
+            "    });",
+            "}"
+          ],
+          "name": "i-suggest, URL, set path to json",
+          "type": "TEST",
+          "opts": "type checking, test data length",
+          "sign": "05642706714570522"
+        },
+        {
+          "code": [
+            "i::suggest ({",
+            "    'data': '/examples/i-suggest/capitals.json?search=%%input%%',",
+            "    'min': 1",
+            "}) AS $suggestURL_input"
+          ],
+          "name": "i-suggest, URL",
+          "type": "CODE",
+          "opts": "pass value through a http request",
+          "sign": "2752137768547982"
+        },
+        {
+          "code": [
+            "expect( $suggestURL_input ).to.be.an.instanceof(Backbone.Model);",
+            "expect( $suggestURL_input.get('data') ).to.be.an.instanceof(Backbone.Collection);"
+          ],
+          "name": "i-suggest, URL, pass value through a http request",
+          "type": "TEST",
+          "opts": "type checking",
+          "sign": "8827399949077517"
+        },
+        {
+          "name": "i-suggest",
+          "type": "SUITE",
+          "opts": "Sizing",
+          "sign": "3154276425484568"
+        },
+        {
+          "code": [
+            "div.i-example__button-sizing",
+            "    div",
+            "        @style \"width:32%\"",
+            "        i::suggest ('One,Two,Three') ({\"size\": \"L\", \"placeholder\": \"L-size\"})",
+            "    div",
+            "        @style \"width:32%\"",
+            "        i::suggest ('One,Two,Three') ({\"size\": \"M\", \"placeholder\": \"M-size\"})",
+            "    div",
+            "        @style \"width:32%\"",
+            "        i::suggest ('One,Two,Three') ({\"size\": \"S\", \"placeholder\": \"S-size\"})"
+          ],
+          "name": "i-suggest, Sizing",
+          "type": "CODE",
+          "opts": "Sizing scale",
+          "sign": "813989725895226"
+        },
+        {
+          "name": "i-suggest",
+          "type": "SUITE",
+          "opts": "Customization",
+          "sign": "9463647385127842"
+        },
+        {
+          "code": [
+            "i::suggest ({",
+            "    'data': '/examples/i-suggest/capitals.json',",
+            "    'option': 'country'",
+            "}) AS $suggestURL__country"
+          ],
+          "name": "i-suggest, Customization",
+          "type": "CODE",
+          "opts": "set option as a String",
+          "sign": "8822819304186851"
+        },
+        {
+          "code": [
+            "expect( $suggestURL__country ).to.be.an.instanceof(Backbone.Model);",
+            "expect( $suggestURL__country.get('data') ).to.be.an.instanceof(Backbone.Collection);"
+          ],
+          "name": "i-suggest, Customization, set option as a String",
+          "type": "TEST",
+          "opts": "type checking",
+          "sign": "13783807237632573"
+        },
+        {
+          "code": [
+            "i::suggest ({",
+            "    'data': '/examples/i-suggest/capitals.json',",
+            "    'option': function(option){",
+            "        return option.get('capital') + \" \" + option.get('code');",
+            "    }",
+            "}) AS $suggestURL__func"
+          ],
+          "name": "i-suggest, Customization",
+          "type": "CODE",
+          "opts": "set option as a Function",
+          "sign": "8618745747953653"
+        },
+        {
+          "code": [
+            "expect( $suggestURL__func ).to.be.an.instanceof(Backbone.Model);",
+            "expect( $suggestURL__func.get('data') ).to.be.an.instanceof(Backbone.Collection);"
+          ],
+          "name": "i-suggest, Customization, set option as a Function",
+          "type": "TEST",
+          "opts": "type checking",
+          "sign": "8460994691122323"
+        },
+        {
+          "code": [
+            "i::suggest ({",
+            "    'data': '/examples/i-suggest/capitals.json',",
+            "    'filter': function(option, input){",
+            "        var EU  = !!option.get(\"EU\"),",
+            "            val = option.get('capital').toLowerCase(),",
+            "            str = input.toLowerCase();",
+            "        return EU && (val.indexOf(str) === 0);",
+            "    },",
+            "    'option': function(option){",
+            "        return option.get('code') + \" \" + option.get('capital');",
+            "    }",
+            "}) AS $suggestURL__func"
+          ],
+          "name": "i-suggest, Customization",
+          "type": "CODE",
+          "opts": "set filter (only European Union)",
+          "sign": "7440967625007033"
+        },
+        {
+          "code": [
+            "expect( $suggestURL__func ).to.be.an.instanceof(Backbone.Model);",
+            "expect( $suggestURL__func.get('data') ).to.be.an.instanceof(Backbone.Collection);"
+          ],
+          "name": "i-suggest, Customization, set filter (only European Union)",
+          "type": "TEST",
+          "opts": "type checking",
+          "sign": "08107711421325803"
+        },
+        {
+          "code": [
+            "i-suggest__custom-button  $selected $select",
+            "    CHOOSE",
+            "        WHEN ($selected)",
+            "            SET $custom",
+            "            CALL i-suggest__custom ($selected) AS $custom",
+            "            JS",
+            "                $($custom).one(",
+            "                    'mousedown',",
+            "                    function(e){",
+            "                        e.stopPropagation();",
+            "                        $select.set(\"selected\", void(0) );",
+            "                    }",
+            "                );",
+            "                $select.set('input', false);",
+            "        OTHERWISE",
+            "            i::input AS $input",
+            "            JS",
+            "                $select.set('input', $input);",
+            "i-suggest__custom $option",
+            "    div.i-suggest__custom AS $container",
+            "        span.i-suggest__custom-capital",
+            "            ($option.get('capital'))",
+            "        span.i-suggest__custom-code",
+            "            ($option.get('code'))",
+            "    EXPOSE $container"
+          ],
+          "name": "i-suggest, Customization",
+          "type": "CODE",
+          "opts": "Define custom templates",
+          "sign": "5986102332826704"
+        },
+        {
+          "code": [
+            "i::suggest ({",
+            "    'data': '/examples/i-suggest/capitals.json',",
+            "    'viewButton': 'i-suggest__custom-button',",
+            "    'viewOption': 'i-suggest__custom'",
+            "}) AS $suggestCustom"
+          ],
+          "name": "i-suggest, Customization",
+          "type": "CODE",
+          "opts": "Set custom templates for input and option",
+          "sign": "2823383875656873"
+        },
+        {
+          "code": [
+            "expect( $suggestCustom ).to.be.an.instanceof(Backbone.Model);",
+            "expect( $suggestCustom.get('data') ).to.be.an.instanceof(Backbone.Collection);"
+          ],
+          "name": "i-suggest, Customization, Set custom templates for input and option",
+          "type": "TEST",
+          "opts": "check type",
+          "sign": "2446457757614553"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "qex": {
+      "name": "qex-controls",
+      "version": "0.4.0"
+    },
+    "kitty": {
+      "name": "conkitty",
+      "version": "0.5.16"
+    },
+    "frameworks": [
+      {
+        "name": "backbone",
+        "version": "1.1.2"
+      },
+      {
+        "name": "exoskeleton",
+        "version": "0.7.0"
+      }
+    ],
+    "$": [
+      {
+        "name": "jQuery",
+        "version": "2.1.3"
+      },
+      {
+        "name": "zepto",
+        "version": "1.1.6"
+      }
+    ]
+  }
+}
