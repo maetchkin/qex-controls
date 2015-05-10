@@ -72,32 +72,32 @@ i-suggest-example__data
     li.i-example__list-item
         CTPL-SUITE Data
             CTPL-CODE String
-                i::suggest ('One,Two,Three') AS $suggestString
+                i::suggest ('One,Two,Three') AS $suggest_string
                 CTPL-TEST set 'value'
-                    expect( $suggestString ).to.be.an.instanceof(Backbone.Model);
-                    expect( $suggestString.get('data') ).to.be.an.instanceof(Backbone.Collection);
+                    expect( $suggest_string ).to.be.an.instanceof(Backbone.Model);
+                    expect( $suggest_string.get('data') ).to.be.an.instanceof(Backbone.Collection);
             CTPL-CODE Array
-                i::suggest (['One','Two','Three']) AS $suggestArray
+                i::suggest (['One','Two','Three']) AS $suggest_array
                 CTPL-TEST set 'value'
-                    expect( $suggestArray ).to.be.an.instanceof(Backbone.Model);
-                    expect( $suggestArray.get('data') ).to.be.an.instanceof(Backbone.Collection);
+                    expect( $suggest_array ).to.be.an.instanceof(Backbone.Model);
+                    expect( $suggest_array.get('data') ).to.be.an.instanceof(Backbone.Collection);
 
 i-suggest-example__url
     li.i-example__list-item
         CTPL-SUITE URL
             "Suggest element by URL with remote data request."
             CTPL-CODE set path to json
-                i::suggest ('./examples/i-suggest/capitals.json') AS $suggestURL
+                i::suggest ('./examples/i-suggest/capitals.json') AS $suggest__url
                 CTPL-TEST type checking, test data length
-                    expect( $suggestURL ).to.be.an.instanceof(Backbone.Model);
-                    expect( $suggestURL.get('data') ).to.be.an.instanceof(Backbone.Collection);
-                    if ($suggestURL.get('data').length === 0) {
+                    expect( $suggest__url ).to.be.an.instanceof(Backbone.Model);
+                    expect( $suggest__url.get('data') ).to.be.an.instanceof(Backbone.Collection);
+                    if ($suggest__url.get('data').length === 0) {
                         describe('$suggestURL check async', function(){
                             it('on fetch', function(done){
-                                $suggestURL.get('data').once(
+                                $suggest__url.get('data').once(
                                     'sync',
                                     function(){
-                                        expect( $suggestURL.get('data').length ).to.be.ok;
+                                        expect( $suggest__url.get('data').length ).to.be.ok;
                                         done();
                                     }
                                 );
@@ -108,10 +108,10 @@ i-suggest-example__url
                 i::suggest ({
                     'data': './examples/i-suggest/capitals.json?search=%%input%%',
                     'min': 1
-                }) AS $suggestURL_input
+                }) AS $suggest__url_param
                 CTPL-TEST type checking
-                    expect( $suggestURL_input ).to.be.an.instanceof(Backbone.Model);
-                    expect( $suggestURL_input.get('data') ).to.be.an.instanceof(Backbone.Collection);
+                    expect( $suggest__url_param ).to.be.an.instanceof(Backbone.Model);
+                    expect( $suggest__url_param.get('data') ).to.be.an.instanceof(Backbone.Collection);
 
 i-suggest-example__sizing
     li.i-example__list-item
@@ -136,10 +136,10 @@ i-suggest-example__customization
                 i::suggest ({
                     'data': './examples/i-suggest/capitals.json',
                     'option': 'country'
-                }) AS $suggestURL__country
+                }) AS $suggest__option_string
                 CTPL-TEST type checking
-                    expect( $suggestURL__country ).to.be.an.instanceof(Backbone.Model);
-                    expect( $suggestURL__country.get('data') ).to.be.an.instanceof(Backbone.Collection);
+                    expect( $suggest__option_string ).to.be.an.instanceof(Backbone.Model);
+                    expect( $suggest__option_string.get('data') ).to.be.an.instanceof(Backbone.Collection);
 
             CTPL-CODE set option as a Function
                 i::suggest ({
@@ -147,10 +147,10 @@ i-suggest-example__customization
                     'option': function(option){
                         return option.get('capital') + " " + option.get('code');
                     }
-                }) AS $suggestURL__func
+                }) AS $suggest__option_func
                 CTPL-TEST type checking
-                    expect( $suggestURL__func ).to.be.an.instanceof(Backbone.Model);
-                    expect( $suggestURL__func.get('data') ).to.be.an.instanceof(Backbone.Collection);
+                    expect( $suggest__option_func ).to.be.an.instanceof(Backbone.Model);
+                    expect( $suggest__option_func.get('data') ).to.be.an.instanceof(Backbone.Collection);
 
             CTPL-CODE set filter (only European Union)
                 i::suggest ({
@@ -164,10 +164,10 @@ i-suggest-example__customization
                     'option': function(option){
                         return option.get('code') + " " + option.get('capital');
                     }
-                }) AS $suggestURL__func
+                }) AS $suggest__filter
                 CTPL-TEST type checking
-                    expect( $suggestURL__func ).to.be.an.instanceof(Backbone.Model);
-                    expect( $suggestURL__func.get('data') ).to.be.an.instanceof(Backbone.Collection);
+                    expect( $suggest__filter ).to.be.an.instanceof(Backbone.Model);
+                    expect( $suggest__filter.get('data') ).to.be.an.instanceof(Backbone.Collection);
 
             CTPL-SHOW Define custom templates
                 i-suggest__custom-button  $selected $select
@@ -205,10 +205,10 @@ i-suggest-example__customization
                     'data': './examples/i-suggest/capitals.json',
                     'viewButton': 'i-suggest__custom-button',
                     'viewOption': 'i-suggest__custom'
-                }) AS $suggestCustom
+                }) AS $suggest__custom_view
                 CTPL-TEST check type
-                    expect( $suggestCustom ).to.be.an.instanceof(Backbone.Model);
-                    expect( $suggestCustom.get('data') ).to.be.an.instanceof(Backbone.Collection);
+                    expect( $suggest__custom_view ).to.be.an.instanceof(Backbone.Model);
+                    expect( $suggest__custom_view.get('data') ).to.be.an.instanceof(Backbone.Collection);
 
 
 
