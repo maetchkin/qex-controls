@@ -5,3 +5,4 @@ libs
 *.sublime*
 .DS_Store
 stand
+npm-debug.log
