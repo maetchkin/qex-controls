@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/maetchkin/qex-control.git"
+    "url": "https://github.com/maetchkin/qex-control.git"
   },
   "contributors":[
     {
@@ -17,7 +17,9 @@
       "url": "https://twitter.com/maetchkin"
     },
     {
-      "name":  "Filipp Ryabchun"
+      "name":  "Filipp Ryabchun",
+      "email":  "talpa@yandex.ru",
+      "url": "https://vk.com/hypnos"
     }
   ],
   "license": "MIT",
@@ -33,8 +35,8 @@
   "dependencies": {
     "glob": "4.0.6",
     "exoskeleton": "0.7.0",
-    "zepto": "git+ssh://git@github.com/madrobby/zepto.git",
-    "qex-prism": "git+ssh://git@github.com/maetchkin/qex-prism.git"
+    "zepto": "git://github.com/madrobby/zepto.git",
+    "qex-prism": "git://github.com/maetchkin/qex-prism.git"
   },
   "devDependencies": {
     "backbone": "1.1.2",
