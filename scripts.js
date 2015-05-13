@@ -1586,7 +1586,7 @@ $C.tpl["examples-content"] = function($set) {
             .p()
                 .text(" So, let's construct top-level block using an existing one, like in example below with  i::button:")
             .end()
-            .div({"class": "i-example-code sign-09451218717731535"})
+            .div({"class": "i-example-code sign-9327364615164697"})
                 .div({"class": "example-block"})
                     .act(function() { $container = this; })
                     .span({"class": "example-block__title"})
@@ -1887,9 +1887,9 @@ $C.tpl["i-example"] = function() {
                 .end()
                 .text(".")
             .end()
-            .div({"class": "i-example-code sign-9193255947902799"})
+            .div({"class": "i-example-code sign-8928607848938555"})
             .end()
-            .div({"class": "i-example-code sign-6058138306252658"})
+            .div({"class": "i-example-code sign-35897766263224185"})
             .end()
             .p()
                 .text("See examples below")
@@ -1904,7 +1904,7 @@ $C.tpl["i-button-example"] = function() {
                 .p()
                     .text("Button state is represented by Backbone.Model. Constructor can recognize following types of input data: String or Object")
                 .end()
-                .div({"class": "i-example-code sign-12092577526345849"})
+                .div({"class": "i-example-code sign-580080698011443"})
                 .end()
                 .act(function() {
                     $C.tpl["i-button-example__options"].call(new $ConkittyEnvClass(this));
@@ -1988,8 +1988,8 @@ $C.tpl["i-button-example__options"] = function() {
 $C.tpl["i-button-example__label"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $container, $button, $node, $buttonOptions;
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-5691237004939467"})
-            .div({"class": "i-example-code sign-6057687317952514"})
+        .div({"class": "i-example-suite sign-8676671555731446"})
+            .div({"class": "i-example-code sign-9224670703988522"})
                 .span()
                     .act(function() { $container = this; })
                     .act(function() {
@@ -1998,7 +1998,7 @@ $C.tpl["i-button-example__label"] = function() {
                 .end()
                 .act(function $C_i_button_example__label_59_21() { $node = ($($container.firstChild)); })
                 .act(function() {
-                    tests['18679901072755456'] = function(){
+                    tests['2591039261315018'] = function(){
 
 
                         expect( $button ).to.be.an.instanceof(Backbone.Model);
@@ -2034,29 +2034,29 @@ $C.tpl["i-button-example__label"] = function() {
 
                     }
                 })
-                .div({"class": "i-example-test sign-18679901072755456"})
+                .div({"class": "i-example-test sign-2591039261315018"})
             .end(2)
-            .div({"class": "i-example-code sign-5305067996960133"})
+            .div({"class": "i-example-code sign-686221003299579"})
                 .act(function() {
                     $buttonOptions = $C._tpl["i::button"].call(new $ConkittyEnvClass(this), ({"label": "click me"}));
                 })
                 .act(function() {
-                    tests['920960265211761'] = function(){
+                    tests['33854158385656774'] = function(){
 
                         expect( $buttonOptions ).to.be.an.instanceof(Backbone.Model);
                         expect( $buttonOptions.get("label") ).to.be.equal("click me");
 
                     }
                 })
-                .div({"class": "i-example-test sign-920960265211761"})
+                .div({"class": "i-example-test sign-33854158385656774"})
     .end(4);
 };
 
 $C.tpl["i-button-example__sizing"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $Lsize, $Msize, $Ssize, $XSsize;
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-840352927101776"})
-            .div({"class": "i-example-code sign-9228135223966092"})
+        .div({"class": "i-example-suite sign-1773295442108065"})
+            .div({"class": "i-example-code sign-3063839948736131"})
                 .div({"class": "i-example__button-sizing"})
                     .div()
                         .act(function() { $Lsize = this; })
@@ -2083,7 +2083,7 @@ $C.tpl["i-button-example__sizing"] = function() {
                         })
             .end(3)
             .act(function() {
-                tests['6644383436068892'] = function(){
+                tests['5535842257086188'] = function(){
 
                     var $L  = $($Lsize.firstChild),
                         $M  = $($Msize.firstChild),
@@ -2101,18 +2101,18 @@ $C.tpl["i-button-example__sizing"] = function() {
 
                 }
             })
-            .div({"class": "i-example-test sign-6644383436068892"})
+            .div({"class": "i-example-test sign-5535842257086188"})
     .end(3);
 };
 
 $C.tpl["i-button-example__action"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $container, $button, $node;
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-3631335615646094"})
+        .div({"class": "i-example-suite sign-5359760369174182"})
             .p()
                 .text("Buttons with 'action' state should be used to show user his way to succeed")
             .end()
-            .div({"class": "i-example-code sign-6353112508077174"})
+            .div({"class": "i-example-code sign-8421699649188668"})
                 .span()
                     .act(function() { $container = this; })
                     .act(function() {
@@ -2124,7 +2124,7 @@ $C.tpl["i-button-example__action"] = function() {
                 .end()
                 .act(function $C_i_button_example__action_157_21() { $node = ($($container.firstChild)); })
                 .act(function() {
-                    tests['9323516476433724'] = function(){
+                    tests['9955109860748053'] = function(){
 
                         expect( $button.get("action") ).to.be.true();
                         expect( $node.hasClass('i-button__action') ).to.be.a.true;
@@ -2134,18 +2134,18 @@ $C.tpl["i-button-example__action"] = function() {
 
                     }
                 })
-                .div({"class": "i-example-test sign-9323516476433724"})
+                .div({"class": "i-example-test sign-9955109860748053"})
     .end(4);
 };
 
 $C.tpl["i-button-example__checked"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $container, $button, $node;
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-8721673744730651"})
+        .div({"class": "i-example-suite sign-9817747888155282"})
             .p()
                 .text("Buttons with 'checked' state could be used the same way as a checkbox.")
             .end()
-            .div({"class": "i-example-code sign-27371403062716126"})
+            .div({"class": "i-example-code sign-08306578919291496"})
                 .span()
                     .act(function() { $container = this; })
                     .act(function() {
@@ -2157,7 +2157,7 @@ $C.tpl["i-button-example__checked"] = function() {
                 .end()
                 .act(function $C_i_button_example__checked_182_21() { $node = ($($container.firstChild)); })
                 .act(function() {
-                    tests['7854570518247783'] = function(){
+                    tests['911976442206651'] = function(){
 
                         expect( $button.get('checked') ).to.be.true();
                         expect( $node.hasClass('i-button__checked') ).to.be.a.true;
@@ -2167,18 +2167,18 @@ $C.tpl["i-button-example__checked"] = function() {
 
                     }
                 })
-                .div({"class": "i-example-test sign-7854570518247783"})
+                .div({"class": "i-example-test sign-911976442206651"})
     .end(4);
 };
 
 $C.tpl["i-button-example__disabled"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $container, $button, $node;
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-5341315581463277"})
+        .div({"class": "i-example-suite sign-4883549234364182"})
             .p()
                 .text("User can not interact with disabled buttons")
             .end()
-            .div({"class": "i-example-code sign-1691373570356518"})
+            .div({"class": "i-example-code sign-7328520594164729"})
                 .span()
                     .act(function() { $container = this; })
                     .act(function() {
@@ -2190,7 +2190,7 @@ $C.tpl["i-button-example__disabled"] = function() {
                 .end()
                 .act(function $C_i_button_example__disabled_207_21() { $node = ($($container.firstChild)); })
                 .act(function() {
-                    tests['6325081151444465'] = function(){
+                    tests['4881505835801363'] = function(){
 
 
                         expect( $button.get('disabled') ).to.be.true();
@@ -2224,18 +2224,18 @@ $C.tpl["i-button-example__disabled"] = function() {
 
                     }
                 })
-                .div({"class": "i-example-test sign-6325081151444465"})
+                .div({"class": "i-example-test sign-4881505835801363"})
     .end(4);
 };
 
 $C.tpl["i-button-example__loading"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $container, $button, $node;
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-8534940422978252"})
+        .div({"class": "i-example-suite sign-05820398568175733"})
             .p()
                 .text("If user's actions have started a long-term process like an asynchronous request we should indicate the loading state.")
             .end()
-            .div({"class": "i-example-code sign-9097206133883446"})
+            .div({"class": "i-example-code sign-5702836059499532"})
                 .span()
                     .act(function() { $container = this; })
                     .act(function() {
@@ -2247,7 +2247,7 @@ $C.tpl["i-button-example__loading"] = function() {
                 .end()
                 .act(function $C_i_button_example__loading_256_21() { $node = ($($container.firstChild)); })
                 .act(function() {
-                    tests['43723724829033017'] = function(){
+                    tests['7788962083868682'] = function(){
 
                         expect( $button.get('loading') ).to.be.true();
 
@@ -2280,20 +2280,20 @@ $C.tpl["i-button-example__loading"] = function() {
 
                     }
                 })
-                .div({"class": "i-example-test sign-43723724829033017"})
+                .div({"class": "i-example-test sign-7788962083868682"})
     .end(4);
 };
 
 $C.tpl["i-button-example__custom"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $container, $node;
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-6723222476430237"})
+        .div({"class": "i-example-suite sign-7225621927063912"})
             .p()
                 .text("It's easy to customize button with 'template' option")
             .end()
-            .div({"class": "i-example-code sign-3796722630504519"})
+            .div({"class": "i-example-code sign-3630580357275903"})
             .end()
-            .div({"class": "i-example-code sign-8825666522607207"})
+            .div({"class": "i-example-code sign-25739817204885185"})
                 .span()
                     .act(function() { $container = this; })
                     .act(function() {
@@ -2306,7 +2306,7 @@ $C.tpl["i-button-example__custom"] = function() {
                 .end()
                 .act(function $C_i_button_example__custom_306_21() { $node = ($($container.firstChild)); })
                 .act(function() {
-                    tests['9986590039916337'] = function(){
+                    tests['30197586631402373'] = function(){
 
                         var $label = $node.find('.i-button__custom-label'),
                             $badge = $node.find('.i-button__custom-badge');
@@ -2319,7 +2319,7 @@ $C.tpl["i-button-example__custom"] = function() {
 
                     }
                 })
-                .div({"class": "i-example-test sign-9986590039916337"})
+                .div({"class": "i-example-test sign-30197586631402373"})
     .end(4);
 };
 
@@ -2342,7 +2342,7 @@ $C.tpl["i-button-group-example"] = function() {
                 .p()
                     .text("Constructor can recognize following types of input data: String, Array and Object")
                 .end()
-                .div({"class": "i-example-code sign-7095772854518145"})
+                .div({"class": "i-example-code sign-9958090502768755"})
             .end(2)
             .act(function() {
                 $C.tpl["i-button-group-example__options"].call(new $ConkittyEnvClass(this));
@@ -2401,8 +2401,8 @@ $C.tpl["i-button-group-example__string"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $container, $group, $node, $buttons, $collection, $radiocheck;
     return $C($ConkittyEnv.p)
         .li({"class": "i-example__list-item"})
-            .div({"class": "i-example-suite sign-14524438534863293"})
-                .div({"class": "i-example-code sign-04327514534816146"})
+            .div({"class": "i-example-suite sign-40763191669248044"})
+                .div({"class": "i-example-code sign-7780530711170286"})
                     .span()
                         .act(function() { $container = this; })
                         .act(function() {
@@ -2413,7 +2413,7 @@ $C.tpl["i-button-group-example__string"] = function() {
                     .act(function $C_i_button_group_example__string_42_25() { $buttons = ($node.find(".i-button")); })
                     .act(function $C_i_button_group_example__string_43_25() { $collection = ($group.get('buttons')); })
                     .act(function() {
-                        tests['7849454099778086'] = function(){
+                        tests['3419005370233208'] = function(){
 
 
                             expect( $group ).to.be.an.instanceof(Backbone.Model);
@@ -2439,20 +2439,20 @@ $C.tpl["i-button-group-example__string"] = function() {
 
                         }
                     })
-                    .div({"class": "i-example-test sign-7849454099778086"})
+                    .div({"class": "i-example-test sign-3419005370233208"})
                 .end(2)
-                .div({"class": "i-example-code sign-2686883294954896"})
+                .div({"class": "i-example-code sign-5441843275912106"})
                     .act(function() {
                         $radiocheck = $C._tpl["i::button-group"].call(new $ConkittyEnvClass(this), ('One,Two,Three'), ({'radiocheck':true}));
                     })
                     .act(function() {
-                        tests['7492672861553729'] = function(){
+                        tests['7903793705627322'] = function(){
 
                             expect( $radiocheck ).to.be.an.instanceof(Backbone.Model);
 
                         }
                     })
-                    .div({"class": "i-example-test sign-7492672861553729"})
+                    .div({"class": "i-example-test sign-7903793705627322"})
     .end(5);
 };
 
@@ -2460,32 +2460,32 @@ $C.tpl["i-button-group-example__array"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $group, $radiocheck;
     return $C($ConkittyEnv.p)
         .li({"class": "i-example__list-item"})
-            .div({"class": "i-example-suite sign-1625372872222215"})
-                .div({"class": "i-example-code sign-24059218796901405"})
+            .div({"class": "i-example-suite sign-6696453809272498"})
+                .div({"class": "i-example-code sign-4051395410206169"})
                     .act(function() {
                         $group = $C._tpl["i::button-group"].call(new $ConkittyEnvClass(this), (['One','Two','Three']));
                     })
                     .act(function() {
-                        tests['2610080468002707'] = function(){
+                        tests['2388161402195692'] = function(){
 
                             expect( $group ).to.be.an.instanceof(Backbone.Model);
 
                         }
                     })
-                    .div({"class": "i-example-test sign-2610080468002707"})
+                    .div({"class": "i-example-test sign-2388161402195692"})
                 .end(2)
-                .div({"class": "i-example-code sign-349079413106665"})
+                .div({"class": "i-example-code sign-9850823406595737"})
                     .act(function() {
                         $radiocheck = $C._tpl["i::button-group"].call(new $ConkittyEnvClass(this), (['One','Two','Three']), ({'radiocheck':true}));
                     })
                     .act(function() {
-                        tests['7260491964407265'] = function(){
+                        tests['3768501649610698'] = function(){
 
                             expect( $radiocheck ).to.be.an.instanceof(Backbone.Model);
 
                         }
                     })
-                    .div({"class": "i-example-test sign-7260491964407265"})
+                    .div({"class": "i-example-test sign-3768501649610698"})
     .end(5);
 };
 
@@ -2493,8 +2493,8 @@ $C.tpl["i-button-group-example__collection"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $collection, $group;
     return $C($ConkittyEnv.p)
         .li({"class": "i-example__list-item"})
-            .div({"class": "i-example-suite sign-09387345728464425"})
-                .div({"class": "i-example-code sign-5267877166625112"})
+            .div({"class": "i-example-suite sign-3873531969729811"})
+                .div({"class": "i-example-code sign-0485765403136611"})
                     .act(function $C_i_button_group_example__collection_117_25() { $collection = (
                                                 new Backbone.Collection([
                                                     {'label': 'One', 'value': '1'},
@@ -2503,18 +2503,18 @@ $C.tpl["i-button-group-example__collection"] = function() {
                                                 ])
                                             ); })
                 .end()
-                .div({"class": "i-example-code sign-8620341138448566"})
+                .div({"class": "i-example-code sign-6043373413849622"})
                     .act(function() {
                         $group = $C._tpl["i::button-group"].call(new $ConkittyEnvClass(this), ($collection));
                     })
                     .act(function() {
-                        tests['021596682723611593'] = function(){
+                        tests['832215300295502'] = function(){
 
                             expect( $group ).to.be.an.instanceof(Backbone.Model);
 
                         }
                     })
-                    .div({"class": "i-example-test sign-021596682723611593"})
+                    .div({"class": "i-example-test sign-832215300295502"})
     .end(5);
 };
 
@@ -2522,25 +2522,25 @@ $C.tpl["i-button-group-example__object"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $object, $group;
     return $C($ConkittyEnv.p)
         .li({"class": "i-example__list-item"})
-            .div({"class": "i-example-suite sign-7761130812577903"})
-                .div({"class": "i-example-code sign-8236313168890774"})
+            .div({"class": "i-example-suite sign-22141429502516985"})
+                .div({"class": "i-example-code sign-9661414336878806"})
                     .act(function $C_i_button_group_example__object_142_25() { $object = ({
                                                 "buttons": "One; Two; Three",
                                                 "delim":   "; "
                                             }); })
                 .end()
-                .div({"class": "i-example-code sign-29147383058443666"})
+                .div({"class": "i-example-code sign-35160644305869937"})
                     .act(function() {
                         $group = $C._tpl["i::button-group"].call(new $ConkittyEnvClass(this), ($object));
                     })
                     .act(function() {
-                        tests['32289045862853527'] = function(){
+                        tests['9285932139027864'] = function(){
 
                             expect( $group ).to.be.an.instanceof(Backbone.Model);
 
                         }
                     })
-                    .div({"class": "i-example-test sign-32289045862853527"})
+                    .div({"class": "i-example-test sign-9285932139027864"})
     .end(5);
 };
 
@@ -2548,8 +2548,8 @@ $C.tpl["i-button-group-example__sizing"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this);
     return $C($ConkittyEnv.p)
         .li({"class": "i-example__list-item"})
-            .div({"class": "i-example-suite sign-9939906536601484"})
-                .div({"class": "i-example-code sign-23342766729183495"})
+            .div({"class": "i-example-suite sign-20240356121212244"})
+                .div({"class": "i-example-code sign-5785062925424427"})
                     .div({"class": "i-example__button-sizing"})
                         .div()
                             .span()
@@ -2581,8 +2581,8 @@ $C.tpl["i-button-group-example__customization"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this);
     return $C($ConkittyEnv.p)
         .li({"class": "i-example__list-item"})
-            .div({"class": "i-example-suite sign-4456184022128582"})
-                .div({"class": "i-example-code sign-836876148590818"})
+            .div({"class": "i-example-suite sign-8263263590633869"})
+                .div({"class": "i-example-code sign-5882050422951579"})
                     .act(function() {
                         $C._tpl["i::button-group"].call(new $ConkittyEnvClass(this), ([
                                                     {'label': 'One', 'value': '1'},
@@ -2594,7 +2594,7 @@ $C.tpl["i-button-group-example__customization"] = function() {
                                                 }));
                     })
                 .end()
-                .div({"class": "i-example-code sign-21843251236714423"})
+                .div({"class": "i-example-code sign-3322664420120418"})
                     .act(function() {
                         $C._tpl["i::button-group"].call(new $ConkittyEnvClass(this), ({
                                                         'size': 'S',
@@ -2613,7 +2613,7 @@ $C.tpl["i-input-example"] = function() {
     return $C($ConkittyEnv.p)
         .ul({"class": "i-example__list"})
             .li({"class": "i-example__list-item"})
-                .div({"class": "i-example-code sign-59678851114586"})
+                .div({"class": "i-example-code sign-5534002492204309"})
                 .end()
                 .act(function() {
                     $C.tpl["i-input-example__options"].call(new $ConkittyEnvClass(this));
@@ -2679,8 +2679,8 @@ $C.tpl["i-input-example__options"] = function() {
 $C.tpl["i-input-example__sizing"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $Lsize, $Msize, $Ssize;
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-14059570198878646"})
-            .div({"class": "i-example-code sign-24938723095692694"})
+        .div({"class": "i-example-suite sign-19730453845113516"})
+            .div({"class": "i-example-code sign-3467237039003521"})
                 .div({"class": "i-example__button-sizing"})
                     .div()
                         .act(function() { $Lsize = this; })
@@ -2704,7 +2704,7 @@ $C.tpl["i-input-example__sizing"] = function() {
                         })
             .end(3)
             .act(function() {
-                tests['8574367098044604'] = function(){
+                tests['4905893257819116'] = function(){
 
                     var $L  = $($Lsize.firstChild),
                         $M  = $($Msize.firstChild),
@@ -2719,15 +2719,15 @@ $C.tpl["i-input-example__sizing"] = function() {
 
                 }
             })
-            .div({"class": "i-example-test sign-8574367098044604"})
+            .div({"class": "i-example-test sign-4905893257819116"})
     .end(3);
 };
 
 $C.tpl["i-input-example__value"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $container, $input, $node, $nodeInput, $nodeClear;
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-7394446511752903"})
-            .div({"class": "i-example-code sign-042959025129675865"})
+        .div({"class": "i-example-suite sign-5623533593025059"})
+            .div({"class": "i-example-code sign-9110414066817611"})
                 .span()
                     .act(function() { $container = this; })
                     .act(function() {
@@ -2739,7 +2739,7 @@ $C.tpl["i-input-example__value"] = function() {
                 .act(function $C_i_input_example__value_79_21() { $nodeClear = ($node.find('.i-input__clear')); })
             .end()
             .act(function() {
-                tests['09533261810429394'] = function(done){
+                tests['6137263234704733'] = function(done){
 
                     var
                         checkValue = function(){
@@ -2785,15 +2785,15 @@ $C.tpl["i-input-example__value"] = function() {
 
                 }
             })
-            .div({"class": "i-example-test sign-09533261810429394"})
+            .div({"class": "i-example-test sign-6137263234704733"})
     .end(3);
 };
 
 $C.tpl["i-input-example__disabled"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $container, $input, $node, $nodeInput, $nodeClear;
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-8245995389297605"})
-            .div({"class": "i-example-code sign-6675715716555715"})
+        .div({"class": "i-example-suite sign-8281887909397483"})
+            .div({"class": "i-example-code sign-61454480397515"})
                 .span()
                     .act(function() { $container = this; })
                     .act(function() {
@@ -2805,7 +2805,7 @@ $C.tpl["i-input-example__disabled"] = function() {
                 .act(function $C_i_input_example__disabled_137_21() { $nodeClear = ($node.find('.i-input__clear')); })
             .end()
             .act(function() {
-                tests['4946394886355847'] = function(){
+                tests['5827508249785751'] = function(){
 
                     expect( $input ).to.be.an.instanceof(Backbone.Model);
                     expect( $input.get('disabled') ).to.be.true();
@@ -2823,15 +2823,15 @@ $C.tpl["i-input-example__disabled"] = function() {
 
                 }
             })
-            .div({"class": "i-example-test sign-4946394886355847"})
+            .div({"class": "i-example-test sign-5827508249785751"})
     .end(3);
 };
 
 $C.tpl["i-input-example__placeholder"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $container, $input, $nodeInput;
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-5401390888728201"})
-            .div({"class": "i-example-code sign-9446460830513388"})
+        .div({"class": "i-example-suite sign-7331083733588457"})
+            .div({"class": "i-example-code sign-9756557706277817"})
                 .span()
                     .act(function() { $container = this; })
                     .act(function() {
@@ -2841,7 +2841,7 @@ $C.tpl["i-input-example__placeholder"] = function() {
                 .act(function $C_i_input_example__placeholder_165_21() { $nodeInput = ($($container).find('.i-input__input')); })
             .end()
             .act(function() {
-                tests['57765310886316'] = function(){
+                tests['2015272134449333'] = function(){
 
                     expect( $input ).to.be.an.instanceof(Backbone.Model);
                     expect( $input.get('placeholder') ).to.be.equal('placeholder');
@@ -2854,15 +2854,15 @@ $C.tpl["i-input-example__placeholder"] = function() {
 
                 }
             })
-            .div({"class": "i-example-test sign-57765310886316"})
+            .div({"class": "i-example-test sign-2015272134449333"})
     .end(3);
 };
 
 $C.tpl["i-input-example__delay"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $container_0, $input_0, $nodeInput_0, $container_1000, $input_1000, $nodeInput_1000;
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-6979699125513434"})
-            .div({"class": "i-example-code sign-12172228493727744"})
+        .div({"class": "i-example-suite sign-6986609816085547"})
+            .div({"class": "i-example-code sign-5639295834116638"})
                 .div({"class": "i-example__button-sizing"})
                     .span()
                         .act(function() { $container_0 = this; })
@@ -2880,7 +2880,7 @@ $C.tpl["i-input-example__delay"] = function() {
                     .act(function $C_i_input_example__delay_192_25() { $nodeInput_1000 = ($($container_1000).find('.i-input__input')); })
             .end(2)
             .act(function() {
-                tests['3724941329564899'] = function(done){
+                tests['6879194697830826'] = function(done){
 
                     var
                         count       = 10,
@@ -2921,7 +2921,7 @@ $C.tpl["i-input-example__delay"] = function() {
 
                 }
             })
-            .div({"class": "i-example-test sign-3724941329564899"})
+            .div({"class": "i-example-test sign-6879194697830826"})
     .end(3);
 };
 
@@ -3023,8 +3023,8 @@ $C.tpl["i-popup-example"] = function() {
                             .text("Time in ms. 500 by default")
             .end(4)
             .li({"class": "i-example__list-item"})
-                .div({"class": "i-example-suite sign-40300709288567305"})
-                    .div({"class": "i-example-code sign-12063347757793963"})
+                .div({"class": "i-example-suite sign-3729849287774414"})
+                    .div({"class": "i-example-code sign-4832450074609369"})
                         .div({"class": "container"})
                             .act(function() { $container = this; })
                             .span({"class": "i-popup-example__owner"})
@@ -3051,7 +3051,7 @@ $C.tpl["i-popup-example"] = function() {
                                 })
                         .end(2)
                         .act(function() {
-                            tests['21492104814387858'] = function(){
+                            tests['1765773445367813'] = function(){
 
                                 $popup.show();
                                 $($sibling).remove();
@@ -3061,11 +3061,11 @@ $C.tpl["i-popup-example"] = function() {
 
                             }
                         })
-                        .div({"class": "i-example-test sign-21492104814387858"})
+                        .div({"class": "i-example-test sign-1765773445367813"})
             .end(4)
             .li({"class": "i-example__list-item"})
-                .div({"class": "i-example-suite sign-2676001591607928"})
-                    .div({"class": "i-example-code sign-7938295037019998"})
+                .div({"class": "i-example-suite sign-6843671018723398"})
+                    .div({"class": "i-example-code sign-2990159725304693"})
                         .span({"class": "i-popup-example__owner"})
                             .text("owner")
                             .act(function() {
@@ -3099,8 +3099,8 @@ $C.tpl["i-popup-example"] = function() {
                             })
             .end(4)
             .li({"class": "i-example__list-item"})
-                .div({"class": "i-example-suite sign-6067146332934499"})
-                    .div({"class": "i-example-code sign-5365410349331796"})
+                .div({"class": "i-example-suite sign-023032438475638628"})
+                    .div({"class": "i-example-code sign-8285821310710162"})
                         .span({"class": "i-popup-example__owner"})
                             .text("owner")
                             .act(function() {
@@ -3197,7 +3197,7 @@ $C.tpl["i-select-example"] = function() {
                     .end()
                     .text(" and Object")
                 .end()
-                .div({"class": "i-example-code sign-17347464966587722"})
+                .div({"class": "i-example-code sign-42043442418798804"})
                 .end()
                 .act(function() {
                     $C.tpl["i-select-example__options"].call(new $ConkittyEnvClass(this));
@@ -3284,8 +3284,8 @@ $C.tpl["i-select-example__options"] = function() {
 $C.tpl["i-select-example__string"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $stringContainer, $stringSelect, $stringNode, $stringCheckSelect;
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-8191566416062415"})
-            .div({"class": "i-example-code sign-42805954860523343"})
+        .div({"class": "i-example-suite sign-6646409635432065"})
+            .div({"class": "i-example-code sign-8477634836453944"})
                 .span()
                     .act(function() { $stringContainer = this; })
                     .act(function() {
@@ -3294,11 +3294,18 @@ $C.tpl["i-select-example__string"] = function() {
                 .end()
                 .act(function $C_i_select_example__string_63_21() { $stringNode = ($($stringContainer.firstChild)); })
                 .act(function() {
-                    tests['07394220679998398'] = function(){
+                    tests['35972947208210826'] = function(){
 
 
+
+                        expect( $stringSelect ).to.be.an.instanceof(Backbone.Model);
+
+                        expect( $stringSelect.get('options') ).to.be.an.instanceof(Backbone.Collection);
+
+                        expect( $stringSelect.get('mode') ).to.be.equal("radio");
 
                         expect($stringSelect.get("selected")).to.be.a("string").and.to.be.empty();
+
                         expect($stringSelect.get("label")).to.equal($stringSelect.get("placeholder"));
 
                         expect($stringNode.find('.i-button__label').text() ).to.be.equal($stringSelect.get("placeholder"));
@@ -3306,8 +3313,8 @@ $C.tpl["i-select-example__string"] = function() {
 
                         $stringSelect.select("One");
 
-                        expect($stringSelect.get("selected")).to.be.a("string").and.to.equal("One");
-                        expect($stringSelect.get("label")).to.equal("One");
+                        expect($stringSelect.get("selected")).to.be.a("string").and.to.be.equal("One");
+                        expect($stringSelect.get("label")).to.be.equal("One");
 
                         expect($stringNode.find('.i-button__label').text() ).to.be.equal('One');
 
@@ -3327,20 +3334,19 @@ $C.tpl["i-select-example__string"] = function() {
 
                     }
                 })
-                .div({"class": "i-example-test sign-07394220679998398"})
+                .div({"class": "i-example-test sign-35972947208210826"})
             .end(2)
-            .div({"class": "i-example-code sign-02092291251756251"})
+            .div({"class": "i-example-code sign-5086992227006704"})
                 .act(function() {
                     $stringCheckSelect = $C._tpl["i::select"].call(new $ConkittyEnvClass(this), ("One, Two, Three"), ({"mode":"check", "delim": ", "}));
                 })
                 .act(function() {
-                    tests['2881313532125205'] = function(){
+                    tests['5298954744357616'] = function(){
 
-                        expect($stringCheckSelect.get("selected"))
-                            .to.be.a("string").and
-                            .to.be.empty();
-                        expect($stringCheckSelect.get("label"))
-                            .to.equal($stringCheckSelect.get("placeholder"));
+
+
+                        expect($stringCheckSelect.get("selected")).to.be.a("string").and.to.be.empty();
+                        expect($stringCheckSelect.get("label")).to.equal($stringCheckSelect.get("placeholder"));
                         $stringCheckSelect.select("One");
                         $stringCheckSelect.select("Two");
                         expect($stringCheckSelect.get("selected"))
@@ -3354,20 +3360,20 @@ $C.tpl["i-select-example__string"] = function() {
 
                     }
                 })
-                .div({"class": "i-example-test sign-2881313532125205"})
+                .div({"class": "i-example-test sign-5298954744357616"})
     .end(4);
 };
 
 $C.tpl["i-select-example__array"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $arraySelect, $arrayCheckSelect;
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-7578173950314522"})
-            .div({"class": "i-example-code sign-5881383491214365"})
+        .div({"class": "i-example-suite sign-8577576621901244"})
+            .div({"class": "i-example-code sign-9517892885487527"})
                 .act(function() {
                     $arraySelect = $C._tpl["i::select"].call(new $ConkittyEnvClass(this), (["One", "Two", "Three"]));
                 })
                 .act(function() {
-                    tests['19786495226435363'] = function(){
+                    tests['1557889780960977'] = function(){
 
                         expect($arraySelect.get("selected"))
                             .to.be.a('null');
@@ -3387,14 +3393,14 @@ $C.tpl["i-select-example__array"] = function() {
 
                     }
                 })
-                .div({"class": "i-example-test sign-19786495226435363"})
+                .div({"class": "i-example-test sign-1557889780960977"})
             .end(2)
-            .div({"class": "i-example-code sign-6728890792001039"})
+            .div({"class": "i-example-code sign-7780947152059525"})
                 .act(function() {
                     $arrayCheckSelect = $C._tpl["i::select"].call(new $ConkittyEnvClass(this), (["One", "Two", "Three"]), ({"mode":"check"}));
                 })
                 .act(function() {
-                    tests['6294194329530001'] = function(){
+                    tests['1081425934098661'] = function(){
 
                         expect($arrayCheckSelect.get("selected"))
                             .to.be.an("array").and
@@ -3411,27 +3417,27 @@ $C.tpl["i-select-example__array"] = function() {
 
                     }
                 })
-                .div({"class": "i-example-test sign-6294194329530001"})
+                .div({"class": "i-example-test sign-1081425934098661"})
     .end(4);
 };
 
 $C.tpl["i-select-example__collection"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $collection, $collectionSelect, $collectionCheckSelect;
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-3927019399125129"})
-            .div({"class": "i-example-code sign-9861629344522953"})
-                .act(function $C_i_select_example__collection_181_21() { $collection = (new Backbone.Collection([
+        .div({"class": "i-example-suite sign-24160708021372557"})
+            .div({"class": "i-example-code sign-6482215935830027"})
+                .act(function $C_i_select_example__collection_187_21() { $collection = (new Backbone.Collection([
                                                     {"value":"1", "label":"One"},
                                                     {"value":"2", "label":"Two"},
                                                     {"value":"3", "label":"Three"}
                                                 ])); })
             .end()
-            .div({"class": "i-example-code sign-21625277842395008"})
+            .div({"class": "i-example-code sign-783437994774431"})
                 .act(function() {
                     $collectionSelect = $C._tpl["i::select"].call(new $ConkittyEnvClass(this), ($collection));
                 })
                 .act(function() {
-                    tests['7666123169474304'] = function(){
+                    tests['833786916686222'] = function(){
 
                         expect($collectionSelect.get("selected"))
                             .to.be.a('null');
@@ -3450,14 +3456,14 @@ $C.tpl["i-select-example__collection"] = function() {
 
                     }
                 })
-                .div({"class": "i-example-test sign-7666123169474304"})
+                .div({"class": "i-example-test sign-833786916686222"})
             .end(2)
-            .div({"class": "i-example-code sign-17064014170318842"})
+            .div({"class": "i-example-code sign-9902060383465141"})
                 .act(function() {
                     $collectionCheckSelect = $C._tpl["i::select"].call(new $ConkittyEnvClass(this), ($collection), ({"mode":"check"}));
                 })
                 .act(function() {
-                    tests['3008917523548007'] = function(){
+                    tests['22756925271824002'] = function(){
 
                         expect($collectionCheckSelect.get("selected"))
                             .to.be.an('array').and
@@ -3474,15 +3480,15 @@ $C.tpl["i-select-example__collection"] = function() {
 
                     }
                 })
-                .div({"class": "i-example-test sign-3008917523548007"})
+                .div({"class": "i-example-test sign-22756925271824002"})
     .end(4);
 };
 
 $C.tpl["i-select-example__object"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this);
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-17512799752876163"})
-            .div({"class": "i-example-code sign-1452605938538909"})
+        .div({"class": "i-example-suite sign-3762199853081256"})
+            .div({"class": "i-example-code sign-46553688030689955"})
                 .act(function() {
                     $C._tpl["i::select"].call(new $ConkittyEnvClass(this), ({
                                             "options":      "One; Two; Three",
@@ -3498,8 +3504,8 @@ $C.tpl["i-select-example__object"] = function() {
 $C.tpl["i-select-example__disabled"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this);
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-17309075267985463"})
-            .div({"class": "i-example-code sign-7394639572594315"})
+        .div({"class": "i-example-suite sign-7418199353851378"})
+            .div({"class": "i-example-code sign-15139083401300013"})
                 .act(function() {
                     $C._tpl["i::select"].call(new $ConkittyEnvClass(this), ('One,Two,Three'), ({'disabled':true}));
                 })
@@ -3509,7 +3515,7 @@ $C.tpl["i-select-example__disabled"] = function() {
 $C.tpl["i-select-example__customization"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $radioSelect, $checkSelect;
     return $C($ConkittyEnv.p)
-        .div({"class": "i-example-suite sign-1309811919927597"})
+        .div({"class": "i-example-suite sign-4182784245349467"})
             .p()
                 .text("It's easy to modify ")
                 .b()
@@ -3517,9 +3523,9 @@ $C.tpl["i-select-example__customization"] = function() {
                 .end()
                 .text(" view with custom templates. ")
             .end()
-            .div({"class": "i-example-code sign-35131140844896436"})
+            .div({"class": "i-example-code sign-1616652263328433"})
             .end()
-            .div({"class": "i-example-code sign-3980842356104404"})
+            .div({"class": "i-example-code sign-9765259546693414"})
                 .act(function() {
                     $radioSelect = $C._tpl["i::select"].call(new $ConkittyEnvClass(this), (
                                             {
@@ -3530,16 +3536,16 @@ $C.tpl["i-select-example__customization"] = function() {
                                         ));
                 })
                 .act(function() {
-                    tests['054614386754110456'] = function(){
+                    tests['9351571986917406'] = function(){
 
                         expect( $radioSelect ).to.be.an('object');
                         expect( $radioSelect ).to.be.an.instanceof(Backbone.Model);
 
                     }
                 })
-                .div({"class": "i-example-test sign-054614386754110456"})
+                .div({"class": "i-example-test sign-9351571986917406"})
             .end(2)
-            .div({"class": "i-example-code sign-02157102059572935"})
+            .div({"class": "i-example-code sign-27089587366208434"})
                 .act(function() {
                     $checkSelect = $C._tpl["i::select"].call(new $ConkittyEnvClass(this), (
                                             {
@@ -3551,13 +3557,13 @@ $C.tpl["i-select-example__customization"] = function() {
                                         ));
                 })
                 .act(function() {
-                    tests['9933334379456937'] = function(){
+                    tests['22061146888881922'] = function(){
 
                         expect( $checkSelect ).to.be.an('object')
 
                     }
                 })
-                .div({"class": "i-example-test sign-9933334379456937"})
+                .div({"class": "i-example-test sign-22061146888881922"})
     .end(4);
 };
 
@@ -3576,7 +3582,7 @@ $C.tpl["i-suggest-example"] = function() {
                     .end()
                     .text(" and Object")
                 .end()
-                .div({"class": "i-example-code sign-15997737972065806"})
+                .div({"class": "i-example-code sign-03197910008020699"})
                 .end()
                 .act(function() {
                     $C.tpl["i-suggest-example__options"].call(new $ConkittyEnvClass(this));
@@ -3671,34 +3677,34 @@ $C.tpl["i-suggest-example__data"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $suggest_string, $suggest_array;
     return $C($ConkittyEnv.p)
         .li({"class": "i-example__list-item"})
-            .div({"class": "i-example-suite sign-466233444865793"})
-                .div({"class": "i-example-code sign-5074220437090844"})
+            .div({"class": "i-example-suite sign-19748709979467094"})
+                .div({"class": "i-example-code sign-547220746986568"})
                     .act(function() {
                         $suggest_string = $C._tpl["i::suggest"].call(new $ConkittyEnvClass(this), ('One,Two,Three'));
                     })
                     .act(function() {
-                        tests['13838792056776583'] = function(){
+                        tests['23605685564689338'] = function(){
 
                             expect( $suggest_string ).to.be.an.instanceof(Backbone.Model);
                             expect( $suggest_string.get('data') ).to.be.an.instanceof(Backbone.Collection);
 
                         }
                     })
-                    .div({"class": "i-example-test sign-13838792056776583"})
+                    .div({"class": "i-example-test sign-23605685564689338"})
                 .end(2)
-                .div({"class": "i-example-code sign-7950031191576272"})
+                .div({"class": "i-example-code sign-5575848205480725"})
                     .act(function() {
                         $suggest_array = $C._tpl["i::suggest"].call(new $ConkittyEnvClass(this), (['One','Two','Three']));
                     })
                     .act(function() {
-                        tests['04012446175329387'] = function(){
+                        tests['5682138323318213'] = function(){
 
                             expect( $suggest_array ).to.be.an.instanceof(Backbone.Model);
                             expect( $suggest_array.get('data') ).to.be.an.instanceof(Backbone.Collection);
 
                         }
                     })
-                    .div({"class": "i-example-test sign-04012446175329387"})
+                    .div({"class": "i-example-test sign-5682138323318213"})
     .end(5);
 };
 
@@ -3723,14 +3729,14 @@ $C.tpl["i-suggest-example__url"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $suggest__url, $suggest__url_param;
     return $C($ConkittyEnv.p)
         .li({"class": "i-example__list-item"})
-            .div({"class": "i-example-suite sign-24958079028874636"})
+            .div({"class": "i-example-suite sign-9980875148903579"})
                 .text("Suggest element by URL with remote data request.")
-                .div({"class": "i-example-code sign-4541303589940071"})
+                .div({"class": "i-example-code sign-026620520278811455"})
                     .act(function() {
                         $suggest__url = $C._tpl["i::suggest"].call(new $ConkittyEnvClass(this), ('./examples/i-suggest/capitals.json'));
                     })
                     .act(function() {
-                        tests['14626241801306605'] = function(){
+                        tests['547090576030314'] = function(){
 
                             expect( $suggest__url ).to.be.an.instanceof(Backbone.Model);
                             expect( $suggest__url.get('data') ).to.be.an.instanceof(Backbone.Collection);
@@ -3750,9 +3756,9 @@ $C.tpl["i-suggest-example__url"] = function() {
 
                         }
                     })
-                    .div({"class": "i-example-test sign-14626241801306605"})
+                    .div({"class": "i-example-test sign-547090576030314"})
                 .end(2)
-                .div({"class": "i-example-code sign-653244435088709"})
+                .div({"class": "i-example-code sign-9578251473139971"})
                     .act(function() {
                         $suggest__url_param = $C._tpl["i::suggest"].call(new $ConkittyEnvClass(this), ({
                                                     'data': './examples/i-suggest/capitals.json?search=%%input%%',
@@ -3760,14 +3766,14 @@ $C.tpl["i-suggest-example__url"] = function() {
                                                 }));
                     })
                     .act(function() {
-                        tests['7687291686888784'] = function(){
+                        tests['48341048299334943'] = function(){
 
                             expect( $suggest__url_param ).to.be.an.instanceof(Backbone.Model);
                             expect( $suggest__url_param.get('data') ).to.be.an.instanceof(Backbone.Collection);
 
                         }
                     })
-                    .div({"class": "i-example-test sign-7687291686888784"})
+                    .div({"class": "i-example-test sign-48341048299334943"})
     .end(5);
 };
 
@@ -3775,8 +3781,8 @@ $C.tpl["i-suggest-example__sizing"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this);
     return $C($ConkittyEnv.p)
         .li({"class": "i-example__list-item"})
-            .div({"class": "i-example-suite sign-04899760149419308"})
-                .div({"class": "i-example-code sign-5177453686483204"})
+            .div({"class": "i-example-suite sign-4067206142935902"})
+                .div({"class": "i-example-code sign-9057607501745224"})
                     .div({"class": "i-example__button-sizing"})
                         .div()
                             .attr("style", "width:32%")
@@ -3802,8 +3808,8 @@ $C.tpl["i-suggest-example__customization"] = function() {
     var $ConkittyEnv = $ConkittyGetEnv(this), $suggest__option_string, $suggest__option_func, $suggest__filter, $suggest__custom_view;
     return $C($ConkittyEnv.p)
         .li({"class": "i-example__list-item"})
-            .div({"class": "i-example-suite sign-5069738100282848"})
-                .div({"class": "i-example-code sign-0668511395342648"})
+            .div({"class": "i-example-suite sign-818463287781924"})
+                .div({"class": "i-example-code sign-8063424108549953"})
                     .act(function() {
                         $suggest__option_string = $C._tpl["i::suggest"].call(new $ConkittyEnvClass(this), ({
                                                     'data': './examples/i-suggest/capitals.json',
@@ -3811,16 +3817,16 @@ $C.tpl["i-suggest-example__customization"] = function() {
                                                 }));
                     })
                     .act(function() {
-                        tests['6686638572718948'] = function(){
+                        tests['39586047222837806'] = function(){
 
                             expect( $suggest__option_string ).to.be.an.instanceof(Backbone.Model);
                             expect( $suggest__option_string.get('data') ).to.be.an.instanceof(Backbone.Collection);
 
                         }
                     })
-                    .div({"class": "i-example-test sign-6686638572718948"})
+                    .div({"class": "i-example-test sign-39586047222837806"})
                 .end(2)
-                .div({"class": "i-example-code sign-3586769625544548"})
+                .div({"class": "i-example-code sign-752035258570686"})
                     .act(function() {
                         $suggest__option_func = $C._tpl["i::suggest"].call(new $ConkittyEnvClass(this), ({
                                                     'data': './examples/i-suggest/capitals.json',
@@ -3830,16 +3836,16 @@ $C.tpl["i-suggest-example__customization"] = function() {
                                                 }));
                     })
                     .act(function() {
-                        tests['2199237321037799'] = function(){
+                        tests['9439439349807799'] = function(){
 
                             expect( $suggest__option_func ).to.be.an.instanceof(Backbone.Model);
                             expect( $suggest__option_func.get('data') ).to.be.an.instanceof(Backbone.Collection);
 
                         }
                     })
-                    .div({"class": "i-example-test sign-2199237321037799"})
+                    .div({"class": "i-example-test sign-9439439349807799"})
                 .end(2)
-                .div({"class": "i-example-code sign-5093801070470363"})
+                .div({"class": "i-example-code sign-8108423124067485"})
                     .act(function() {
                         $suggest__filter = $C._tpl["i::suggest"].call(new $ConkittyEnvClass(this), ({
                                                     'data': './examples/i-suggest/capitals.json',
@@ -3855,18 +3861,18 @@ $C.tpl["i-suggest-example__customization"] = function() {
                                                 }));
                     })
                     .act(function() {
-                        tests['7591625282075256'] = function(){
+                        tests['683884235098958'] = function(){
 
                             expect( $suggest__filter ).to.be.an.instanceof(Backbone.Model);
                             expect( $suggest__filter.get('data') ).to.be.an.instanceof(Backbone.Collection);
 
                         }
                     })
-                    .div({"class": "i-example-test sign-7591625282075256"})
+                    .div({"class": "i-example-test sign-683884235098958"})
                 .end(2)
-                .div({"class": "i-example-code sign-18632925488054752"})
+                .div({"class": "i-example-code sign-8323305265512317"})
                 .end()
-                .div({"class": "i-example-code sign-9297415653709322"})
+                .div({"class": "i-example-code sign-19536383426748216"})
                     .act(function() {
                         $suggest__custom_view = $C._tpl["i::suggest"].call(new $ConkittyEnvClass(this), ({
                                                     'data': './examples/i-suggest/capitals.json',
@@ -3875,14 +3881,14 @@ $C.tpl["i-suggest-example__customization"] = function() {
                                                 }));
                     })
                     .act(function() {
-                        tests['06811151187866926'] = function(){
+                        tests['013855422614142299'] = function(){
 
                             expect( $suggest__custom_view ).to.be.an.instanceof(Backbone.Model);
                             expect( $suggest__custom_view.get('data') ).to.be.an.instanceof(Backbone.Collection);
 
                         }
                     })
-                    .div({"class": "i-example-test sign-06811151187866926"})
+                    .div({"class": "i-example-test sign-013855422614142299"})
     .end(5);
 };
 
