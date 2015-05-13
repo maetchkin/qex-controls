@@ -957,6 +957,9 @@ body.i-popup__noscroll {
   padding-right: 2em;
   position: relative;
 }
+.i-select__empty > .i-button .i-button__label {
+  color: #808080;
+}
 .i-select__size-L {
   font-size: 1.25rem;
 }
