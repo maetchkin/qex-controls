@@ -65,8 +65,15 @@ i-select-example__string
             CTPL-TEST test selected
 
                 // check initial state
-                // model state
+                // must return a Backbone.Model
+                expect( $stringSelect ).to.be.an.instanceof(Backbone.Model);
+                // check options
+                expect( $stringSelect.get('options') ).to.be.an.instanceof(Backbone.Collection);
+                // check mode
+                expect( $stringSelect.get('mode') ).to.be.equal("radio");
+                // check selected
                 expect($stringSelect.get("selected")).to.be.a("string").and.to.be.empty();
+                // check label
                 expect($stringSelect.get("label")).to.equal($stringSelect.get("placeholder"));
                 // DOM state
                 expect($stringNode.find('.i-button__label').text() ).to.be.equal($stringSelect.get("placeholder"));
@@ -75,8 +82,8 @@ i-select-example__string
                 // check select value string
                 $stringSelect.select("One");
                 // model state
-                expect($stringSelect.get("selected")).to.be.a("string").and.to.equal("One");
-                expect($stringSelect.get("label")).to.equal("One");
+                expect($stringSelect.get("selected")).to.be.a("string").and.to.be.equal("One");
+                expect($stringSelect.get("label")).to.be.equal("One");
                 // DOM state
                 expect($stringNode.find('.i-button__label').text() ).to.be.equal('One');
 
@@ -99,11 +106,11 @@ i-select-example__string
         CTPL-CODE check mode
             i::select ("One, Two, Three") ({"mode":"check", "delim": ", "}) AS $stringCheckSelect
             CTPL-TEST test selected
-                expect($stringCheckSelect.get("selected"))
-                    .to.be.a("string").and
-                    .to.be.empty();
-                expect($stringCheckSelect.get("label"))
-                    .to.equal($stringCheckSelect.get("placeholder"));
+                // check initial state
+                // model state
+                expect($stringCheckSelect.get("selected")).to.be.a("string").and.to.be.empty();
+                expect($stringCheckSelect.get("label")).to.equal($stringCheckSelect.get("placeholder"));
+
                 $stringCheckSelect.select("One");
                 $stringCheckSelect.select("Two");
                 expect($stringCheckSelect.get("selected"))
