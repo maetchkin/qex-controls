@@ -68,7 +68,15 @@ i-select-example__string
                 // must return a Backbone.Model
                 expect( $stringSelect ).to.be.an.instanceof(Backbone.Model);
                 // check options
-                expect( $stringSelect.get('options') ).to.be.an.instanceof(Backbone.Collection);
+                var $options = $stringSelect.get('options');
+                expect( $options ).to.be.an.instanceof(Backbone.Collection);
+                var $button_1 = $options.at(0),
+                    $button_2 = $options.at(1),
+                    $button_3 = $options.at(2);
+                expect( $button_1.get('label') ).to.be.equal('One');
+                expect( $button_2.get('label') ).to.be.equal('Two');
+                expect( $button_3.get('label') ).to.be.equal('Three');
+
                 // check mode
                 expect( $stringSelect.get('mode') ).to.be.equal("radio");
                 // check selected
@@ -102,6 +110,15 @@ i-select-example__string
                 expect($stringSelect.get("label")).to.equal($stringSelect.get("placeholder"));
                 // DOM state
                 expect($stringNode.find('.i-button__label').text() ).to.be.equal($stringSelect.get("placeholder"));
+
+                // check behavior
+                // init by mouseover
+                $stringNode.find('.i-button').trigger($.Event('mouseover'));
+                // fire mousedown
+                $stringNode.find('.i-button').trigger($.Event('mousedown'));
+                //
+
+
 
         CTPL-CODE check mode
             i::select ("One, Two, Three") ({"mode":"check", "delim": ", "}) AS $stringCheckSelect
