@@ -60,6 +60,11 @@ ns.views.select = Backbone.View.extend({
             'change:disabled',
             this.proxyDisabled
         );
+        this.listenTo(
+            this.model,
+            'change:selected',
+            this.selectedHandler
+        );
     },
     'onblur': function(){
         //this.model.set('open', false);
@@ -117,11 +122,13 @@ ns.views.select = Backbone.View.extend({
             this.model.toggleOpen();
         }
     },
+    'selectedHandler': function(select, selected){
+        this.$el.toggleClass( block + '__empty', (!selected || selected.length === 0));
+    },
     'proxyInit': function(){
         this.$button.trigger('asyncInit')
     },
     'proxyButton': function(e) {
-        //console.log('proxyButton', e.clientX);
         if(e.clientX){
             this.model.set('focus', void(0));
             this.$el.find('.i-button').trigger(e.type);

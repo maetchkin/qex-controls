@@ -11,9 +11,10 @@ i::select $data $options
     SET $block ("i-select")
     SET $model (ns.select($data, $options))
     SET $popupOptions ($options && $options.popup || {})
-    
+
     div AS $select
         @class $block
+        @class +($block + "__empty")
         @class +($block + "__size-" + $model.get("size"))
         i::button ({
             'label':    $model.get('label'),
@@ -26,7 +27,7 @@ i::select $data $options
             $popupOptions.owner = this;
         i::popup $popupOptions AS $popup
             CALL i-select__options-list ($model) AS $optionsList
-    
+
     JS
         new ns.views.select(
             {

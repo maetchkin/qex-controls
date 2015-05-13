@@ -84,6 +84,7 @@ i-select-example__string
                 // check label
                 expect($stringSelect.get("label")).to.equal($stringSelect.get("placeholder"));
                 // DOM state
+                expect($stringNode.hasClass('i-select__empty'), "empty mod on").to.be.true;
                 expect($stringNode.find('.i-button__label').text() ).to.be.equal($stringSelect.get("placeholder"));
                 expect($stringNode.find('.i-button').attr('tabindex') ).to.be.equal('0');
 
@@ -93,6 +94,7 @@ i-select-example__string
                 expect($stringSelect.get("selected")).to.be.a("string").and.to.be.equal("One");
                 expect($stringSelect.get("label")).to.be.equal("One");
                 // DOM state
+                expect($stringNode.hasClass('i-select__empty'), "empty mod off").to.be.false;
                 expect($stringNode.find('.i-button__label').text() ).to.be.equal('One');
 
                 // check reset
