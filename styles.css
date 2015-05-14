@@ -957,9 +957,6 @@ body.i-popup__noscroll {
   padding-right: 2em;
   position: relative;
 }
-.i-select__empty > .i-button .i-button__label {
-  color: #808080;
-}
 .i-select__size-L {
   font-size: 1.25rem;
 }
@@ -1123,6 +1120,14 @@ body.i-popup__noscroll {
     */
   bottom: calc(50% - .3rem);
   right: calc(1.1em - .3rem);
+}
+.i-select__disabled:after {
+  border-right-color: #808080;
+  border-bottom-color: #808080;
+  cursor: default;
+}
+.i-select__empty > .i-button .i-button__label {
+  color: #808080;
 }
 
 .i-select .check {
