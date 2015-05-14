@@ -8,10 +8,6 @@
         position: relative;
     }
 
-    &__empty > .i-button .i-button__label{
-        color: lighten(black, 50%)
-    }
-
     &__size{
         &-L{
             font-size: 1.25rem;
@@ -58,6 +54,18 @@
                 .arrow-up(.375);
             }
         }
+    }
+
+
+
+    &__disabled:after{
+        border-right-color: lighten(black, 50%);
+        border-bottom-color: lighten(black, 50%);
+        cursor: default;
+    }
+
+    &__empty > .i-button .i-button__label{
+        color: lighten(black, 50%)
     }
 
     .arrow-down(@scale: .5, @angle: 45deg){

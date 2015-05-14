@@ -140,7 +140,8 @@ ns.views.select = Backbone.View.extend({
     'proxyLabel': function(model, label) {
         this.$button.set('label', label);
     },
-    'proxyDisabled': function(model, value) {
-        this.$button.set('disabled', value);
+    'proxyDisabled': function(model, disabled) {
+        this.$el.toggleClass( block + '__disabled', !!disabled);
+        this.$button.set('disabled', disabled);
     }
 });

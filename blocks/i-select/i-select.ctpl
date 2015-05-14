@@ -16,6 +16,9 @@ i::select $data $options
         @class $block
         @class +($block + "__empty")
         @class +($block + "__size-" + $model.get("size"))
+        TEST ($model.get('disabled'))
+            @class +($block + "__disabled")
+
         i::button ({
             'label':    $model.get('label'),
             'size':     $model.get('size'),

@@ -63,7 +63,6 @@ i-select-example__string
                 i::select ('One,Two,Three') AS $stringSelect
             SET $stringNode ($($stringContainer.firstChild))
             CTPL-TEST test selected
-
                 // check initial state
                 // must return a Backbone.Model
                 expect( $stringSelect ).to.be.an.instanceof(Backbone.Model);
@@ -96,7 +95,7 @@ i-select-example__string
                 // DOM state
                 expect($stringNode.hasClass('i-select__empty'), "empty mod off").to.be.false;
                 expect($stringNode.find('.i-button__label').text() ).to.be.equal('One');
-
+            CTPL-TEST test behavior
                 // check reset
                 $stringSelect.reset();
                 // model state
