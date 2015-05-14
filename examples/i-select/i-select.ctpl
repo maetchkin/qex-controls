@@ -95,7 +95,7 @@ i-select-example__string
                 // DOM state
                 expect($stringNode.hasClass('i-select__empty'), "empty mod off").to.be.false;
                 expect($stringNode.find('.i-button__label').text() ).to.be.equal('One');
-            CTPL-TEST test behavior
+
                 // check reset
                 $stringSelect.reset();
                 // model state
@@ -112,12 +112,24 @@ i-select-example__string
                 // DOM state
                 expect($stringNode.find('.i-button__label').text() ).to.be.equal($stringSelect.get("placeholder"));
 
+                // test behavior
+                $stringSelect.reset();
                 // check behavior
                 // init by mouseover
                 $stringNode.find('.i-button').trigger($.Event('mouseover'));
                 // fire mousedown
                 $stringNode.find('.i-button').trigger($.Event('mousedown'));
+                // fire mouseup
+                $stringNode.find('.i-button').trigger($.Event('mouseup'));
+                // check DOM
+                expect($stringNode.hasClass('i-select__empty'), "empty mod on").to.be.true;
+                expect($stringNode.hasClass('i-select__open'), "open mod on").to.be.true;
+                expect($stringNode.find('.i-button').hasClass('i-button__pseudofocus'), "button pseudofocus on").to.be.true;
                 //
+                var popup = $('body .i-popup').last().get(0);
+                console.log(' popup ', popup  );
+
+
 
 
 
