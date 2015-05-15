@@ -69,12 +69,12 @@ i-select-example__string
                 // check options
                 var $options = $stringSelect.get('options');
                 expect( $options ).to.be.an.instanceof(Backbone.Collection);
-                var $button_1 = $options.at(0),
-                    $button_2 = $options.at(1),
-                    $button_3 = $options.at(2);
-                expect( $button_1.get('label') ).to.be.equal('One');
-                expect( $button_2.get('label') ).to.be.equal('Two');
-                expect( $button_3.get('label') ).to.be.equal('Three');
+                var $option_1 = $options.at(0),
+                    $option_2 = $options.at(1),
+                    $option_3 = $options.at(2);
+                expect( $option_1.get('label') ).to.be.equal('One');
+                expect( $option_2.get('label') ).to.be.equal('Two');
+                expect( $option_3.get('label') ).to.be.equal('Three');
 
                 // check mode
                 expect( $stringSelect.get('mode') ).to.be.equal("radio");
@@ -125,12 +125,13 @@ i-select-example__string
                 expect($stringNode.hasClass('i-select__empty'), "empty mod on").to.be.true;
                 expect($stringNode.hasClass('i-select__open'), "open mod on").to.be.true;
                 expect($stringNode.find('.i-button').hasClass('i-button__pseudofocus'), "button pseudofocus on").to.be.true;
-                //
-                var popup = $('body .i-popup').last().get(0);
-                console.log(' popup ', popup  );
 
-
-
+                // check popup
+                var popup = $('body .i-popup').last(),
+                    popupItems = popup.find('.i-select__options-list__item'),
+                    popupStyle = getComputedStyle( popup.get(0), null);
+                expect( popupStyle.display ).to.be.equal("block");
+                expect( popupItems.length  ).to.be.equal( 3 );
 
 
         CTPL-CODE check mode
