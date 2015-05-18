@@ -98,7 +98,7 @@ ns.views.button = Backbone.View.extend(
         },
 
         'shouldIgnore': function(e) {
-            return e && (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey || e.button === 2);
+            return e && (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey || e.button > 0);
         },
 
         'pressed': function(e) {
