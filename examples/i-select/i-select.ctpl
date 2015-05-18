@@ -59,40 +59,89 @@ i-select-example__options
 i-select-example__string
     CTPL-SUITE String
         CTPL-CODE radio mode
-            i::select ('One,Two,Three') AS $stringSelect
+            span AS $stringContainer
+                i::select ('One,Two,Three') AS $stringSelect
+            SET $stringNode ($($stringContainer.firstChild))
             CTPL-TEST test selected
-                expect($stringSelect.get("selected"))
-                    .to.be.a("string").and
-                    .to.be.empty();
-                expect($stringSelect.get("label"))
-                    .to.equal($stringSelect.get("placeholder"));
+                // check initial state
+                // must return a Backbone.Model
+                expect( $stringSelect ).to.be.an.instanceof(Backbone.Model);
+                // check options
+                var $options = $stringSelect.get('options');
+                expect( $options ).to.be.an.instanceof(Backbone.Collection);
+                var $option_1 = $options.at(0),
+                    $option_2 = $options.at(1),
+                    $option_3 = $options.at(2);
+                expect( $option_1.get('label') ).to.be.equal('One');
+                expect( $option_2.get('label') ).to.be.equal('Two');
+                expect( $option_3.get('label') ).to.be.equal('Three');
+
+                // check mode
+                expect( $stringSelect.get('mode') ).to.be.equal("radio");
+                // check selected
+                expect($stringSelect.get("selected")).to.be.a("string").and.to.be.empty();
+                // check label
+                expect($stringSelect.get("label")).to.equal($stringSelect.get("placeholder"));
+                // DOM state
+                expect($stringNode.hasClass('i-select__empty'), "empty mod on").to.be.true;
+                expect($stringNode.find('.i-button__label').text() ).to.be.equal($stringSelect.get("placeholder"));
+                expect($stringNode.find('.i-button').attr('tabindex') ).to.be.equal('0');
+
+                // check select value string
                 $stringSelect.select("One");
-                expect($stringSelect.get("selected"))
-                    .to.be.a("string").and
-                    .to.equal("One");
-                expect($stringSelect.get("label"))
-                    .to.equal("One");
-                $stringSelect.select("Two");
-                expect($stringSelect.get("selected"))
-                    .to.be.a("string").and
-                    .to.equal("Two");
-                expect($stringSelect.get("label"))
-                    .to.equal("Two");
+                // model state
+                expect($stringSelect.get("selected")).to.be.a("string").and.to.be.equal("One");
+                expect($stringSelect.get("label")).to.be.equal("One");
+                // DOM state
+                expect($stringNode.hasClass('i-select__empty'), "empty mod off").to.be.false;
+                expect($stringNode.find('.i-button__label').text() ).to.be.equal('One');
+
+                // check reset
                 $stringSelect.reset();
-                expect($stringSelect.get("selected"))
-                    .to.be.a("string").and
-                    .to.be.empty();
-                expect($stringSelect.get("label"))
-                    .to.equal($stringSelect.get("placeholder"));
+                // model state
+                expect($stringSelect.get("selected")).to.be.a("string").and.to.be.empty();
+                expect($stringSelect.get("label")).to.equal($stringSelect.get("placeholder"));
+                // DOM state
+                expect($stringNode.find('.i-button__label').text() ).to.be.equal($stringSelect.get("placeholder"));
+
+                // check setting non-existent value cause reset
+                $stringSelect.select("Four");
+                // model state
+                expect($stringSelect.get("selected")).to.be.a("string").and.to.be.empty();
+                expect($stringSelect.get("label")).to.equal($stringSelect.get("placeholder"));
+                // DOM state
+                expect($stringNode.find('.i-button__label').text() ).to.be.equal($stringSelect.get("placeholder"));
+
+                // test behavior
+                $stringSelect.reset();
+                // check behavior
+                // init by mouseover
+                $stringNode.find('.i-button').trigger($.Event('mouseover'));
+                // fire mousedown
+                $stringNode.find('.i-button').trigger($.Event('mousedown'));
+                // fire mouseup
+                $stringNode.find('.i-button').trigger($.Event('mouseup'));
+                // check DOM
+                expect($stringNode.hasClass('i-select__empty'), "empty mod on").to.be.true;
+                expect($stringNode.hasClass('i-select__open'), "open mod on").to.be.true;
+                expect($stringNode.find('.i-button').hasClass('i-button__pseudofocus'), "button pseudofocus on").to.be.true;
+
+                // check popup
+                var popup = $('body .i-popup').last(),
+                    popupItems = popup.find('.i-select__options-list__item'),
+                    popupStyle = getComputedStyle( popup.get(0), null);
+                expect( popupStyle.display ).to.be.equal("block");
+                expect( popupItems.length  ).to.be.equal( 3 );
+
 
         CTPL-CODE check mode
             i::select ("One, Two, Three") ({"mode":"check", "delim": ", "}) AS $stringCheckSelect
             CTPL-TEST test selected
-                expect($stringCheckSelect.get("selected"))
-                    .to.be.a("string").and
-                    .to.be.empty();
-                expect($stringCheckSelect.get("label"))
-                    .to.equal($stringCheckSelect.get("placeholder"));
+                // check initial state
+                // model state
+                expect($stringCheckSelect.get("selected")).to.be.a("string").and.to.be.empty();
+                expect($stringCheckSelect.get("label")).to.equal($stringCheckSelect.get("placeholder"));
+
                 $stringCheckSelect.select("One");
                 $stringCheckSelect.select("Two");
                 expect($stringCheckSelect.get("selected"))
