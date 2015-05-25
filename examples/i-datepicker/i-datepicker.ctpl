@@ -1,0 +1,99 @@
+i-datepicker-example
+    ul.i-example__list
+        li.i-example__list-item
+            p
+                "The i::datepicker block is based on i::select and provides an easy way to select a date. It can accept any string recognized by"
+                a
+                    @href 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse'
+                    'Date.parse()'
+                "."
+            CTPL-SHOW Usage
+                i::datepicker
+                //
+                i::datepicker ( /* Date object */ )
+                // or
+                i::datepicker ( /* Date string */ )
+                // or
+                i::datepicker ( /* type ("from"/"to") */ )
+                // or
+                i::datepicker ( /* options hash */ )
+
+            CALL i-datepicker-example__options
+            CALL i-datepicker-example__default
+            CALL i-datepicker-example__type
+            CALL i-datepicker-example__date
+            CALL i-datepicker-example__object
+
+i-datepicker-example__options
+    h4
+        "Options"
+    p
+        dl
+            dt
+                "date"
+            dd
+                "Date object or string. Current date by default"
+            dt
+                "type"
+            dd
+                "\"from\" or \"to\". \"from\" by default. The time is set to 00:00:00 or 23:59:59 depemding on this option"
+
+i-datepicker-example__default
+    CTPL-SUITE Default
+        CTPL-CODE use current date
+            span
+                i::datepicker AS $from
+            CTPL-TEST must use current date
+                var date = $from.getDate();
+                // must use current date
+                expect( date.toDateString() ).to.be.equal(new Date().toDateString());
+                // must set time to 00:00:00.000
+                expect( date.getHours() ).to.be.equal(0);
+                expect( date.getMinutes() ).to.be.equal(0);
+                expect( date.getSeconds() ).to.be.equal(0);
+                expect( date.getMilliseconds() ).to.be.equal(0);
+
+i-datepicker-example__type
+    CTPL-SUITE Type
+        CTPL-CODE use "to" type for the end of some range
+            span
+                i::datepicker 'to' AS $to
+            CTPL-TEST must use current date
+                var date = $to.getDate();
+                // must use current date
+                expect( date.toDateString() ).to.be.equal(new Date().toDateString());
+                // must set time to 23:59:59:999
+                expect( date.getHours() ).to.be.equal(23);
+                expect( date.getMinutes() ).to.be.equal(59);
+                expect( date.getSeconds() ).to.be.equal(59);
+                expect( date.getMilliseconds() ).to.be.equal(999);
+                
+i-datepicker-example__date
+    CTPL-SUITE Date
+        CTPL-CODE use date string
+            span
+                SET $date '2007-08-03'
+                i::datepicker $date AS $dateString
+            CTPL-TEST must use the specified date
+                var date = $dateString.getDate();
+                // must use the specified date
+                expect( date.toDateString() ).to.be.equal(new Date($date).toDateString());
+
+i-datepicker-example__object
+    CTPL-SUITE Object
+        CTPL-CODE use options hash
+            span
+                SET $date (new Date(2016, 0, 1))
+                i::datepicker ({
+                    'date': $date,
+                    'type': 'to'
+                }) AS $object
+            CTPL-TEST must use the specified date
+                var date = $object.getDate();
+                // must use the specified date
+                expect( date.toDateString() ).to.be.equal($date.toDateString());
+                // must set time to 23:59:59:999
+                expect( date.getHours() ).to.be.equal(23);
+                expect( date.getMinutes() ).to.be.equal(59);
+                expect( date.getSeconds() ).to.be.equal(59);
+                expect( date.getMilliseconds() ).to.be.equal(999);

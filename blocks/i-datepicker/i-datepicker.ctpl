@@ -1,0 +1,107 @@
+i::datepicker $options
+    &"../i/i.js"
+    &"../i/i.less"
+    &"i-datepicker-fabric.js"
+    &"i-datepicker-model.js"
+    &"i-datepicker-view.js"
+    &"i-datepicker.less"
+    SET $date (ns.date($options))
+    SET $month (new ns.sets.month([$date]))
+    div.i-datepicker
+        i::select ({
+            'placeholder': $date.get('placeholder'),
+            'options': $month,
+            'viewOption': 'i-datepicker__day'
+        }) AS $select
+        JS
+            $select.select($date);
+            new ns.views.datepicker({
+                'options': $month,
+                'select': $select,
+                'el': this 
+            });
+    EXPOSE ($month.state)
+            
+i-datepicker__week
+    div.i-datepicker__week
+        div.i-datepicker__day
+            'Mo'
+        div.i-datepicker__day
+            'Tu'
+        div.i-datepicker__day
+            'We'
+        div.i-datepicker__day
+            'Th'
+        div.i-datepicker__day
+            'Fr'
+        div.i-datepicker__day.i-datepicker__day-weekend
+            'Sa'
+        div.i-datepicker__day.i-datepicker__day-weekend
+            'Su'
+        
+
+i-datepicker__day $model
+    SET $date ($model.get('date'))
+    div.i-datepicker__day
+        ($date.getDate())
+        SET $day ($date.getDay() || 7)
+        //TEST ($day === 6 || $day === 7)
+        //  @class +'i-datepicker__day-weekend'
+        TEST ($model === $model.collection.at(0))
+            JS
+                var $this = $(this);
+                window.setTimeout(
+                    function() {
+                        $this.parent().css(
+                            'margin-left',
+                            ($day - 1) * 2 + 'em'
+                        );
+                    },
+                    0
+                );
+
+i-datepicker__form $state
+    SET $month ($state.get('month'))
+    SET $monthNames ([
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'Septemper',
+            'October',
+            'November',
+            'December'
+        ])
+    div.i-datepicker__form-prev
+        i::button ({
+            label: ''
+        }) AS $prev
+    div.i-datepicker__form-title
+        ($monthNames[$month] + ' ' + $state.get('year'))
+    div.i-datepicker__form-next
+        i::button ({
+            label: ''
+        }) AS $next
+    JS
+        $prev.on(
+            'action',
+            function() {
+                $state.set(
+                    'month',
+                    $month - 1
+                );
+            }
+        );
+        $next.on(
+            'action',
+            function() {
+                $state.set(
+                    'month',
+                    $month + 1
+                );
+            }
+        );
