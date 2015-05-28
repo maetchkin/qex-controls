@@ -1,11 +1,14 @@
 {
   "name": "qex-controls",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "main": "./index.js",
   "scripts": {
     "build": "gulp",
     "test": "gulp"
   },
+  "keywords": ["backbone","exoskeleton","ui","mvc","mvvm","controls"],
+  "description": "This is a library of UI blocks based on a number of modern front-end technologies which transparently demonstrates our approach to Single Page Applications. We are providing this library with documentation, examples and tests which are built on qex-controls library and should give explanations to various aspects of a block's architecture from within, so feel free to look inside.",
+  "homepage": "http://maetchkin.github.io/qex-controls/",
   "repository": {
     "type": "git",
     "url": "https://github.com/maetchkin/qex-controls.git"
