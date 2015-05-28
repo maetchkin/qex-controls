@@ -1277,6 +1277,139 @@ body.i-popup__noscroll {
   z-index: -1;
 }
 
+.i-datepicker .check {
+  box-sizing: border-box;
+  content: '';
+  position: absolute;
+  height: 1em;
+  width: .4em;
+  -webkit-transform: rotate(35deg) skewY(15deg);
+          transform: rotate(35deg) skewY(15deg);
+  border-right: .13em solid black;
+  border-bottom: .13em solid black;
+}
+.i-datepicker .line {
+  box-sizing: border-box;
+  content: '';
+  position: absolute;
+  height: 2rem;
+  width: .15rem;
+  background-color: #000;
+}
+.i-datepicker__popup {
+  box-sizing: border-box;
+  width: 15em;
+  padding: .5em;
+}
+.i-datepicker__month {
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+}
+.i-datepicker__month .i-select__options-list__item {
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+}
+.i-datepicker__month .i-select__options-list__item-selected {
+  box-shadow: inset 0 0 0 2px rgba(255, 0, 0, 0.5);
+}
+.i-datepicker__month .i-select__options-list__item-selected:before {
+  border: none;
+}
+.i-datepicker__week {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row;
+      -ms-flex-flow: row;
+          flex-flow: row;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.i-datepicker__week > .i-datepicker__day {
+  line-height: 2;
+}
+.i-datepicker__week,
+.i-datepicker__month {
+  box-shadow: inset -4em 0 0 0 #f3f1ed;
+}
+.i-datepicker__day {
+  box-sizing: border-box;
+  width: 2em;
+  text-align: right;
+  padding-right: .4em;
+}
+.i-datepicker__form {
+  padding-bottom: .5em;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row;
+      -ms-flex-flow: row;
+          flex-flow: row;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.i-datepicker__form-title {
+  text-align: center;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  font-weight: bold;
+}
+.i-datepicker__form-prev .i-button,
+.i-datepicker__form-next .i-button {
+  height: 1.5em;
+  width: 2em;
+  padding: 0;
+  position: relative;
+}
+.i-datepicker__form-prev .i-button:before,
+.i-datepicker__form-next .i-button:before {
+  box-sizing: border-box;
+  content: '';
+  position: absolute;
+  height: 1rem;
+  width: 1rem;
+  -webkit-transform-origin: 70% 70%;
+          transform-origin: 70% 70%;
+  border-right: .2rem solid black;
+  border-bottom: .2rem solid black;
+  -webkit-transform: scale(0.5) rotateZ(135deg);
+          transform: scale(0.5) rotateZ(135deg);
+  cursor: pointer;
+  /* 
+        transition: transform .1s linear;
+    */
+  bottom: calc(50% - .3rem);
+  right: calc(50% - .3rem);
+}
+.i-datepicker__form-next .i-button:before {
+  box-sizing: border-box;
+  content: '';
+  position: absolute;
+  height: 1rem;
+  width: 1rem;
+  -webkit-transform-origin: 70% 70%;
+          transform-origin: 70% 70%;
+  border-right: .2rem solid black;
+  border-bottom: .2rem solid black;
+  -webkit-transform: scale(0.5) rotateZ(-45deg);
+          transform: scale(0.5) rotateZ(-45deg);
+  cursor: pointer;
+  /* 
+        transition: transform .1s linear;
+    */
+  bottom: calc(50% - .3rem);
+  right: calc(50% - .3rem);
+}
+
 .i-input {
   position: relative;
   display: inline-block;
@@ -1493,15 +1626,6 @@ body.i-popup__noscroll {
   background-color: #ffeba0;
 }
 
-.i-popup-example__owner {
-  border-bottom: 1px dotted black;
-  cursor: pointer;
-}
-.i-popup-example__content {
-  padding: .5em;
-  white-space: nowrap;
-}
-
 .i-select__view-option {
   padding: .2em .5em;
   border: 1px dashed orangered;
@@ -1524,6 +1648,15 @@ body.i-popup__noscroll {
   padding-top: 0em;
   line-height: 20px;
   cursor: pointer;
+}
+
+.i-popup-example__owner {
+  border-bottom: 1px dotted black;
+  cursor: pointer;
+}
+.i-popup-example__content {
+  padding: .5em;
+  white-space: nowrap;
 }
 
 .i-suggest {
