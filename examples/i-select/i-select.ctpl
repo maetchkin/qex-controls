@@ -132,6 +132,17 @@ i-select-example__string
                     popupStyle = getComputedStyle( popup.get(0), null);
                 expect( popupStyle.display ).to.be.equal("block");
                 expect( popupItems.length  ).to.be.equal( 3 );
+                // check item's nodes
+                var $optionItem_1 = popupItems.get(0),
+                    $optionItem_2 = popupItems.get(1),
+                    $optionItem_3 = popupItems.get(2);
+
+                expect( $($optionItem_1).text()  ).to.be.equal( 'One' );
+                expect( $($optionItem_2).text()  ).to.be.equal( 'Two' );
+                expect( $($optionItem_3).text()  ).to.be.equal( 'Three' );
+
+                //console.log( ' $optionItem_1 ', $optionItem_1);
+
 
 
         CTPL-CODE check mode
