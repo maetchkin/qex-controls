@@ -1626,6 +1626,15 @@ body.i-popup__noscroll {
   background-color: #ffeba0;
 }
 
+.i-popup-example__owner {
+  border-bottom: 1px dotted black;
+  cursor: pointer;
+}
+.i-popup-example__content {
+  padding: .5em;
+  white-space: nowrap;
+}
+
 .i-select__view-option {
   padding: .2em .5em;
   border: 1px dashed orangered;
@@ -1648,15 +1657,6 @@ body.i-popup__noscroll {
   padding-top: 0em;
   line-height: 20px;
   cursor: pointer;
-}
-
-.i-popup-example__owner {
-  border-bottom: 1px dotted black;
-  cursor: pointer;
-}
-.i-popup-example__content {
-  padding: .5em;
-  white-space: nowrap;
 }
 
 .i-suggest {
