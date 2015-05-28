@@ -2,7 +2,7 @@ i-datepicker-example
     ul.i-example__list
         li.i-example__list-item
             p
-                "The i::datepicker block is based on i::select and provides an easy way to select a date. It can accept any string recognized by"
+                "The i::datepicker block is based on i::select and provides an easy way to select a date. It can accept any string recognized by "
                 a
                     @href 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse'
                     'Date.parse()'
@@ -67,7 +67,7 @@ i-datepicker-example__type
                 expect( date.getMinutes() ).to.be.equal(59);
                 expect( date.getSeconds() ).to.be.equal(59);
                 expect( date.getMilliseconds() ).to.be.equal(999);
-                
+
 i-datepicker-example__date
     CTPL-SUITE Date
         CTPL-CODE use date string
