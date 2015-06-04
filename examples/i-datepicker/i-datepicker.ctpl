@@ -36,7 +36,7 @@ i-datepicker-example__options
             dt
                 "type"
             dd
-                "\"from\" or \"to\". \"from\" by default. The time is set to 00:00:00 or 23:59:59 depemding on this option"
+                "\"from\" or \"to\". \"from\" by default. The time is set to 00:00:00 or 23:59:59 depending on this option"
 
 i-datepicker-example__default
     CTPL-SUITE Default
