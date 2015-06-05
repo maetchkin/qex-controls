@@ -8,7 +8,7 @@ i-select-example
                     "Backbone.Collection"
                 " and Object"
             CTPL-SHOW Usage
-                i::select ( options ) /* ( options ) */
+                i::select ( items ) /* ( options ) */
 
             CALL i-select-example__options
             CALL i-select-example__string
@@ -32,7 +32,7 @@ i-select-example__options
             dd
                 "String. none (default)"
             dt
-                "options"
+                "items"
             dd
                 "String, Array, Object or Backbone.Collection"
             dt
