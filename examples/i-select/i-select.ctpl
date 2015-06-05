@@ -58,6 +58,8 @@ i-select-example__options
 
 i-select-example__string
     CTPL-SUITE String
+        p
+            "Set items with a comma-separated string."
         CTPL-CODE radio mode
             span AS $stringContainer
                 i::select ('One,Two,Three') AS $stringSelect
@@ -144,13 +146,29 @@ i-select-example__string
                 //console.log( ' $optionItem_1 ', $optionItem_1);
 
 
-
+        p
+            "Set items with a string and a custom delimiter."
         CTPL-CODE check mode
-            i::select ("One, Two, Three") ({"mode":"check", "delim": ", "}) AS $stringCheckSelect
+            span AS $stringDelimContainer
+                i::select ("One, Two, Three") ({"mode":"check", "delim": ", "}) AS $stringCheckSelect
+            SET $stringDelimNode ($($stringDelimContainer.firstChild))
             CTPL-TEST test selected
                 // check initial state
-                // model state
-                expect($stringCheckSelect.get("selected")).to.be.a("string").and.to.be.empty();
+                // must return a Backbone.Model
+                expect( $stringCheckSelect ).to.be.an.instanceof(Backbone.Model);
+                // check options
+                var $options = $stringCheckSelect.get('options');
+                expect( $options ).to.be.an.instanceof(Backbone.Collection);
+                var $option_1 = $options.at(0),
+                    $option_2 = $options.at(1),
+                    $option_3 = $options.at(2);
+                expect( $option_1.get('label') ).to.be.equal('One');
+                expect( $option_2.get('label') ).to.be.equal('Two');
+                expect( $option_3.get('label') ).to.be.equal('Three');
+
+                // check mode
+                expect($stringCheckSelect.get('mode')).to.be.equal("check");
+                // check selected
                 expect($stringCheckSelect.get("label")).to.equal($stringCheckSelect.get("placeholder"));
 
                 $stringCheckSelect.select("One");
@@ -166,6 +184,8 @@ i-select-example__string
 
 i-select-example__array
     CTPL-SUITE Array
+        p
+            "Set items with an array."
         CTPL-CODE radio mode
             i::select (["One", "Two", "Three"]) AS $arraySelect
             CTPL-TEST radio mode
@@ -184,6 +204,7 @@ i-select-example__array
                 $arraySelect.reset();
                 expect($arraySelect.get("selected"))
                     .to.be.a('null');
+
         CTPL-CODE check mode
             i::select (["One", "Two", "Three"]) ({"mode":"check"}) AS $arrayCheckSelect
             CTPL-TEST check mode
