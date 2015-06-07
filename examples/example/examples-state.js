@@ -30,10 +30,10 @@ window.exampleState = (function (location) {
 
         'url': function(options){
 
-            var framework = options.framework || params.framework,
-                $  = options.$ || params.$,
+            var framework = options.framework || params.framework || '',
+                $  = options.$ || params.$ || '',
                 f$ = framework + "&" + $,
-                result = "?" + (f$ === 'exoskeleton&zepto' ? '' :  f$);
+                result = "?" + (f$ === 'exoskeleton&zepto' || f$ === '&' ? '' :  f$);
 
             if(options.section){
                 result += "#" + options.section;
