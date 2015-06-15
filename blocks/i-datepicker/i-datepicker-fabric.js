@@ -1,6 +1,6 @@
 ns.date = function(options) {
     var toString = Object.prototype.toString,
-        datatype = toString.call(options).slice(8,-1)
+        datatype = toString.call(options).slice(8,-1),
         params;
     options = options || {};
     params = {
