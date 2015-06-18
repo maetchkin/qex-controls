@@ -33,7 +33,8 @@ ns.models.suggest = Backbone.Model.extend(
             this.get('data').fetch({
                 'reset':   true,
                 'success': function(){
-                    filter() && done();
+                    filter();
+                    done();
                 },
                 'error':   done
             });
