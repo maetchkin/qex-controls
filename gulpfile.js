@@ -15,7 +15,8 @@ var pkg     = require('./package.json'),
     path    = require('path'),
     del     = require('del'),
     argv    = require('yargs').argv,
-    autoprefixer = require('gulp-autoprefixer'),
+    autoprefixer = require('autoprefixer-core'),
+    postcss = require('gulp-postcss'),
     mochaPhantomJS = require('gulp-mocha-phantomjs'),
 
     types   = ['ctpl','less','js','css','html'],
@@ -158,9 +159,11 @@ gulp.task(
             .pipe(techs.less.restore())
 
             .pipe(techs.css)
-            .pipe(autoprefixer({
-                browsers: ['last 2 versions']
-            }))
+            .pipe(postcss([
+                autoprefixer({
+                    browsers: ['last 2 versions']
+                })
+            ]))
             .pipe(concat('styles.css'))
             .pipe(techs.css.restore())
 

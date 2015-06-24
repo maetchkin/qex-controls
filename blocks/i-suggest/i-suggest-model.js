@@ -100,18 +100,18 @@ ns.models.suggest = Backbone.Model.extend(
                 select.get('input')
             );
 
-            if(this.get('param')){
-                select.set(
-                    'disabled',
-                    false
-                );
-                select.on(
-                    "change:disabled",
-                    function(){
-                        select.set('disabled', false);
-                    }
-                );
+            
+        select.set(
+            'disabled',
+            false
+        );
+        select.on(
+            "change:disabled",
+            function(){
+                select.set('disabled', false);
             }
+        );
+
         },
 
         'onRender': function(){
@@ -188,7 +188,7 @@ ns.models.suggest = Backbone.Model.extend(
 
         'input': function (input, value) {
 
-            this.set('input', 'value');
+            this.set('input', value);
 
             var str    = value.toLowerCase().trim(),
                 select = this.get('select');
