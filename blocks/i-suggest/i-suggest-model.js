@@ -193,11 +193,12 @@ ns.models.suggest = Backbone.Model.extend(
             var str    = value.toLowerCase().trim(),
                 select = this.get('select');
 
-            if(str && str.length >= this.get('min')){
+            if(str.length >= this.get('min')){
                 if( this.get('param') ){
                     this.get('data').once('sync', this.setSuggest, this);
                     this.load();
                 } else {
+                    str || select.reset();
                     this.setSuggest();
                 }
             } else {
