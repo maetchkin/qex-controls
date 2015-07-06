@@ -86,10 +86,12 @@ ns.views.select = Backbone.View.extend({
         switch (e.which) {
             case ns.keys.up:
                 e.preventDefault();
+                e.stopPropagation();
                 (select.focusPrev() && this.scrollFocused(select.get('focus'), true)) || select.set('open', false);
             break;
             case ns.keys.down:
                 e.preventDefault();
+                e.stopPropagation();
                 select.get('open') ? (select.focusNext() && this.scrollFocused(select.get('focus'), false)) : select.set('open', true);
             break;
         }
