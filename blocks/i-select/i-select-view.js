@@ -62,6 +62,11 @@ ns.views.select = Backbone.View.extend({
         );
         this.listenTo(
             this.model,
+            'change:loading',
+            this.proxyLoading
+        );
+        this.listenTo(
+            this.model,
             'change:selected',
             this.selectedHandler
         );
@@ -145,5 +150,9 @@ ns.views.select = Backbone.View.extend({
     'proxyDisabled': function(model, disabled) {
         this.$el.toggleClass( block + '__disabled', !!disabled);
         this.$button.set('disabled', disabled);
+    },
+    'proxyLoading': function(model, loading) {
+        this.$el.toggleClass( block + '__loading', !!loading);
+        this.$button.set('loading', loading);
     }
 });
