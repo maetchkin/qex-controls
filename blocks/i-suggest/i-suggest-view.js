@@ -57,6 +57,7 @@ ns.views.suggest = Backbone.View.extend(
 
                     $button.attr({'tabindex': -1});
                     $input .attr({'tabindex':  0});
+                    $input .attr({'autocomplete':  'off'});
                 }
             } else {
                 $button.attr({'tabindex': 0});
