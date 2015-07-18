@@ -123,7 +123,8 @@ gulp.task(
             .pipe(
                 wrapper(
                     {
-                        header: '(function (ns, window, Backbone, $){\n',
+                        header: '/* ${filename} qex-controls ' + Meta.version + ' ' + new Date() + '*/\n' +
+                                '(function (ns, window, Backbone, $){\n',
                         footer: '})(' + controls_ns + ', window, Backbone, $);\n'
                     }
                 )
