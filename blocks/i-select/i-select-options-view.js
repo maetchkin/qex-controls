@@ -26,15 +26,9 @@ ns.views.selectOptions = Backbone.View.extend({
         );
 
         this.listenTo(
-            this.model,
+            this.model.get('index'),
             'change:selected',
             this.setSelected
-        );
-
-        this.listenTo(
-            this.model,
-            'change:filtered',
-            this.render
         );
 
         this.listenTo(
@@ -150,19 +144,12 @@ ns.views.selectOptions = Backbone.View.extend({
         }
     },
 
-    'setSelected': function() {
-        var index = this.model.get('index'),
-            options = this.model.get('options'),
-            cid;
-        options.forEach(
-            function(option){
-                var cid = option.cid;
-                this
-                    .$('.' + block + '[data-cid="' + cid + '"]')
-                    .toggleClass(block + '-selected', !!index[cid])
-            },
-            this
-        );
+    'setSelected': function(item, selected) {
+
+        this
+            .$('.' + block + '[data-cid="' + item.get('id') + '"]')
+            .toggleClass(block + '-selected', selected)
+
     }
 
 });

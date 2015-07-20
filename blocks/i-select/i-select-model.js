@@ -13,7 +13,8 @@ ns.models.select = Backbone.Model.extend(
             'label':       void(0),
             'type':        void(0),
             'viewButton':  void(0),
-            'viewOption':  void(0)
+            'viewOption':  void(0),
+            'value':       void(0)
         },
 
         'initialize': function ns_models_select(attrs) {
@@ -23,16 +24,16 @@ ns.models.select = Backbone.Model.extend(
 
             this.indexedOption  = this.indexedOption.bind(this);
             this.getOptionLabel = this.getOptionLabel.bind(this);
+            this.getOptionValue = this.getOptionValue.bind(this);
+
+            this.on('change:selected', this.setLabel);
+            this.on('change:selected', this.setValue);
+
+            this.on('change:open',  this.openHandler);
 
             this.createIndex();
             this.setLabel();
-
-            //attrs.options.length || this.set('disabled', true);
-            //this.on('change:selected', this.selectedHandler);
-            this.on('change:selected', this.setLabel);
-            this.on('change:open',  this.openHandler);
-            //this.reset();
-            //this.set('selected', this.getSelected() );
+            this.setValue();
         },
 
         'createIndex': function(){
@@ -73,6 +74,44 @@ ns.models.select = Backbone.Model.extend(
             this.set('label', label);
         },
 
+        'setValue': function(){
+            var value,
+                selected = this.get('selected'),
+                type     = this.get('type'),
+                isCheck  = this.isCheck();
+
+            if(type === 'string'){
+                value = '';
+                if(selected){
+                    value = selected.map(
+                        this.getOptionValue
+                    ).join(
+                        this.get('delim')
+                    );
+                }
+            } else
+
+            if(type === 'array'){
+                value = [];
+                if(selected){
+                    value = selected.map(
+                        this.getOptionValue
+                    );
+                }
+            } else
+
+            if(type === 'collection'){
+                value = null;
+                if(selected){
+                    value = selected;
+                }
+            }
+
+            console.log('setValue', type, value, selected);
+
+            this.set('value', value);
+        },
+
         'indexHandler': function(){
             console.log('indexHandler', this, arguments);
         },
@@ -81,7 +120,7 @@ ns.models.select = Backbone.Model.extend(
             this.set('focus', void(0));
         },
 
-        'selectedHandler': function(select, value){
+        /*'selectedHandler': function(select, value){
             var type = this.get('type'),
                 isCheck = this.isCheck(),
                 placeholder = this.get('placeholder'),
@@ -106,7 +145,7 @@ ns.models.select = Backbone.Model.extend(
                 this.set('checked', (label !== placeholder));
             }
             this.set('label', label);
-        },
+        },*/
 
         'toggleOpen': function(open){
             this.set(
@@ -133,8 +172,6 @@ ns.models.select = Backbone.Model.extend(
             var select  = this,
                 type    = this.get('type'),
                 options = this.get('options'),
-                isCheck = this.isCheck(),
-                cid,
                 selected;
 
             if(typeof value === 'string'){
@@ -250,12 +287,6 @@ ns.models.select = Backbone.Model.extend(
             } else {
                 return option;
             }
-        },
-
-        'isCheckedOption': function(option){
-            var index = this.get('index'),
-                key = option.cid;
-            return key in index ? index[key]===true : false;
         },
 
         'isCheck': function() {
