@@ -2,6 +2,7 @@ i::select $data $options
     &"../i/i.js"
     &"../i/i.less"
     &"i-select-fabric.js"
+    &"i-select-index.js"
     &"i-select-model.js"
     &"i-select-view.js"
     &"i-select-options-view.js"

@@ -10,13 +10,13 @@ i-select-example
             CTPL-SHOW Usage
                 i::select ( items ) /* ( options ) */
 
-            CALL i-select-example__options
+            //CALL i-select-example__options
             CALL i-select-example__string
-            CALL i-select-example__array
-            CALL i-select-example__collection
-            CALL i-select-example__object
-            CALL i-select-example__disabled
-            CALL i-select-example__customization
+            //CALL i-select-example__array
+            //CALL i-select-example__collection
+            //CALL i-select-example__object
+            //CALL i-select-example__disabled
+            //CALL i-select-example__customization
 
 i-select-example__options
     h4

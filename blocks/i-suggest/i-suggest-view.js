@@ -13,12 +13,14 @@ ns.views.suggest = Backbone.View.extend(
             );
             this.setSelect();
         },
+
         'setLoading': function(){
             this.$el.toggleClass(
                 'i-suggest__loading',
                 this.model.get('loading')
             );
         },
+
         'setSelect': function(){
             var select = this.model.get('select');
             select.on(
@@ -31,12 +33,14 @@ ns.views.suggest = Backbone.View.extend(
                 select.get('input')
             );
         },
+
         'setInput': function(select, input){
             var $input  = this.$el.find('.i-input__input'),
                 $button = this.$el.find('.i-button');
 
             if(input){
                 if( $input.length === 0 ){
+                    // waiting for the moment when input is inserted into DOM
                     setTimeout(
                         function(self){
                             self.setInput(select, input)
@@ -55,9 +59,12 @@ ns.views.suggest = Backbone.View.extend(
                         'keydown':   this.keyfilter
                     });
 
-                    $button.attr({'tabindex': -1});
-                    $input .attr({'tabindex':  0});
-                    $input .attr({'autocomplete':  'off'});
+                    $input .attr({'autocomplete': 'off' });
+                    $input .attr({'tabindex': 0 });
+                    $input .focus();
+
+                    $button.attr({'tabindex': -1 });
+
                 }
             } else {
                 $button.attr({'tabindex': 0});
@@ -80,6 +87,7 @@ ns.views.suggest = Backbone.View.extend(
         'keyfilter': function(e){
             switch (e.which) {
                 case ns.keys.backspace:
+                    //e.stopImmediatePropagation();
                 case ns.keys.space:
                     e.stopPropagation();
                 break;

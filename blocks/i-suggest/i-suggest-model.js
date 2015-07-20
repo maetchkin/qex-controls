@@ -14,7 +14,8 @@ ns.models.suggest = Backbone.Model.extend(
             'viewButton': 'i-suggest-input',
             'viewOption': void(0),
             'selected':   void(0),
-            'filter':     void(0)
+            'filter':     void(0),
+            'sort':       void(0)
         },
 
         'initialize': function(){
@@ -100,7 +101,7 @@ ns.models.suggest = Backbone.Model.extend(
                 select.get('input')
             );
 
-            
+
         select.set(
             'disabled',
             false
@@ -132,7 +133,7 @@ ns.models.suggest = Backbone.Model.extend(
 
         'setSelected': function(){
             var select = this.get('select');
-            select.set('filtered',{});
+            //select.set('filtered',[]);
             this.set('selected', select.get('selected'));
             setTimeout(
                 function(){
@@ -166,17 +167,29 @@ ns.models.suggest = Backbone.Model.extend(
         'setFiltered': function(){
             var select = this.get('select'),
                 filter = this.get('filter') && (typeof this.get('filter') === 'function') ? this.get('filter') : this.filter,
-                filtered = {};
+                sort   = this.get('sort') &&   (typeof this.get('sort')   === 'function') ? this.get('sort')   : false,
+                filtered = [];
 
             this.get('data').models.forEach(
                 function (option) {
-
-                    if ( ! filter.call(this, option, select.get('input').get('value') ) ) {
-                        filtered[option.cid] = true;
+                    if ( filter && filter.call(this, option, select.get('input').get('value') ) ) {
+                        filtered.push(option.cid);
                     }
                 },
                 this
             );
+
+            /*filtered.sort(
+                function(a, b){
+                    return  select.getOptionLabel(
+                                select.get('options').get(a)
+                            ) >
+                            select.getOptionLabel(
+                                select.get('options').get(b)
+                            );
+                }
+            );*/
+
             select.set('filtered', filtered);
         },
 
@@ -193,21 +206,22 @@ ns.models.suggest = Backbone.Model.extend(
             var str    = value.toLowerCase().trim(),
                 select = this.get('select');
 
+            select.reset();
+
             if(str.length >= this.get('min')){
                 if( this.get('param') ){
                     this.get('data').once('sync', this.setSuggest, this);
                     this.load();
-                } else {
-                    str || select.reset();
-                    this.setSuggest();
+                    return;
                 }
             } else {
                 if( this.get('param') ){
+                    this.get('data').once('reset', this.setSuggest, this);
                     this.get('data').reset();
+                    return;
                 }
-                select.reset();
-                this.setSuggest();
             }
+            return this.setSuggest();
         }
     }
 );

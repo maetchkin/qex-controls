@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "autoprefixer-core": "5.2.1",
-    "backbone": "1.1.2",
+    "backbone": "1.2.1",
     "chai": "1.10.0",
     "conkitty": "0.5.16",
     "del": "0.1.3",

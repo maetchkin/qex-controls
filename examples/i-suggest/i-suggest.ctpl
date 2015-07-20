@@ -169,6 +169,20 @@ i-suggest-example__customization
                     expect( $suggest__filter ).to.be.an.instanceof(Backbone.Model);
                     expect( $suggest__filter.get('data') ).to.be.an.instanceof(Backbone.Collection);
 
+            CTPL-CODE set sort (by code)
+                i::suggest ({
+                    'data': './examples/i-suggest/capitals.json',
+                    'sort': function(){
+                        console.log(">>> sort");
+                    },
+                    'option': function(option){
+                        return option.get('code') + " " + option.get('capital');
+                    }
+                }) AS $suggest__sort
+                CTPL-TEST type checking
+                    expect( $suggest__sort ).to.be.an.instanceof(Backbone.Model);
+                    expect( $suggest__sort.get('data') ).to.be.an.instanceof(Backbone.Collection);
+
             CTPL-SHOW Define custom templates
                 i-suggest__custom-button  $selected $select
                     CHOOSE

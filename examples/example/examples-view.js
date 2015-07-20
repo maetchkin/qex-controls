@@ -64,7 +64,7 @@ window.ExamplesView = Backbone.View.extend({
 
     'sidebar': function(){
         this.$sidebar.empty();
-        this.nodes['sidebar'] = $C.tpl[this.block + "__sidebar"].call(this.$sidebar[0], this.collection);
+        /*this.nodes['sidebar'] = $C.tpl[this.block + "__sidebar"].call(this.$sidebar[0], this.collection);
 
         this.listenToOnce(
             this.nodes['sidebar'].test,
@@ -82,7 +82,7 @@ window.ExamplesView = Backbone.View.extend({
             this.nodes['sidebar'].jz,
             'change:selected',
             this.reload
-        );
+        );*/
 
         return true;
     },

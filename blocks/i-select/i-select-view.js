@@ -50,11 +50,7 @@ ns.views.select = Backbone.View.extend({
             'change:open',
             this.openHandler
         );
-        this.listenTo(
-            this.model,
-            'change:checked',
-            this.proxyChecked
-        );
+
         this.listenTo(
             this.model,
             'change:disabled',
@@ -87,7 +83,7 @@ ns.views.select = Backbone.View.extend({
         e.stopPropagation();
     },
     'onkeydown': function(e) {
-        var select = this.model;
+        /*var select = this.model;
         switch (e.which) {
             case ns.keys.up:
                 e.preventDefault();
@@ -99,7 +95,7 @@ ns.views.select = Backbone.View.extend({
                 e.stopPropagation();
                 select.get('open') ? (select.focusNext() && this.scrollFocused(select.get('focus'), false)) : select.set('open', true);
             break;
-        }
+        }*/
     },
     'scrollFocused': function(cid, dir){
         if(cid){
@@ -133,7 +129,7 @@ ns.views.select = Backbone.View.extend({
         this.$el.toggleClass( block + '__empty', (!selected || selected.length === 0));
     },
     'proxyInit': function(){
-        this.$button.trigger('asyncInit')
+        this.$button.trigger('asyncInit');
     },
     'proxyButton': function(e) {
         if(e.clientX){

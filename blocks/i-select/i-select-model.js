@@ -1,17 +1,16 @@
 ns.models.select = Backbone.Model.extend(
     {
         'defaults': {
+            'selected':    null,
             'open':        false,
             'size':        'M',
             'placeholder': 'none',
             'mode':        'radio',
             'delim':       ',',
-            'index':       {},
-            'filtered':    {},
+            'index':       null,
             'disabled':    false,
             'focus':       void(0),
             'label':       void(0),
-            'selected':    void(0),
             'type':        void(0),
             'viewButton':  void(0),
             'viewOption':  void(0)
@@ -21,15 +20,61 @@ ns.models.select = Backbone.Model.extend(
             if (!attrs || !('options' in attrs)){
                 throw "i::select: incorrect options";
             }
-            attrs.options.length || this.set('disabled', true);
-            this.on('change:selected', this.selectedHandler);
-            this.on('change:open',     this.openHandler);
-            this.reset();
+
+            this.indexedOption  = this.indexedOption.bind(this);
+            this.getOptionLabel = this.getOptionLabel.bind(this);
+
+            this.createIndex();
+            this.setLabel();
+
+            //attrs.options.length || this.set('disabled', true);
+            //this.on('change:selected', this.selectedHandler);
+            this.on('change:selected', this.setLabel);
+            this.on('change:open',  this.openHandler);
+            //this.reset();
+            //this.set('selected', this.getSelected() );
         },
 
-        'reset': function(){
-            this.set('index',    this.getIndex(true));
-            this.set('selected', this.getSelected());
+        'createIndex': function(){
+            var index   = [],
+                options = this.get('options');
+
+            options.forEach(
+                function(option){
+                    index.push(
+                        {id: option.cid}
+                    );
+                }
+            );
+
+            this.set('index', new ns.models.selectIndex(index) );
+            this.listenTo(
+                this.get('index'),
+                'change:selected',
+                this.setSelected
+            );
+        },
+
+        'setLabel': function(){
+            var label = this.get('placeholder'),
+                selected = this.get('selected'),
+                type, isCheck;
+
+            if(selected){
+                label = selected.map(
+                    this.getOptionLabel
+                );
+                type  = this.get('type');
+                isCheck = this.isCheck();
+
+                console.log('setLabel', label);
+            }
+
+            this.set('label', label);
+        },
+
+        'indexHandler': function(){
+            console.log('indexHandler', this, arguments);
         },
 
         'openHandler': function(select, value){
@@ -71,11 +116,11 @@ ns.models.select = Backbone.Model.extend(
         },
 
         'selectFocused': function(){
-            if(this.get("focus")){
+            /*if(this.get("focus")){
                 this.selectByCid(
                     this.get("focus")
                 );
-            }
+            }*/
             if (!this.isCheck()) {
                 this.toggleOpen(false);
             }
@@ -85,8 +130,8 @@ ns.models.select = Backbone.Model.extend(
             if (!value){
                 throw "i::select: incorrect value";
             }
-            var select = this,
-                type = this.get('type'),
+            var select  = this,
+                type    = this.get('type'),
                 options = this.get('options'),
                 isCheck = this.isCheck(),
                 cid,
@@ -113,21 +158,7 @@ ns.models.select = Backbone.Model.extend(
             return this;
         },
 
-        'getIndex': function(reset){
-            var old   = this.get('index'),
-                index = {};
-            if(!reset){
-                this.get('options').forEach(
-                    function(option){
-                        index[option.cid] = option.cid in old ? old[option.cid] : false;
-                    },
-                    this
-                );
-            }
-            return index;
-        },
-
-        'getSelected': function(_type){
+        /*'getSelected': function(_type){
             var type     = _type || this.get("type"),
                 index    = this.get("index"),
                 options  = this.get("options"),
@@ -152,7 +183,7 @@ ns.models.select = Backbone.Model.extend(
             }
 
             return selected;
-        },
+        },*/
 
         'getOptionLabel': function(option){
             var label;
@@ -170,42 +201,40 @@ ns.models.select = Backbone.Model.extend(
             if (typeof cid !== 'string'){
                 throw "i::select: incorrect cid";
             }
-            var index = this.get('index'),
-                isCheck = this.isCheck(),
-                id;
+
+            var index    = this.get('index'),
+                isCheck  = this.isCheck(),
+                item     = index.get(cid),
+                selected;
 
             if (!isCheck) {
-                for(id in index){
-                    index[id] = id===cid ? index[id] : false;
+                if((selected = index.findWhere({'selected': true}))){
+                    selected.set('selected', false);
                 }
             }
-            index[cid] = isCheck ? !index[cid] : true;
-            this.setSelected();
+
+            item.set('selected', !item.get('selected'));
+
+        },
+
+        'indexedOption': function(item){
+            return this
+                    .get('options')
+                    .get(item.get('id'));
         },
 
         'setSelected': function(){
-            var index   = this.get('index'),
-                type    = this.get('type'),
-                isCheck = this.isCheck(),
-                result  = this.get('options')
-                            .filter(
-                                function(option){
-                                    return !!index[option.cid];
-                                }
-                            )
-                            .map(
-                                this.getOptionValue.bind(this)
-                            );
-            if(type==='string'){
-                result = result.join(
-                    this.get('delim')
-                );
-            } else {
-                if(!isCheck){
-                    result = result[0];
-                }
-            }
-            this.set("selected", result);
+
+            var result = this
+                    .get('index')
+                    .where({'selected': true})
+                    .map(this.indexedOption);
+
+            return this.set(
+                'selected',
+                result.length ? result : null
+            );
+
         },
 
         'getOptionValue': function(option){
@@ -241,7 +270,7 @@ ns.models.select = Backbone.Model.extend(
             if(current){
                 options.every(
                     function(option){
-                        if(option.cid in filtered){
+                        if(filtered.lastIndexOf(option.cid) > -1){
                             return true;
                         }
 
@@ -284,7 +313,7 @@ ns.models.select = Backbone.Model.extend(
             } else {
                 options.every(
                     function(option){
-                        if(option.cid in filtered){
+                        if(filtered.lastIndexOf(option.cid) > -1){
                             return true;
                         } else {
                             next = option.cid;
