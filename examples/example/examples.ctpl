@@ -34,7 +34,7 @@ i-examples__sidebar $set
 
             CALL i-examples__packages-selector ($set.meta.frameworks) (exampleState.params.framework) AS $bePackagesSelector
             CALL i-examples__packages-selector ($set.meta.$)          (exampleState.params.$)         AS $jzPackagesSelector
-            CALL i-examples__packages-kitty    ($set.meta.kitty)
+            //CALL i-examples__packages-kitty    ($set.meta.kitty)
 
             li.i-examples-menu-item
                 a.toc-title
@@ -62,23 +62,28 @@ i-examples__packages-selector $options $selected
         i::select ({
                 'options': $packages,
                 'size': 'S',
-                "viewButton": "i-examples__packages-selector-option",
-                "viewOption": "i-examples__packages-selector-option"
+                'viewButton': 'i-examples__packages-selector-option',
+                'viewOption': 'i-examples__packages-selector-option'
             }) AS $packagesSelector
     JS
+        debugger;
         $packagesSelector.select(
-            $packages.findWhere({name: $selected})
+            $packages.findWhere({'name': $selected})
         );
     EXPOSE ($packagesSelector)
 
-i-examples__packages-selector-option $option
+i-examples__packages-selector-option $value
+    JS
+        debugger;
+
+    (console.log(' >>>> ', $value))
     CHOOSE
-        WHEN ($option)
+        WHEN ($value)
             div.i-examples-menu-item__packages-selector-option
                 span.name
-                    ($option.get('name'))
+                    ($value.get('name'))
                 span.version
-                    ($option.get('version'))
+                    ($value.get('version'))
         OTHERWISE
             '''&nbsp;'''
 
@@ -86,9 +91,9 @@ i-examples__packages-selector-option $option
 i-examples__toc-section $set
     a.toc-title
         @href (exampleState.url({'section': 'Top'}))
-        ($set.meta.qex.name || "")
+        ($set.meta.qex.name || '')
         span.version
-            ( $set.meta.qex.version ? " (" + $set.meta.qex.version + ")" : "" )
+            ( $set.meta.qex.version ? ' (' + $set.meta.qex.version + ')' : '' )
     ul.i-examples-menu.toc_section
         li
             a.toc-link
@@ -98,8 +103,8 @@ i-examples__toc-section $set
 i-examples__blocks-section $set
     a.toc-title
         @href (exampleState.url({'section': 'Blocks'}))
-        "Blocks"
-    " "
+        'Blocks'
+    ' '
     i::button ({'label':'run tests', 'size':'XS'}) AS $runTest
     ul.i-examples-menu.toc-section
         EACH $block ($set.models)

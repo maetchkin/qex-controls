@@ -74,13 +74,13 @@ window.ExamplesView = Backbone.View.extend({
 
         this.listenToOnce(
             this.nodes['sidebar'].be,
-            'change:selected',
+            'change:value',
             this.reload
         );
 
         this.listenToOnce(
             this.nodes['sidebar'].jz,
-            'change:selected',
+            'change:value',
             this.reload
         );*/
 
@@ -88,10 +88,11 @@ window.ExamplesView = Backbone.View.extend({
     },
 
     'reload': function(){
-        location.href = exampleState.url({
+        console.log('reload',arguments);
+        /*location.href = exampleState.url({
             'framework': this.nodes['sidebar'].be.get('selected').get('name'),
             '$':         this.nodes['sidebar'].jz.get('selected').get('name')
-        });
+        });*/
     },
 
     'content': function(){

@@ -97,7 +97,7 @@ ns.views.selectOptions = Backbone.View.extend({
                 var
 
                 li = top.li({
-                    'class':    block + ( !!index[$option.cid] ? ' '+block+'-selected' : '' ),
+                    'class':    block + ( item.get('selected') ? ' '+block+'-selected' : '' ),
                     'data-cid': $option.cid
                 });
 

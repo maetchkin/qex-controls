@@ -1,7 +1,6 @@
 ns.models.select = Backbone.Model.extend(
     {
         'defaults': {
-            'selected':    null,
             'open':        false,
             'size':        'M',
             'placeholder': 'none',
@@ -9,12 +8,13 @@ ns.models.select = Backbone.Model.extend(
             'delim':       ',',
             'index':       null,
             'disabled':    false,
+            'selected':    void(0),
+            'value':       void(0),
             'focus':       void(0),
             'label':       void(0),
             'type':        void(0),
             'viewButton':  void(0),
-            'viewOption':  void(0),
-            'value':       void(0)
+            'viewOption':  void(0)
         },
 
         'initialize': function ns_models_select(attrs) {
@@ -22,53 +22,58 @@ ns.models.select = Backbone.Model.extend(
                 throw "i::select: incorrect options";
             }
 
+            this.set('index', new ns.models.selectIndex([]) );
+
             this.indexedOption  = this.indexedOption.bind(this);
             this.getOptionLabel = this.getOptionLabel.bind(this);
             this.getOptionValue = this.getOptionValue.bind(this);
 
             this.on('change:selected', this.setLabel);
             this.on('change:selected', this.setValue);
-
             this.on('change:open',  this.openHandler);
 
-            this.createIndex();
-            this.setLabel();
-            this.setValue();
+            this.listenTo(this.get('index'), 'change:selected', this.setSelected);
+            this.listenTo(this.get('index'), 'reset',           this.setSelected);
+
+            this.reset();
         },
 
-        'createIndex': function(){
-            var index   = [],
-                options = this.get('options');
+        'reset': function(){
+            this
+                .get('index')
+                .reset(
+                    this
+                        .get('options')
+                        .map(
+                            function(option){
+                                return {id: option.cid};
+                            }
+                        )
+                );
+        },
 
-            options.forEach(
-                function(option){
-                    index.push(
-                        {id: option.cid}
-                    );
-                }
-            );
-
-            this.set('index', new ns.models.selectIndex(index) );
-            this.listenTo(
-                this.get('index'),
-                'change:selected',
-                this.setSelected
+        'setSelected': function(){
+            this.set(
+                'selected',
+                this
+                    .get('index')
+                    .where({'selected': true})
+                    .map(this.indexedOption)
             );
         },
 
         'setLabel': function(){
+
             var label = this.get('placeholder'),
                 selected = this.get('selected'),
                 type, isCheck;
 
-            if(selected){
+            if(selected.length){
                 label = selected.map(
                     this.getOptionLabel
+                ).join(
+                    this.get('delim')
                 );
-                type  = this.get('type');
-                isCheck = this.isCheck();
-
-                console.log('setLabel', label);
             }
 
             this.set('label', label);
@@ -107,7 +112,7 @@ ns.models.select = Backbone.Model.extend(
                 }
             }
 
-            console.log('setValue', type, value, selected);
+            //console.log('setValue', type, value, selected);
 
             this.set('value', value);
         },
@@ -260,19 +265,7 @@ ns.models.select = Backbone.Model.extend(
                     .get(item.get('id'));
         },
 
-        'setSelected': function(){
 
-            var result = this
-                    .get('index')
-                    .where({'selected': true})
-                    .map(this.indexedOption);
-
-            return this.set(
-                'selected',
-                result.length ? result : null
-            );
-
-        },
 
         'getOptionValue': function(option){
             var type = this.get('type');

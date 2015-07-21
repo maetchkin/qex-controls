@@ -65,52 +65,64 @@ i-select-example__string
                 i::select ('One,Two,Three') AS $stringSelect
             SET $stringNode ($($stringContainer.firstChild))
             CTPL-TEST test selected
-                // check initial state
-                // must return a Backbone.Model
-                expect( $stringSelect ).to.be.an.instanceof(Backbone.Model);
-                // check options
+                expect( $stringSelect, 'check initial state' ).to.be.an.instanceof(Backbone.Model);
                 var $options = $stringSelect.get('options');
-                expect( $options ).to.be.an.instanceof(Backbone.Collection);
+                expect( $options, 'check options' ).to.be.an.instanceof(Backbone.Collection);
                 var $option_1 = $options.at(0),
                     $option_2 = $options.at(1),
                     $option_3 = $options.at(2);
-                expect( $option_1.get('label') ).to.be.equal('One');
-                expect( $option_2.get('label') ).to.be.equal('Two');
-                expect( $option_3.get('label') ).to.be.equal('Three');
+                expect($option_1.get('label') , 'check option 1' ).to.be.equal('One');
+                expect($option_2.get('label') , 'check option 2' ).to.be.equal('Two');
+                expect($option_3.get('label') , 'check option 3' ).to.be.equal('Three');
 
-                // check mode
-                expect( $stringSelect.get('mode') ).to.be.equal("radio");
-                // check selected
-                expect($stringSelect.get("selected")).to.be.a("string").and.to.be.empty();
-                // check label
-                expect($stringSelect.get("label")).to.equal($stringSelect.get("placeholder"));
+                expect($stringSelect.get('mode'),       'check radio mode' ).to.be.equal('radio');
+
+                expect($stringSelect.get('selected'),   'check selected' ).to.be.a('array').and.to.be.empty();
+                expect($stringSelect.get('value'),      'check value').to.be.a('string').and.to.be.empty();
+                expect($stringSelect.get('label'),      'check label').to.equal($stringSelect.get('placeholder'));
+
                 // DOM state
-                expect($stringNode.hasClass('i-select__empty'), "empty mod on").to.be.true;
-                expect($stringNode.find('.i-button__label').text() ).to.be.equal($stringSelect.get("placeholder"));
-                expect($stringNode.find('.i-button').attr('tabindex') ).to.be.equal('0');
+                expect($stringNode.hasClass('i-select__empty'), 'empty mod on').to.be.true;
+                expect($stringNode.find('.i-button__label').text(), 'label equal to placeholder').to.be.equal($stringSelect.get('placeholder'));
+                expect($stringNode.find('.i-button').attr('tabindex'), 'check tabindex').to.be.equal('0');
 
-                // check select value string
+
+
                 $stringSelect.select("One");
-                // model state
-                expect($stringSelect.get("selected")).to.be.a("string").and.to.be.equal("One");
-                expect($stringSelect.get("label")).to.be.equal("One");
+
+                expect($stringSelect.get('selected'), 'check selected')
+                    .to.be.an("array").and
+                    .to.have.property('length', 1);
+                expect($stringSelect.get('selected')[0], 'check selected contains model')
+                    .to.be.an.instanceof(Backbone.Model);
+                expect($stringSelect.get('value'), 'value is One').to.be.a("string").and.to.be.equal("One");
+                expect($stringSelect.get('label'), 'label is One').to.be.equal("One");
+
+
                 // DOM state
-                expect($stringNode.hasClass('i-select__empty'), "empty mod off").to.be.false;
+                expect($stringNode.hasClass('i-select__empty'), 'empty mod off').to.be.false;
                 expect($stringNode.find('.i-button__label').text() ).to.be.equal('One');
 
                 // check reset
                 $stringSelect.reset();
-                // model state
-                expect($stringSelect.get("selected")).to.be.a("string").and.to.be.empty();
-                expect($stringSelect.get("label")).to.equal($stringSelect.get("placeholder"));
+
+                expect($stringSelect.get('selected'),   'check selected' ).to.be.a('array').and.to.be.empty();
+                expect($stringSelect.get('value'),      'check value').to.be.a('string').and.to.be.empty();
+                expect($stringSelect.get('label'),      'check label').to.equal($stringSelect.get('placeholder'));
+
                 // DOM state
                 expect($stringNode.find('.i-button__label').text() ).to.be.equal($stringSelect.get("placeholder"));
 
                 // check setting non-existent value cause reset
-                $stringSelect.select("Four");
+
+
+                $stringSelect.select('One');
+                $stringSelect.select('Four');
+
                 // model state
-                expect($stringSelect.get("selected")).to.be.a("string").and.to.be.empty();
-                expect($stringSelect.get("label")).to.equal($stringSelect.get("placeholder"));
+                expect($stringSelect.get('selected'),   'check selected' ).to.be.a('array').and.to.be.empty();
+                expect($stringSelect.get('value'),      'check value').to.be.a('string').and.to.be.empty();
+                expect($stringSelect.get('label'),      'check label').to.equal($stringSelect.get('placeholder'));
                 // DOM state
                 expect($stringNode.find('.i-button__label').text() ).to.be.equal($stringSelect.get("placeholder"));
 
