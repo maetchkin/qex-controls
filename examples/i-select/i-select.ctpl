@@ -11,8 +11,8 @@ i-select-example
                 i::select ( items ) /* ( options ) */
 
             //CALL i-select-example__options
-            CALL i-select-example__string
-            //CALL i-select-example__array
+            //CALL i-select-example__string
+            CALL i-select-example__array
             //CALL i-select-example__collection
             //CALL i-select-example__object
             //CALL i-select-example__disabled
@@ -86,8 +86,6 @@ i-select-example__string
                 expect($stringNode.find('.i-button__label').text(), 'label equal to placeholder').to.be.equal($stringSelect.get('placeholder'));
                 expect($stringNode.find('.i-button').attr('tabindex'), 'check tabindex').to.be.equal('0');
 
-
-
                 $stringSelect.select("One");
 
                 expect($stringSelect.get('selected'), 'check selected')
@@ -97,7 +95,6 @@ i-select-example__string
                     .to.be.an.instanceof(Backbone.Model);
                 expect($stringSelect.get('value'), 'value is One').to.be.a("string").and.to.be.equal("One");
                 expect($stringSelect.get('label'), 'label is One').to.be.equal("One");
-
 
                 // DOM state
                 expect($stringNode.hasClass('i-select__empty'), 'empty mod off').to.be.false;
@@ -114,12 +111,9 @@ i-select-example__string
                 expect($stringNode.find('.i-button__label').text() ).to.be.equal($stringSelect.get("placeholder"));
 
                 // check setting non-existent value cause reset
-
-
                 $stringSelect.select('One');
                 $stringSelect.select('Four');
 
-                // model state
                 expect($stringSelect.get('selected'),   'check selected' ).to.be.a('array').and.to.be.empty();
                 expect($stringSelect.get('value'),      'check value').to.be.a('string').and.to.be.empty();
                 expect($stringSelect.get('label'),      'check label').to.equal($stringSelect.get('placeholder'));
@@ -136,15 +130,15 @@ i-select-example__string
                 // fire mouseup
                 $stringNode.find('.i-button').trigger($.Event('mouseup'));
                 // check DOM
-                expect($stringNode.hasClass('i-select__empty'), "empty mod on").to.be.true;
-                expect($stringNode.hasClass('i-select__open'), "open mod on").to.be.true;
+                expect($stringNode.hasClass('i-select__empty'), "empty mod on"  ).to.be.true;
+                expect($stringNode.hasClass('i-select__open'),  "open mod on"   ).to.be.true;
                 expect($stringNode.find('.i-button').hasClass('i-button__pseudofocus'), "button pseudofocus on").to.be.true;
 
                 // check popup
                 var popup = $('body .i-popup').last(),
                     popupItems = popup.find('.i-select__options-list__item'),
                     popupStyle = getComputedStyle( popup.get(0), null);
-                expect( popupStyle.display ).to.be.equal("block");
+                expect( popupStyle.display ).to.be.equal('block');
                 expect( popupItems.length  ).to.be.equal( 3 );
                 // check item's nodes
                 var $optionItem_1 = popupItems.get(0),
@@ -155,14 +149,11 @@ i-select-example__string
                 expect( $($optionItem_2).text()  ).to.be.equal( 'Two' );
                 expect( $($optionItem_3).text()  ).to.be.equal( 'Three' );
 
-                //console.log( ' $optionItem_1 ', $optionItem_1);
-
-
         p
             "Set items with a string and a custom delimiter."
         CTPL-CODE check mode
             span AS $stringDelimContainer
-                i::select ("One, Two, Three") ({"mode":"check", "delim": ", "}) AS $stringCheckSelect
+                i::select ('One, Two, Three') ({'mode':'check', 'delim': ', '}) AS $stringCheckSelect
             SET $stringDelimNode ($($stringDelimContainer.firstChild))
             CTPL-TEST test selected
                 // check initial state
@@ -178,44 +169,76 @@ i-select-example__string
                 expect( $option_2.get('label') ).to.be.equal('Two');
                 expect( $option_3.get('label') ).to.be.equal('Three');
 
+
                 // check mode
                 expect($stringCheckSelect.get('mode')).to.be.equal("check");
                 // check selected
-                expect($stringCheckSelect.get("label")).to.equal($stringCheckSelect.get("placeholder"));
+                expect($stringCheckSelect.get('label')).to.equal($stringCheckSelect.get('placeholder'));
 
-                $stringCheckSelect.select("One");
-                $stringCheckSelect.select("Two");
-                expect($stringCheckSelect.get("selected"))
-                    .to.be.a("string").and
-                    .to.be.equal("One, Two").and
-                    .to.be.equal($stringCheckSelect.get("label"));
+
+                $stringCheckSelect.select('One');
+                $stringCheckSelect.select('Two');
+                expect($stringCheckSelect.get('selected'))
+                    .to.be.an('array').and
+                    .to.have.property('length', 2);
+
+                expect($stringCheckSelect.get('selected')[0], 'check selected #0 contains model')
+                    .to.be.an.instanceof(Backbone.Model);
+                expect($stringCheckSelect.get('selected')[1], 'check selected #1 contains model')
+                    .to.be.an.instanceof(Backbone.Model);
+
+                expect($stringCheckSelect.get('value'))
+                    .to.be.a('string').and
+                    .to.be.equal('One, Two').and
+                    .to.be.equal($stringCheckSelect.get('label'));
+
                 $stringCheckSelect.reset();
-                expect($stringCheckSelect.get("selected"))
-                    .to.be.a("string").and
+                expect($stringCheckSelect.get('selected'))
+                    .to.be.an('array').and
                     .to.be.empty();
+                expect($stringCheckSelect.get('value'))
+                    .to.be.a('string').and
+                    .to.be.empty();
+
 
 i-select-example__array
     CTPL-SUITE Array
         p
             "Set items with an array."
         CTPL-CODE radio mode
-            i::select (["One", "Two", "Three"]) AS $arraySelect
+            i::select (['One', 'Two', 'Three']) AS $arraySelect
             CTPL-TEST radio mode
-                expect($arraySelect.get("selected"))
-                    .to.be.a('null');
-                expect($arraySelect.get("label"))
-                    .to.equal($arraySelect.get("placeholder"));
-                $arraySelect.select("One");
-                expect($arraySelect.get("selected"))
-                    .to.be.a("string").and
-                    .to.be.equal("One");
-                $arraySelect.select("Two");
-                expect($arraySelect.get("selected"))
-                    .to.be.an("string").and
-                    .to.be.deep.equal("Two");
+
+                expect( $arraySelect, 'check initial state' ).to.be.an.instanceof(Backbone.Model);
+                var $options = $arraySelect.get('options');
+                expect( $options, 'check options' ).to.be.an.instanceof(Backbone.Collection);
+
+                expect($arraySelect.get('selected'), 'check selected').to.be.an('array').and.to.be.empty();
+                expect($arraySelect.get('value'),    'check value'   ).to.be.an('array').and.to.be.empty();
+                expect($arraySelect.get('label'),    'check label'   ).to.equal($arraySelect.get("placeholder"));
+
+                $arraySelect.select('One');
+                expect($arraySelect.get('selected')).to.be.an('array').and.to.have.property('length', 1);
+                expect($arraySelect.get('selected')[0], 'check selected #0 contains model').to.be.an.instanceof(Backbone.Model);
+                expect($arraySelect.get('value'), 'check value').to.be.an('array').and.to.have.property('length', 1);
+                expect($arraySelect.get('value')[0], 'check value #0 contains One')
+                    .to.be.a('string').and
+                    .to.be.equal('One').and
+                    .to.be.equal($arraySelect.get('label'));
+
+                $arraySelect.select('Two');
+                expect($arraySelect.get('selected')).to.be.an('array').and.to.have.property('length', 1);
+                expect($arraySelect.get('selected')[0], 'check selected #0 contains model').to.be.an.instanceof(Backbone.Model);
+                expect($arraySelect.get('value'), 'check value').to.be.an('array').and.to.have.property('length', 1);
+                expect($arraySelect.get('value')[0], 'check value #0 contains Two')
+                    .to.be.a('string').and
+                    .to.be.equal('Two').and
+                    .to.be.equal($arraySelect.get('label'));
+
                 $arraySelect.reset();
-                expect($arraySelect.get("selected"))
-                    .to.be.a('null');
+                expect($arraySelect.get('selected'), 'check selected').to.be.an('array').and.to.be.empty();
+                expect($arraySelect.get('value'),    'check value'   ).to.be.an('array').and.to.be.empty();
+                expect($arraySelect.get('label'),    'check label'   ).to.equal($arraySelect.get("placeholder"));
 
         CTPL-CODE check mode
             i::select (["One", "Two", "Three"]) ({"mode":"check"}) AS $arrayCheckSelect

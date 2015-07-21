@@ -64,7 +64,8 @@ ns.models.select = Backbone.Model.extend(
 
         'setLabel': function(){
 
-            var label = this.get('placeholder'),
+            var label,
+                placeholder = this.get('placeholder'),
                 selected = this.get('selected'),
                 type, isCheck;
 
@@ -76,7 +77,7 @@ ns.models.select = Backbone.Model.extend(
                 );
             }
 
-            this.set('label', label);
+            this.set('label', label || placeholder);
         },
 
         'setValue': function(){
@@ -115,10 +116,6 @@ ns.models.select = Backbone.Model.extend(
             //console.log('setValue', type, value, selected);
 
             this.set('value', value);
-        },
-
-        'indexHandler': function(){
-            console.log('indexHandler', this, arguments);
         },
 
         'openHandler': function(select, value){
@@ -199,33 +196,6 @@ ns.models.select = Backbone.Model.extend(
             }
             return this;
         },
-
-        /*'getSelected': function(_type){
-            var type     = _type || this.get("type"),
-                index    = this.get("index"),
-                options  = this.get("options"),
-                isCheck  = this.isCheck(),
-                selected = [],
-                option,
-                id;
-
-            for(id in index){
-                if(index[id]){
-                    option = options.get({cid: id});
-                    selected.push(option);
-                }
-            }
-
-            if (type === 'string') {
-                selected = selected.join(this.get("delim"));
-            } else {
-                if(!isCheck){
-                    selected = selected.length ? selected[0] : null;
-                }
-            }
-
-            return selected;
-        },*/
 
         'getOptionLabel': function(option){
             var label;
