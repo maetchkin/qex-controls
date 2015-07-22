@@ -59,7 +59,7 @@ i-select-example__options
 i-select-example__string
     CTPL-SUITE String
         p
-            "Set items with a comma-separated string."
+            "Set items with a comma-separated string. Attribute 'value' will be a string"
         CTPL-CODE radio mode
             span AS $stringContainer
                 i::select ('One,Two,Three') AS $stringSelect
@@ -204,7 +204,7 @@ i-select-example__string
 i-select-example__array
     CTPL-SUITE Array
         p
-            "Set items with an array."
+            "Set items with an array. Attribute 'value' will be an array"
         CTPL-CODE radio mode
             i::select (['One', 'Two', 'Three']) AS $arraySelect
             CTPL-TEST radio mode
@@ -243,18 +243,29 @@ i-select-example__array
         CTPL-CODE check mode
             i::select (["One", "Two", "Three"]) ({"mode":"check"}) AS $arrayCheckSelect
             CTPL-TEST check mode
-                expect($arrayCheckSelect.get("selected"))
-                    .to.be.an("array").and
-                    .to.be.empty();
-                $arrayCheckSelect.select("One");
-                $arrayCheckSelect.select("Two");
-                expect($arrayCheckSelect.get("selected"))
-                    .to.be.an("array").and
-                    .to.be.deep.equal(["One", "Two"]);
+                expect( $arrayCheckSelect, 'check initial state' ).to.be.an.instanceof(Backbone.Model);
+                var $options = $arrayCheckSelect.get('options');
+                expect( $options, 'check options' ).to.be.an.instanceof(Backbone.Collection);
+
+                expect($arrayCheckSelect.get('selected'), 'check selected').to.be.an('array').and.to.be.empty();
+                expect($arrayCheckSelect.get('value'),    'check value'   ).to.be.an('array').and.to.be.empty();
+                expect($arrayCheckSelect.get('label'),    'check label'   ).to.equal($arrayCheckSelect.get("placeholder"));
+
+                $arrayCheckSelect.select('One');
+                $arrayCheckSelect.select('Two');
+
+                expect($arrayCheckSelect.get('selected')).to.be.an('array').and.to.have.property('length', 2);
+                expect($arrayCheckSelect.get('selected')[0], 'check selected #0 contains model').to.be.an.instanceof(Backbone.Model);
+                expect($arrayCheckSelect.get('selected')[1], 'check selected #1 contains model').to.be.an.instanceof(Backbone.Model);
+                expect($arrayCheckSelect.get('value'), 'check value').to.be.an('array').and.to.have.property('length', 2);
+                expect($arrayCheckSelect.get('value')[0], 'check value #0 contains One').to.be.a('string').and.to.be.equal('One');
+                expect($arrayCheckSelect.get('value')[1], 'check value #0 contains Two').to.be.a('string').and.to.be.equal('Two');
+                expect($arrayCheckSelect.get('label'),    'check label'   ).to.equal('One,Two');
+
                 $arrayCheckSelect.reset();
-                expect($arrayCheckSelect.get("selected"))
-                    .to.be.an("array").and
-                    .to.be.empty();
+                expect($arrayCheckSelect.get('selected'), 'check selected').to.be.an('array').and.to.be.empty();
+                expect($arrayCheckSelect.get('value'),    'check value'   ).to.be.an('array').and.to.be.empty();
+                expect($arrayCheckSelect.get('label'),    'check label'   ).to.equal($arrayCheckSelect.get("placeholder"));
 
 i-select-example__collection
     CTPL-SUITE Backbone.Collection
