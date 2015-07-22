@@ -12,8 +12,8 @@ i-select-example
 
             //CALL i-select-example__options
             //CALL i-select-example__string
-            CALL i-select-example__array
-            //CALL i-select-example__collection
+            //CALL i-select-example__array
+            CALL i-select-example__collection
             //CALL i-select-example__object
             //CALL i-select-example__disabled
             //CALL i-select-example__customization
@@ -268,48 +268,68 @@ i-select-example__array
                 expect($arrayCheckSelect.get('label'),    'check label'   ).to.equal($arrayCheckSelect.get("placeholder"));
 
 i-select-example__collection
+    p
+        "Set items with a Backbone.Collection. Attribute 'value' will be an array"
     CTPL-SUITE Backbone.Collection
         CTPL-CODE Define collection
             SET $collection (new Backbone.Collection([
-                            {"value":"1", "label":"One"},
-                            {"value":"2", "label":"Two"},
-                            {"value":"3", "label":"Three"}
-                        ]))
+                    {"value":"1", "label":"One"},
+                    {"value":"2", "label":"Two"},
+                    {"value":"3", "label":"Three"}
+                ]))
 
         CTPL-CODE radio mode
             i::select ($collection) AS $collectionSelect
             CTPL-TEST radio mode
-                expect($collectionSelect.get("selected"))
-                    .to.be.a('null');
-                $collectionSelect.select($collection.at(0))
-                expect($collectionSelect.get("selected"))
-                    .to.be.an.instanceof(Backbone.Model).and
-                    .to.be.equal($collection.at(0));
-                $collection.reset([
-                    {"value":"1", "label":"One"},
-                    {"value":"2", "label":"Two"},
-                    {"value":"3", "label":"Four"}
-                ]);
-                $collectionSelect.reset();
-                expect($collectionSelect.get("selected"))
-                    .to.be.a('null');
+                expect( $collectionSelect, 'check initial state' ).to.be.an.instanceof(Backbone.Model);
+                var $options = $collectionSelect.get('options');
+                expect( $options, 'check options' ).to.be.an.instanceof(Backbone.Collection).and.to.be.equal($collection);
 
+                expect($collectionSelect.get('selected'), 'check selected').to.be.an('array').and.to.be.empty();
+                expect($collectionSelect.get('value'),    'check value'   ).to.be.null;
+                expect($collectionSelect.get('label'),    'check label'   ).to.equal($collectionSelect.get("placeholder"));
+
+                $collectionSelect.select($collection.at(0));
+                expect($collectionSelect.get('selected')).to.be.an('array').and.to.have.property('length', 1);
+                expect($collectionSelect.get('selected')[0], 'check selected #0 contains model').to.be.an.instanceof(Backbone.Model);
+                expect($collectionSelect.get('value'), 'check value').to.be.an.instanceof(Backbone.Model).and.to.be.equal($collection.at(0));
+
+                $collectionSelect.select($collection.at(1));
+                expect($collectionSelect.get('selected')).to.be.an('array').and.to.have.property('length', 1);
+                expect($collectionSelect.get('selected')[0], 'check selected #0 contains model').to.be.an.instanceof(Backbone.Model);
+                expect($collectionSelect.get('value'), 'check value').to.be.an.instanceof(Backbone.Model).and.to.be.equal($collection.at(1));
+
+                $collectionSelect.reset();
+                expect($collectionSelect.get('selected'), 'check selected').to.be.an('array').and.to.be.empty();
+                expect($collectionSelect.get('value'),    'check value'   ).to.be.null;
+                expect($collectionSelect.get('label'),    'check label'   ).to.equal($collectionSelect.get("placeholder"));
 
         CTPL-CODE check mode
             i::select ($collection) ({"mode":"check"}) AS $collectionCheckSelect
             CTPL-TEST check mode
-                expect($collectionCheckSelect.get("selected"))
-                    .to.be.an('array').and
-                    .to.be.empty();
-                $collectionCheckSelect.select($collection.at(0))
-                $collectionCheckSelect.select($collection.at(1))
-                expect($collectionCheckSelect.get("selected"))
-                    .to.be.an('array').and
-                    .to.be.deep.equal([$collection.at(0),$collection.at(1)]);
+                expect( $collectionSelect, 'check initial state' ).to.be.an.instanceof(Backbone.Model);
+                var $options = $collectionSelect.get('options');
+                expect( $options, 'check options' ).to.be.an.instanceof(Backbone.Collection).and.to.be.equal($collection);
+
+                expect($collectionCheckSelect.get('selected'), 'check selected').to.be.an('array').and.to.be.empty();
+                expect($collectionCheckSelect.get('value'),    'check value'   ).to.be.an('array').and.to.be.empty();
+                expect($collectionCheckSelect.get('label'),    'check label'   ).to.equal($collectionCheckSelect.get("placeholder"));
+
+                $collectionCheckSelect.select($collection.at(0));
+                expect($collectionCheckSelect.get('selected')).to.be.an('array').and.to.have.property('length', 1);
+                expect($collectionCheckSelect.get('selected')[0], 'check selected #0 contains model').to.be.an.instanceof(Backbone.Model);
+                expect($collectionCheckSelect.get('value'), 'check value').to.be.an('array').and.to.be.eql([$collection.at(0)]);
+
+                $collectionCheckSelect.select($collection.at(1));
+                expect($collectionCheckSelect.get('selected')).to.be.an('array').and.to.have.property('length', 2);
+                expect($collectionCheckSelect.get('selected')[0], 'check selected #0 contains model').to.be.an.instanceof(Backbone.Model);
+                expect($collectionCheckSelect.get('selected')[1], 'check selected #1 contains model').to.be.an.instanceof(Backbone.Model);
+                expect($collectionCheckSelect.get('value'), 'check value').to.be.an('array').and.to.be.eql([$collection.at(0), $collection.at(1)]);
+
                 $collectionCheckSelect.reset();
-                expect($collectionCheckSelect.get("selected"))
-                    .to.be.an('array').and
-                    .to.be.empty();
+                expect($collectionCheckSelect.get('selected'), 'check selected').to.be.an('array').and.to.be.empty();
+                expect($collectionCheckSelect.get('value'),    'check value'   ).to.be.an('array').and.to.be.empty();
+                expect($collectionCheckSelect.get('label'),    'check label'   ).to.equal($collectionCheckSelect.get("placeholder"));
 
 i-select-example__object
     CTPL-SUITE Object

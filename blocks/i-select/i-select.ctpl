@@ -56,4 +56,4 @@ i-select__options-list $select
 
 i-select__button $button
     SET $select ($button.get("select"))
-    CALL ($select.get("viewButton")) ($select.get("selected")) ($select)
+    CALL ($select.get("viewButton")) ($select.get("value")) ($select)

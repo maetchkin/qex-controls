@@ -107,13 +107,11 @@ ns.models.select = Backbone.Model.extend(
             } else
 
             if(type === 'collection'){
-                value = null;
-                if(selected){
-                    value = selected;
+                value = isCheck ? [] : null;
+                if(selected.length){
+                    value = isCheck ? selected : selected[0];
                 }
             }
-
-            //console.log('setValue', type, value, selected);
 
             this.set('value', value);
         },
