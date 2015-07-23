@@ -13,10 +13,12 @@ i-select-example
             //CALL i-select-example__options
             //CALL i-select-example__string
             //CALL i-select-example__array
-            CALL i-select-example__collection
+            //CALL i-select-example__collection
             //CALL i-select-example__object
             //CALL i-select-example__disabled
-            //CALL i-select-example__customization
+            CALL i-select-example__custom-templates
+            //CALL i-select-example__filter
+            //CALL i-select-example__sort
 
 i-select-example__options
     h4
@@ -55,6 +57,14 @@ i-select-example__options
                 "viewOption"
             dd
                 "Template name for i-select option customization."
+            dt
+                "filter"
+            dd
+                "Filter function"
+            dt
+                "sort"
+            dd
+                "Sort function"
 
 i-select-example__string
     CTPL-SUITE String
@@ -200,7 +210,6 @@ i-select-example__string
                     .to.be.a('string').and
                     .to.be.empty();
 
-
 i-select-example__array
     CTPL-SUITE Array
         p
@@ -333,7 +342,7 @@ i-select-example__collection
 
 i-select-example__object
     CTPL-SUITE Object
-        CTPL-CODE radio mode
+        CTPL-CODE check mode
             i::select ({
                 "options":      "One; Two; Three",
                 "size":         "S",
@@ -345,10 +354,10 @@ i-select-example__object
 i-select-example__disabled
     CTPL-SUITE Disabled
         CTPL-CODE disabled
-            i::select ('One,Two,Three') ({'disabled':true})
+            i::select ('One,Two,Three') ({'disabled': true})
 
-i-select-example__customization
-    CTPL-SUITE Customization
+i-select-example__custom-templates
+    CTPL-SUITE Custom templates
         p
             "It's easy to modify "
             b
@@ -356,11 +365,10 @@ i-select-example__customization
             " view with custom templates. "
         CTPL-SHOW Define custom templates
             i-select__view-button $selected $select $check
-                SET $label  ($selected || 'empty')
                 div.i-select__view-button
                     span.i-select__view-button-label
-                        ($label)
-                    TEST ($label!='empty')
+                        ($select.get('label'))
+                    TEST ($select.get('label')!=$select.get('placeholder'))
                         span.i-select__view-button-delete AS $delete
                             "×"
                         JS
@@ -375,6 +383,7 @@ i-select-example__customization
                                     }
                                 }
                             )
+
             i-select__view-option $model
                 div.i-select__view-option
                     "→ "
@@ -393,7 +402,6 @@ i-select-example__customization
                 expect( $radioSelect ).to.be.an('object');
                 expect( $radioSelect ).to.be.an.instanceof(Backbone.Model);
 
-
         CTPL-CODE check mode
             i::select (
                 {
@@ -405,4 +413,84 @@ i-select-example__customization
             ) AS $checkSelect
             CTPL-TEST "test type"
                 expect( $checkSelect ).to.be.an('object')
+
+i-select-example__filter
+    CTPL-SUITE Filter
+        CTPL-CODE Define collection
+            SET $collection (new Backbone.Collection([
+                    {"value": 1, "label":"One"},
+                    {"value": 2, "label":"Two"},
+                    {"value": 3, "label":"Three"},
+                    {"value": 4, "label":"Four"},
+                    {"value": 5, "label":"Five"}
+                ]))
+
+        CTPL-CODE define filter function
+            i::select (
+                {
+                    "options": $collection,
+                    "filter":  function(item){
+                        return item.get('value') > 1 && item.get('value') < 5;
+                    }
+                }
+            ) AS $filteredSelect
+            CTPL-TEST test filter
+                expect( $filteredSelect, 'check initial state' ).to.be.an.instanceof(Backbone.Model);
+                var $options = $filteredSelect.get('options');
+                expect( $options, 'check options' ).to.be.an.instanceof(Backbone.Collection).and.to.be.equal($collection);
+
+                expect($filteredSelect.get('index'),    'check index'   ).to.be.an.instanceof(Backbone.Collection).and.to.have.property('length', 3);
+                expect($filteredSelect.get('selected'), 'check selected').to.be.an('array').and.to.be.empty();
+                expect($filteredSelect.get('value'),    'check value'   ).to.be.null;
+                expect($filteredSelect.get('label'),    'check label'   ).to.equal($filteredSelect.get("placeholder"));
+
+                $filteredSelect.select($collection.at(0));
+                expect($filteredSelect.get('selected'), 'check selected').to.be.an('array').and.to.be.empty();
+                expect($filteredSelect.get('value'),    'check value'   ).to.be.null;
+                expect($filteredSelect.get('label'),    'check label'   ).to.equal($filteredSelect.get("placeholder"));
+
+                $filteredSelect.select($collection.at(1));
+                expect($filteredSelect.get('selected'), 'check selected').to.be.an('array').and.to.have.property('length', 1);
+                expect($filteredSelect.get('value'),    'check value'   ).to.be.an.instanceof(Backbone.Model);
+                expect($filteredSelect.get('label'),    'check label'   ).to.equal($collection.at(1).get("label"));
+
+                $filteredSelect.reset();
+                expect($filteredSelect.get('index'),    'check index'   ).to.be.an.instanceof(Backbone.Collection).and.to.have.property('length', 3);
+                expect($filteredSelect.get('selected'), 'check selected').to.be.an('array').and.to.be.empty();
+                expect($filteredSelect.get('value'),    'check value'   ).to.be.null;
+                expect($filteredSelect.get('label'),    'check label'   ).to.equal($filteredSelect.get("placeholder"));
+
+i-select-example__sort
+    CTPL-SUITE Sort
+        CTPL-CODE Define collection
+            SET $collection (new Backbone.Collection([
+                    {"value": 1, "label": "One"  },
+                    {"value": 2, "label": "Two"  },
+                    {"value": 3, "label": "Three"},
+                    {"value": 4, "label": "Four" },
+                    {"value": 5, "label": "Five" }
+                ]))
+        CTPL-CODE define sort function
+            i::select (
+                {
+                    "options": $collection,
+                    "sort":  function(a, b){
+                        return a.get('value') < b.get('value');
+                    }
+                }
+            ) AS $sortedSelect
+            CTPL-TEST test sort
+                expect( $sortedSelect, 'check initial state' ).to.be.an.instanceof(Backbone.Model);
+                var $options = $sortedSelect.get('options');
+                expect( $options, 'check options' ).to.be.an.instanceof(Backbone.Collection).and.to.be.equal($collection);
+                expect(
+                    $sortedSelect.get('index').map(
+                        function(item){
+                            return $options.get(item.get('id')).get('value');
+                        }
+                    ),
+                    'check index is sorted'
+                )
+                    .to.be.an('array').and
+                    .to.eql( [5, 4, 3, 2, 1] );
 

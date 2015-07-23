@@ -12,29 +12,35 @@ i-select__view-button__check $selected $select
 
 
 
-i-select__view-button $selected $select $check
-    SET $label  ($selected || 'empty')
-    div.i-select__view-button
+i-select__view-button $button $select $check
+    div.i-select__view-button AS $container
         span.i-select__view-button-label
-            ($label)
-        TEST ($label!='empty')
+            ($select.get('label'))
+        TEST ($select.get('label')!=$select.get('placeholder'))
             span.i-select__view-button-delete AS $delete
                 "×"
             JS
                 $delete.addEventListener(
                     "mouseup",
+                    function(){
+                        $select.reset();
+                    }
+                )
+                $container.addEventListener(
+                    "mousedown",
                     function(e){
                         e.stopPropagation();
-                        if($check){
-                            $select.select($label);
-                        } else {
-                            $select.reset();
-                        }
+                        this.classList.add('i-select__view-button-pressed');
+                    }
+                )
+                $container.addEventListener(
+                    "mouseup",
+                    function(e){
+                        e.stopPropagation();
+                        this.classList.remove('i-select__view-button-pressed');
                     }
                 )
 
 i-select__view-option $model
     div.i-select__view-option
-        "→ "
         ($model.get('label'))
-        " ←"

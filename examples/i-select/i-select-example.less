@@ -1,16 +1,22 @@
 .i-select__view{
-    &-option{
+    .i-select__custom-style{
         padding: .2em .5em;
-        border: 1px dashed orangered;
-        margin-bottom: .5em;
-        margin-top: .5em;
+        box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.25);
+        background-image: linear-gradient(#ffffff, rgba(0, 0, 0, 0.23));
+        text-shadow: 0px 1px 0px #ffffff;
+        margin: .5em 0;
+        display: flex;
+        justify-content: center;
+        border-radius: .2em;
+    }
+    &-option{
+        .i-select__custom-style();
     }
     &-button{
-        padding: .2em .5em;
-        border: 1px dashed orangered;
-        margin: .2em;
-        border-radius: .5em;
-        display: inline-block;
+        .i-select__custom-style();
+        &-pressed{
+            background-image: linear-gradient(rgba(0, 0, 0, 0.23), #ffffff);
+        }
         &-delete{
             font-size: 1.5em;
             color: orangered;

@@ -13,6 +13,8 @@ ns.models.select = Backbone.Model.extend(
             'focus':       void(0),
             'label':       void(0),
             'type':        void(0),
+            'filter':      void(0),
+            'sort':        void(0),
             'viewButton':  void(0),
             'viewOption':  void(0)
         },
@@ -27,29 +29,41 @@ ns.models.select = Backbone.Model.extend(
             this.indexedOption  = this.indexedOption.bind(this);
             this.getOptionLabel = this.getOptionLabel.bind(this);
             this.getOptionValue = this.getOptionValue.bind(this);
+            this.reset          = this.reset.bind(this);
 
             this.on('change:selected', this.setLabel);
             this.on('change:selected', this.setValue);
             this.on('change:open',  this.openHandler);
 
-            this.listenTo(this.get('index'), 'change:selected', this.setSelected);
-            this.listenTo(this.get('index'), 'reset',           this.setSelected);
+            this.listenTo(this.get('index'),   'change:selected', this.setSelected);
+            this.listenTo(this.get('index'),   'reset',           this.setSelected);
+            this.listenTo(this.get('options'), 'reset',           this.reset);
 
             this.reset();
         },
 
         'reset': function(){
-            this
-                .get('index')
-                .reset(
-                    this
-                        .get('options')
-                        .map(
-                            function(option){
-                                return {id: option.cid};
-                            }
-                        )
-                );
+            var options = this.get('options'),
+                filter  = this.get('filter'),
+                sort    = this.get('sort'),
+                index   = this.get('index'),
+                items   = options.models;
+
+            if(filter){
+                items = items.filter(filter);
+            }
+
+            if(sort){
+                items = items.sort(sort);
+            }
+
+            index.reset(
+                items.map(
+                    function(option){
+                        return {id: option.cid};
+                    }
+                )
+            );
         },
 
         'setSelected': function(){
@@ -120,33 +134,6 @@ ns.models.select = Backbone.Model.extend(
             this.set('focus', void(0));
         },
 
-        /*'selectedHandler': function(select, value){
-            var type = this.get('type'),
-                isCheck = this.isCheck(),
-                placeholder = this.get('placeholder'),
-                label = placeholder;
-
-            if(value){
-                if(value.length!==0){
-                    if(type==='string' || type==='array'){
-                        label = value;
-                    } else if(type==='collection'){
-                        if(isCheck){
-                            label = value
-                                    .map(this.getOptionLabel.bind(this))
-                                    .join(this.get("delim"));
-                        } else {
-                            label = value.has('label') ? value.get('label') : value.cid;
-                        }
-                    }
-                }
-            }
-            if(isCheck){
-                this.set('checked', (label !== placeholder));
-            }
-            this.set('label', label);
-        },*/
-
         'toggleOpen': function(open){
             this.set(
                 'open',
@@ -216,6 +203,10 @@ ns.models.select = Backbone.Model.extend(
                 isCheck  = this.isCheck(),
                 item     = index.get(cid),
                 selected;
+
+            if(!item){
+                return;
+            }
 
             if (!isCheck) {
                 if((selected = index.findWhere({'selected': true}))){

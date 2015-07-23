@@ -24,7 +24,7 @@ i::select $data $options
             'label':    $model.get('label'),
             'size':     $model.get('size'),
             'disabled': $model.get('disabled'),
-            'template': $model.get('viewButton') ? "i-select__button" : void(0),
+            'template': $model.get('viewButton') ? 'i-select__button' : void(0),
             'select':   $model
         }) AS $button
         JS
@@ -45,15 +45,17 @@ i::select $data $options
     EXPOSE $model
 
 i-select__options-list $select
-    SET $optionsList
     ul.i-select__options-list AS $list
-    JS
-        $optionsList = new ns.views.selectOptions({
+    EXPOSE JS
+        return new ns.views.selectOptions({
             'el': $list,
             'model': $select
         });
-    EXPOSE $optionsList
 
 i-select__button $button
     SET $select ($button.get("select"))
-    CALL ($select.get("viewButton")) ($select.get("value")) ($select)
+
+    JS
+        console.log('i-select__button', $select)
+
+    CALL ($select.get("viewButton")) ($button) ($select)

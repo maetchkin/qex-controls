@@ -66,17 +66,12 @@ i-examples__packages-selector $options $selected
                 'viewOption': 'i-examples__packages-selector-option'
             }) AS $packagesSelector
     JS
-        debugger;
         $packagesSelector.select(
             $packages.findWhere({'name': $selected})
         );
     EXPOSE ($packagesSelector)
 
 i-examples__packages-selector-option $value
-    JS
-        debugger;
-
-    (console.log(' >>>> ', $value))
     CHOOSE
         WHEN ($value)
             div.i-examples-menu-item__packages-selector-option

@@ -1,4 +1,3 @@
-
 ns.models.selectIndexItem = Backbone.Model.extend(
     {
         'defaults': {
@@ -11,9 +10,6 @@ ns.models.selectIndexItem = Backbone.Model.extend(
 
 ns.models.selectIndex = Backbone.Collection.extend(
     {
-        'model': ns.models.selectIndexItem,
-        /*'initialize': function () {
-            //console.log('ns.models.selectIndex', this);
-        }*/
+        'model': ns.models.selectIndexItem
     }
 );

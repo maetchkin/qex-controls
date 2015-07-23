@@ -64,7 +64,7 @@ window.ExamplesView = Backbone.View.extend({
 
     'sidebar': function(){
         this.$sidebar.empty();
-        /*this.nodes['sidebar'] = $C.tpl[this.block + "__sidebar"].call(this.$sidebar[0], this.collection);
+        this.nodes['sidebar'] = $C.tpl[this.block + "__sidebar"].call(this.$sidebar[0], this.collection);
 
         this.listenToOnce(
             this.nodes['sidebar'].test,
@@ -82,13 +82,13 @@ window.ExamplesView = Backbone.View.extend({
             this.nodes['sidebar'].jz,
             'change:value',
             this.reload
-        );*/
+        );
 
         return true;
     },
 
     'reload': function(){
-        console.log('reload',arguments);
+        console.log('reload', this.nodes['sidebar']);
         /*location.href = exampleState.url({
             'framework': this.nodes['sidebar'].be.get('selected').get('name'),
             '$':         this.nodes['sidebar'].jz.get('selected').get('name')
