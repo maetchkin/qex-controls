@@ -62,7 +62,7 @@ i-examples__packages-selector $options $selected
         i::select ({
                 'options': $packages,
                 'size': 'S',
-                'viewButton': 'i-examples__packages-selector-option',
+                'viewButton': 'i-examples__packages-selector-button',
                 'viewOption': 'i-examples__packages-selector-option'
             }) AS $packagesSelector
     JS
@@ -71,16 +71,20 @@ i-examples__packages-selector $options $selected
         );
     EXPOSE ($packagesSelector)
 
-i-examples__packages-selector-option $value
+i-examples__packages-selector-button $select
     CHOOSE
-        WHEN ($value)
-            div.i-examples-menu-item__packages-selector-option
-                span.name
-                    ($value.get('name'))
-                span.version
-                    ($value.get('version'))
+        WHEN ($select.get('value'))
+            CALL i-examples__packages-selector-option ($select.get('value'))
         OTHERWISE
             '''&nbsp;'''
+
+i-examples__packages-selector-option $model
+    div.i-examples-menu-item__packages-selector-option
+        span.name
+            ($model.get('name'))
+        span.version
+            ($model.get('version'))
+
 
 
 i-examples__toc-section $set

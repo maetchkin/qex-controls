@@ -1,18 +1,7 @@
 i-select__view
     &"./i-select-example.less"
 
-i-select__view-button__check $selected $select
-    SET $arr ($selected.split(','))
-    CHOOSE
-        WHEN ($arr.length)
-            EACH $option ($arr)
-                CALL i-select__view-button $option $select (true)
-        OTHERWISE
-            CALL i-select__view-button 'empty' $select
-
-
-
-i-select__view-button $button $select $check
+i-select__view-button $select
     div.i-select__view-button AS $container
         span.i-select__view-button-label
             ($select.get('label'))

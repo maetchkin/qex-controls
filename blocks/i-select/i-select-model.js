@@ -8,6 +8,7 @@ ns.models.select = Backbone.Model.extend(
             'delim':       ',',
             'index':       null,
             'disabled':    false,
+            'label':       void(0),
             'selected':    void(0),
             'value':       void(0),
             'focus':       void(0),
@@ -31,8 +32,9 @@ ns.models.select = Backbone.Model.extend(
             this.getOptionValue = this.getOptionValue.bind(this);
             this.reset          = this.reset.bind(this);
 
-            this.on('change:selected', this.setLabel);
             this.on('change:selected', this.setValue);
+            this.on('change:selected', this.setLabel);
+
             this.on('change:open',  this.openHandler);
 
             this.listenTo(this.get('index'),   'change:selected', this.setSelected);

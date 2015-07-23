@@ -10,15 +10,15 @@ i-select-example
             CTPL-SHOW Usage
                 i::select ( items ) /* ( options ) */
 
-            //CALL i-select-example__options
-            //CALL i-select-example__string
-            //CALL i-select-example__array
-            //CALL i-select-example__collection
-            //CALL i-select-example__object
-            //CALL i-select-example__disabled
+            CALL i-select-example__options
+            CALL i-select-example__string
+            CALL i-select-example__array
+            CALL i-select-example__collection
+            CALL i-select-example__object
+            CALL i-select-example__disabled
             CALL i-select-example__custom-templates
-            //CALL i-select-example__filter
-            //CALL i-select-example__sort
+            CALL i-select-example__filter
+            CALL i-select-example__sort
 
 i-select-example__options
     h4
@@ -364,8 +364,8 @@ i-select-example__custom-templates
                 "i-select"
             " view with custom templates. "
         CTPL-SHOW Define custom templates
-            i-select__view-button $selected $select $check
-                div.i-select__view-button
+            i-select__view-button $select
+                div.i-select__view-button AS $container
                     span.i-select__view-button-label
                         ($select.get('label'))
                     TEST ($select.get('label')!=$select.get('placeholder'))
@@ -374,21 +374,30 @@ i-select-example__custom-templates
                         JS
                             $delete.addEventListener(
                                 "mouseup",
+                                function(){
+                                    $select.reset();
+                                }
+                            )
+                            $container.addEventListener(
+                                "mousedown",
                                 function(e){
                                     e.stopPropagation();
-                                    if($check){
-                                        $select.select($label);
-                                    } else {
-                                        $select.reset();
-                                    }
+                                    this.classList.add('i-select__view-button-pressed');
+                                }
+                            )
+                            $container.addEventListener(
+                                "mouseup",
+                                function(e){
+                                    e.stopPropagation();
+                                    this.classList.remove('i-select__view-button-pressed');
                                 }
                             )
 
             i-select__view-option $model
                 div.i-select__view-option
-                    "→ "
                     ($model.get('label'))
-                    " ←"
+
+
 
         CTPL-CODE radio mode
             i::select (

@@ -50,7 +50,6 @@ ns.views.select = Backbone.View.extend({
             'change:open',
             this.openHandler
         );
-
         this.listenTo(
             this.model,
             'change:disabled',

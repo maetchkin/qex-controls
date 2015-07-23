@@ -64,35 +64,43 @@ window.ExamplesView = Backbone.View.extend({
 
     'sidebar': function(){
         this.$sidebar.empty();
-        this.nodes['sidebar'] = $C.tpl[this.block + "__sidebar"].call(this.$sidebar[0], this.collection);
 
-        this.listenToOnce(
-            this.nodes['sidebar'].test,
+        var sidebar = this.nodes['sidebar'] = $C.tpl[this.block + "__sidebar"].call(this.$sidebar[0], this.collection);
+
+        this.listenTo(
+            sidebar.test,
             'action',
             this.runAllTests
         );
 
-        this.listenToOnce(
-            this.nodes['sidebar'].be,
+        this.listenTo(
+            sidebar.be,
             'change:value',
             this.reload
         );
 
-        this.listenToOnce(
-            this.nodes['sidebar'].jz,
+        this.listenTo(
+            sidebar.jz,
             'change:value',
             this.reload
         );
+
+        console.log('sidebar', sidebar);
 
         return true;
     },
 
     'reload': function(){
-        console.log('reload', this.nodes['sidebar']);
-        /*location.href = exampleState.url({
-            'framework': this.nodes['sidebar'].be.get('selected').get('name'),
-            '$':         this.nodes['sidebar'].jz.get('selected').get('name')
-        });*/
+        var be = this.nodes['sidebar'].be.get('value'),
+            jz = this.nodes['sidebar'].jz.get('value');
+        if(be && jz){
+            location.href = exampleState.url({
+                'framework': be.get('name'),
+                '$':         jz.get('name')
+            });
+        }
+        // console.log('reload', arguments/*this.nodes['sidebar'].be, this.nodes['sidebar'].be.get('value')*/  );
+
     },
 
     'content': function(){

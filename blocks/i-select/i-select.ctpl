@@ -53,9 +53,4 @@ i-select__options-list $select
         });
 
 i-select__button $button
-    SET $select ($button.get("select"))
-
-    JS
-        console.log('i-select__button', $select)
-
-    CALL ($select.get("viewButton")) ($button) ($select)
+    CALL ($button.get('select').get('viewButton')) ($button.get('select'))
