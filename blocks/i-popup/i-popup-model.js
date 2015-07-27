@@ -41,13 +41,13 @@ ns.models.popup = Backbone.Model.extend(
             'side': 'bottom',
             'adaptive': false,
             'align': 'start',
-            'sideOffset': '.5em',
-            'alignOffset': '1px',
+            'sideOffset': 6,
+            'alignOffset': 1,
             'tail': false,
-            'tailWidth': '1em',
-            'tailHeight': '.5em',
+            'tailWidth': 12,
+            'tailHeight': 6,
             'tailAlign': 'center',
-            'tailOffset': '0px',
+            'tailOffset': 0,
             'autoclose': true,
             'delay': 500
         }

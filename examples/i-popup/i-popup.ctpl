@@ -32,11 +32,11 @@ i-popup-example
                     dt
                         "sideOffset"
                     dd
-                        "CSS length value. .5em by default"
+                        "integer (pixels). 6 by default"
                     dt
                         "alignOffset"
                     dd
-                        "CSS length value. 1px by default"
+                        "integer (pixels). 1 by default"
                     dt
                         "tail"
                     dd
@@ -44,11 +44,11 @@ i-popup-example
                     dt
                         "tailWidth"
                     dd
-                        "CSS length value. .5em by default"
+                        "integer (pixels). 12 by default"
                     dt
                         "tailHeight"
                     dd
-                        "CSS length value. 1px by default"
+                        "integer (pixels). 6 by default"
                     dt
                         "tailAlign"
                     dd
@@ -56,7 +56,7 @@ i-popup-example
                     dt
                         "tailOffset"
                     dd
-                        "CSS length value. 1px by default"
+                        "integer (pixels). 6 by default"
                     dt
                         "autoclose"
                     dd

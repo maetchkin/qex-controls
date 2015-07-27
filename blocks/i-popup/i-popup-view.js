@@ -28,21 +28,7 @@ $.cleanData              ?
         }
     );
 
-/*convert any valid css length value except percents
-(https://developer.mozilla.org/en-US/docs/Web/CSS/length) to px*/
-$.fn.toPx = function(value, type) {
-    var dim = type || 'height',
-        $test = $('<div>')
-            .css({
-                'visibility': 'hidden',
-                'position': 'absolute'
-            })
-            [dim](value)
-            .appendTo(this),
-        result = $test[dim]();
-    $test.remove();
-    return result;
-}
+
 
 
 ns.views.popup = Backbone.View.extend({
@@ -59,16 +45,16 @@ ns.views.popup = Backbone.View.extend({
         var params = this.model.attributes,
             popupAlignDim = this.el[offsetDim[params.alignDim]],
             halfWidth = Math.min(
-                this.$owner.toPx(params.tailWidth),
+                params.tailWidth,
                 popupAlignDim
             )/2,
-            height = this.$owner.toPx(params.tailHeight),
+            height = params.tailHeight,
             hypotenuse = Math.sqrt(halfWidth * halfWidth + height * height),
             initial = 2 * Math.ceil(halfWidth * height / hypotenuse),
             kh = Math.SQRT2 * height / initial,
             kw = Math.SQRT2 * halfWidth / initial,
-            alignOffset = this.$owner.toPx(params.alignOffset),
-            tailOffset = this.$owner.toPx(params.tailOffset),
+            alignOffset = params.alignOffset,
+            tailOffset = params.tailOffset,
             ownerAlignDim = this.$owner[0][offsetDim[params.alignDim]],
             popupOffsets = {
                 'start': alignOffset,
@@ -115,8 +101,8 @@ ns.views.popup = Backbone.View.extend({
             rect = params.owner.getBoundingClientRect(),
             popupHeight = this.el.offsetHeight,
             popupWidth = this.el.offsetWidth,
-            sideOffset = this.$owner.toPx(params.sideOffset) +
-                (params.tail && this.$owner.toPx(params.tailHeight)),
+            sideOffset = params.sideOffset +
+                (params.tail && params.tailHeight),
             offsets = {
                 'top': rect.top - popupHeight - sideOffset,
                 'right': window.innerWidth - rect.right
@@ -156,9 +142,9 @@ ns.views.popup = Backbone.View.extend({
                 - parentRect[params.alignStart],
             baseAlignCenterOffset =
                 (baseAlignStartOffset + baseAlignEndOffset) / 2,
-            sideOffset = this.$owner.toPx(params.sideOffset) +
-                (params.tail && this.$owner.toPx(params.tailHeight)),
-            alignOffset = this.$owner.toPx(params.alignOffset),
+            sideOffset = params.sideOffset +
+                (params.tail && params.tailHeight),
+            alignOffset = params.alignOffset,
             popupAlignDim = this.el[offsetDim[params.alignDim]],
             popupSideDim = this.el[offsetDim[params.sideDim]],
             alignStyles = {
@@ -205,7 +191,7 @@ ns.views.popup = Backbone.View.extend({
         container.appendChild(this.el);
         this.isAppended = true;
         this.$owner.one('remove', this.autodestroy);
-        this.$el.css('font-size', this.$owner.toPx('1em'));
+        this.$el.css('font-size', this.$owner.css('font-size'));
     },
     'autodestroy': function() {
         this.hide();
