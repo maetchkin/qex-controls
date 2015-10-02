@@ -26,6 +26,15 @@ ns.views.suggest = Backbone.View.extend(
                 this.setInput,
                 this
             );
+            select.on(
+                'change:checked',
+                function() {
+                    select.set(
+                        'checked',
+                        false
+                    );
+                }
+            );
             this.setInput(
                 select,
                 select.get('input')
@@ -51,8 +60,8 @@ ns.views.suggest = Backbone.View.extend(
                         'mouseup':   this.stop,
                         'focus':     this.focus.bind(this, true),
                         'blur':      this.focus.bind(this, false),
-                        'keyup':     this.keyfilter,
-                        'keydown':   this.keyfilter
+                        'keyup':     this.keyfilter.bind(this),
+                        'keydown':   this.keyfilter.bind(this)
                     });
 
                     $button.attr({'tabindex': -1});
@@ -80,10 +89,22 @@ ns.views.suggest = Backbone.View.extend(
         'keyfilter': function(e){
             switch (e.which) {
                 case ns.keys.backspace:
+                    e.type === 'keyup' &&
+                        this.model.get('mode') === 'check' &&
+                        this.uncheckLast();
                 case ns.keys.space:
                     e.stopPropagation();
                 break;
             }
+        },
+
+        'uncheckLast': function(e) {
+            var select = this.model.get('select'),
+                input = select.get('input'),
+                options = select.get('selected');
+            input.get('value') ||
+                options.length &&
+                select.select(options[options.length - 1]);
         }
     }
 );

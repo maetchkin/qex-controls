@@ -1,51 +1,87 @@
 .i-suggest {
+    @import (reference) "../i/i.less";
     display: inline-flex;
     align-items: baseline;
+    & > .i-select > .i-button {
+        cursor: hand;
+
+        &&__disabled {
+            cursor: hand;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            background: #FFF;
+        }
+
+        & > .i-button__face {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: baseline;
+
+            .i-suggest-selected{
+                display: inline-flex;
+                flex-direction: row;
+                align-items: baseline;
+                background-color: @checked-color;
+                margin: .2em;
+                line-height: 1.5;
+                border-radius: 3px;
+                padding: 0 .2em 0 .5em;
+                border: 1px solid fadeout(@border-color, 10%);
+                &__text{
+                    flex-grow: 1;
+                }
+                &__cross{
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    line-height: 1;
+                    margin-left: .3em;
+                    opacity: 0.2;
+                    &:hover{
+                        opacity: 0.5;
+                    }
+                }
+            }
+
+            & > .i-input {
+                & > .i-input__input {
+                    border: 0;
+                    padding: 0;
+                    background: transparent;
+                    &:focus {
+                        box-shadow: none;
+                    }
+                }
+                & > .i-input__clear{
+                    display: none;
+                }
+            }
+        }
+    }
+
+    &&__param > .i-select:after {
+        display: none;
+    }
+
+    &&__param&__loading > .i-select:after {
+        content: '';
+        position: absolute;
+        height: 1em;
+        width:  1em;
+        transform-origin: 50% 50%;
+        border-right:   2px solid gray;
+        border-left:    2px solid gray;
+        border-top:     2px solid white;
+        border-bottom:  2px solid white;
+        border-radius: 1em;
+        transform: initial;
+        animation: spin 2s linear infinite;
+        display: block;
+        bottom: calc(~"50% - .5rem");
+        right: calc(.5rem);
+    }
+
 }
 
-.i-suggest > .i-select > .i-button > .i-button__face > .i-input > .i-input__input:focus {
-    box-shadow: none;
-}
-.i-suggest > .i-select > .i-button > .i-button__face > .i-input > .i-input__input {
-    border: 0;
-    padding: 0;
-    background: transparent;
-}
 
-.i-suggest > .i-select > .i-button > .i-button__face > .i-input > .i-input__clear{
-    display: none;
-}
-
-.i-suggest.i-suggest__param > .i-select > .i-button{
-    cursor: hand;
-}
-
-.i-suggest.i-suggest__param > .i-select > .i-button.i-button__disabled{
-    cursor: hand;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    background: #FFF;
-}
-
-.i-suggest.i-suggest__param > .i-select:after{
-    display: none;
-}
-
-.i-suggest.i-suggest__param.i-suggest__loading > .i-select:after{
-    content: '';
-    position: absolute;
-    height: 1em;
-    width:  1em;
-    transform-origin: 50% 50%;
-    border-right:   2px solid gray;
-    border-left:    2px solid gray;
-    border-top:     2px solid white;
-    border-bottom:  2px solid white;
-    border-radius: 1em;
-    transform: initial;
-    animation: spin 2s linear infinite;
-    display: block;
-    bottom: calc(~"50% - .5rem");
-    right: calc(.5rem);
-}
 
 @keyframes spin { 100% { transform:rotate(360deg); } }

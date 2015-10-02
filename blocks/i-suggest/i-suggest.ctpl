@@ -27,17 +27,46 @@ i-suggest-select $model
         "options":    $model.get('data'),
         "size":       $model.get('size'),
         "viewButton": $model.get('viewButton'),
-        "viewOption": $model.get('viewOption')
+        "viewOption": $model.get('viewOption'),
+        "mode":    $model.get('mode'),
     })
     i::select ($options) AS $select
     EXPOSE $select
 
 i-suggest-input $selected $select
-    SET $input
-    SET $value ($selected ? $select.getOptionLabel($selected) : '')
+    SET $isCheck ($select.get('mode') === 'check')
+    TEST $isCheck
+        EACH $option $selected
+            CALL i-suggest-selected $option $select
+    SET $value ($selected && !$isCheck ? $select.getOptionLabel($selected) : '')
     i::input ({
         'value': $value,
         'size': $select.get('size')
     }) AS $input
     JS
-        $select.set('input', $input);
+        $select.set({
+            'input': $input,
+            'open': false
+        });
+
+
+i-suggest-selected $option $select
+    div.i-suggest-selected
+        div.i-suggest-selected__text
+            ($select.getOptionLabel($option))
+        div.i-suggest-selected__cross
+            '×'
+            JS
+                $(this).on(
+                    'mousedown',
+                    function(e) {
+                        e.stopPropagation();
+                    }
+                );
+                $(this).on(
+                    'mouseup',
+                    function(e) {
+                        e.stopPropagation();
+                        $select.select($option);
+                    }
+                );

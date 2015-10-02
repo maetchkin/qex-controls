@@ -14,7 +14,8 @@ ns.models.suggest = Backbone.Model.extend(
             'viewButton': 'i-suggest-input',
             'viewOption': void(0),
             'selected':   void(0),
-            'filter':     void(0)
+            'filter':     void(0),
+            'mode':       'radio'
         },
 
         'initialize': function(){
@@ -198,7 +199,7 @@ ns.models.suggest = Backbone.Model.extend(
                     this.get('data').once('sync', this.setSuggest, this);
                     this.load();
                 } else {
-                    str || select.reset();
+                    str || this.get('mode') === 'check' || select.reset();
                     this.setSuggest();
                 }
             } else {

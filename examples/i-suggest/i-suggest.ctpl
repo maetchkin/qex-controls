@@ -48,6 +48,10 @@ i-suggest-example__options
                 dd
                     "minimum number of characters required to request data"
                 dt
+                    "mode"
+                dd
+                    "String. Values: radio (default) or check"
+                dt
                     "viewButton"
                 dd
                     "Template name for i-select button customization."
@@ -104,6 +108,11 @@ i-suggest-example__url
                             });
                         });
                     }
+            CTPL-CODE check mode
+                i::suggest ({
+                    'data': './examples/i-suggest/capitals.json',
+                    'mode': 'check'
+                }) AS $suggest__url_check
             CTPL-CODE pass value through a http request
                 i::suggest ({
                     'data': './examples/i-suggest/capitals.json?search=%%input%%',
@@ -112,6 +121,7 @@ i-suggest-example__url
                 CTPL-TEST type checking
                     expect( $suggest__url_param ).to.be.an.instanceof(Backbone.Model);
                     expect( $suggest__url_param.get('data') ).to.be.an.instanceof(Backbone.Collection);
+            
 
 i-suggest-example__sizing
     li.i-example__list-item
