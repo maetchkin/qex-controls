@@ -133,17 +133,17 @@ ns.views.selectOptions = Backbone.View.extend({
         }
     },
     'setSelected': function() {
-        var index = this.model.get('index'),
-            options = this.model.get('options'),
-            cid;
-        options.forEach(
-            function(option){
-                var cid = option.cid;
+        var index = this.model.get('index');
+        this.$('.' + block)
+            .removeClass(block + '-selected')
+        Object.keys(index)
+            .forEach(
+                function(cid){
+                    index[cid] && this
+                        .$('.' + block + '[data-cid="' + cid + '"]')
+                        .addClass(block + '-selected');
+                },
                 this
-                    .$('.' + block + '[data-cid="' + cid + '"]')
-                    .toggleClass(block + '-selected', !!index[cid])
-            },
-            this
-        );
+            );
     }
 });

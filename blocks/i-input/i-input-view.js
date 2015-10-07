@@ -63,15 +63,18 @@ ns.views.input = Backbone.View.extend(
             this.$el.toggleClass('i-input__empty', !(value.length > 0));
         },
         'onInput': function() {
+            var debounce = this.model.get('debounce');
             if (this.input) {
                 clearTimeout(this.input);
                 delete this.input;
             }
-            this.input = setTimeout(
-                this.readInput,
-                this.model.get('debounce'),
-                this
-            );
+			debounce ?
+				(this.input = setTimeout(
+					this.readInput,
+					this.model.get('debounce'),
+					this
+				)) :
+				this.readInput(this);
         },
         'readInput': function(input){
             input.model.set('value', input.$input.val());
