@@ -113,7 +113,7 @@ ns.views.select = Backbone.View.extend({
         this.model.set('open', open);
     },
     'openHandler': function(model, open) {
-        if(open){
+        if(!this.get('allowEmpty') && open){
             this.$el.find('.i-button').not('[tabindex="-1"]').focus();
         }
         this.$popup[open ? 'show' : 'hide']();
