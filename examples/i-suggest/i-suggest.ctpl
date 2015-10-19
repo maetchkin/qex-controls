@@ -52,6 +52,10 @@ i-suggest-example__options
                 dd
                     "String. Values: radio (default) or check"
                 dt
+                    "disabled"
+                dd
+                    "Boolean. false by default"
+                dt
                     "viewButton"
                 dd
                     "Template name for i-select button customization."
@@ -71,6 +75,7 @@ i-suggest-example__options
                     "size"
                 dd
                     "String. L, M or S. M by default"
+                
 
 i-suggest-example__data
     li.i-example__list-item
@@ -111,7 +116,8 @@ i-suggest-example__url
             CTPL-CODE check mode
                 i::suggest ({
                     'data': './examples/i-suggest/capitals.json',
-                    'mode': 'check'
+                    'mode': 'check',
+                    'disabled': true
                 }) AS $suggest__url_check
             CTPL-CODE pass value through a http request
                 i::suggest ({

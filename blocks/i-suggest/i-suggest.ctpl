@@ -29,6 +29,8 @@ i-suggest-select $model
         "viewButton": $model.get('viewButton'),
         "viewOption": $model.get('viewOption'),
         "mode":    $model.get('mode'),
+        "disabled":   $model.get('disabled'),
+        "allowEmpty": true
     })
     i::select ($options) AS $select
     EXPOSE $select

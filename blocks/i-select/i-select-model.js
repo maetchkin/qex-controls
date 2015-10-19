@@ -14,14 +14,15 @@ ns.models.select = Backbone.Model.extend(
             'selected':    void(0),
             'type':        void(0),
             'viewButton':  void(0),
-            'viewOption':  void(0)
+            'viewOption':  void(0),
+            'allowEmpty':  false
         },
 
         'initialize': function ns_models_select(attrs) {
             if (!attrs || !('options' in attrs)){
                 throw "i::select: incorrect options";
             }
-            attrs.options.length || this.set('disabled', true);
+            attrs.options.length || attrs.allowEmpty || this.set('disabled', true);
             this.on('change:selected', this.selectedHandler);
             this.on('change:open',     this.openHandler);
             this.reset();

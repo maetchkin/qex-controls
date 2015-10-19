@@ -15,7 +15,8 @@ ns.models.suggest = Backbone.Model.extend(
             'viewOption': void(0),
             'selected':   void(0),
             'filter':     void(0),
-            'mode':       'radio'
+            'mode':       'radio',
+            'disabled': false
         },
 
         'initialize': function(){
@@ -25,6 +26,23 @@ ns.models.suggest = Backbone.Model.extend(
             this.on(
                 'change:select',
                 this.setSelect
+            );
+            this.on(
+                'change:disabled',
+                this.proxyDisabled
+            );
+        },
+
+        'proxyDisabled': function(model, value) {
+            var select = this.get('select'),
+                input = select && select.get('input');
+            select && select.set(
+                'disabled',
+                value
+            );
+            input && input.set(
+                'disabled',
+                value
             );
         },
 
@@ -102,16 +120,7 @@ ns.models.suggest = Backbone.Model.extend(
             );
 
             
-        select.set(
-            'disabled',
-            false
-        );
-        select.on(
-            "change:disabled",
-            function(){
-                select.set('disabled', false);
-            }
-        );
+        
 
         },
 
@@ -150,6 +159,7 @@ ns.models.suggest = Backbone.Model.extend(
             if(input){
                 input.set('placeholder', this.get('placeholder'));
                 input.set('debounce',    this.get('debounce'));
+                input.set('disabled',    this.get('disabled'));
                 this.listenTo(input, 'change:value', this.input);
             }
         },

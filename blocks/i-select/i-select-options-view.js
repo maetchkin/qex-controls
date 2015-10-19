@@ -110,7 +110,7 @@ ns.views.selectOptions = Backbone.View.extend({
             }
         );
         select.set('rendered', rendered);
-        this.model.set(
+        this.model.get('allowEmpty') || this.model.set(
             'disabled',
             !options.length
         );
