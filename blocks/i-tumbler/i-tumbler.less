@@ -1,0 +1,90 @@
+.i-tumbler{
+    @import (reference) "../i/i.less";
+
+    cursor: pointer;
+    position: relative;
+    height: 2em;
+    width: 5em;
+
+    &__on,
+    &__off,
+    &__button{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        transition: left 0.15s ease-out, right 0.15s ease-out, box-shadow 0.05s ease-out;
+        border-radius: 3px;
+        box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+        &:hover{
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    &__on{
+        background-color: @checked-color;
+        right: 5em;
+    }
+
+    &__off{
+        background-color: @off-color;
+        right: 0;
+    }
+
+    &__button{
+        left: 0;
+        z-index: 1;
+        width: 2em;
+        .i-button{
+            padding: 0;
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            bottom: 1px;
+            left: 1px;
+            border-width: 0px;
+            border-radius: 2px;
+        } 
+    }
+
+
+    &_state_on &__on{
+        right: 0;
+    }
+    &_state_on &__off{
+        left: 5em;
+    }
+    &_state_on &__button{
+        left: 3em;
+    }
+
+    
+    &_disabled{
+        cursor: default;
+    }
+    &_disabled &__on,
+    &_disabled &__off,
+    &_disabled &__button{
+        &, &:hover{
+            box-shadow: none;
+        }
+    }
+    &_disabled &__on{
+        background-color: @disabled-on-color;
+    }
+    &_disabled &__off{
+        background-color: @disabled-color;
+    }
+
+    &__size{
+        &-L{
+            font-size: 1.25rem;
+        }
+        &-M{
+            font-size: 1rem;
+        }
+        &-S{
+            font-size: .75rem;
+        }
+    }
+}

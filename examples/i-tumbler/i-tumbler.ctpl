@@ -1,0 +1,85 @@
+i-tumbler-example
+    ul.i-example__list
+        li.i-example__list-item
+            CTPL-SHOW Usage
+                i::tumbler /* ( options ) */
+            CALL i-tumbler-example__options
+            CALL i-tumbler-example__sizing
+            CALL i-tumbler-example__disabled
+            CALL i-tumbler-example__on
+
+i-tumbler-example__options
+    h4
+        "Options"
+    p
+        dl
+            dt
+                "size"
+            dd
+                "String. L, M or S. M by default"
+            dt
+                "disabled"
+            dd
+                "Boolean. false by default"
+            dt
+                "on"
+            dd
+                "Boolean. false by default"
+
+i-tumbler-example__sizing
+    CTPL-SUITE Sizing
+        CTPL-CODE Sizing scale
+            div.i-example__button-sizing
+                div AS $Lsize
+                    @style "width:32%"
+                    i::tumbler ({'size': 'L'})
+                div AS $Msize
+                    @style "width:32%"
+                    i::tumbler ({'size': 'M'})
+                div AS $Ssize
+                    @style "width:32%"
+                    i::tumbler ({'size': 'S'})
+
+        CTPL-TEST test L > M > S
+            var $L  = $($Lsize.firstChild),
+                $M  = $($Msize.firstChild),
+                $S  = $($Ssize.firstChild);
+            // check classes
+            expect( $L.hasClass('i-tumbler__size-L')  ).to.be.true;
+            expect( $M.hasClass('i-tumbler__size-M')  ).to.be.true;
+            expect( $S.hasClass('i-tumbler__size-S')  ).to.be.true;
+            // check size
+            expect( $L.height() > $M.height()  ).to.be.true;
+            expect( $M.height() > $S.height()  ).to.be.true;
+
+
+i-tumbler-example__disabled
+    CTPL-SUITE Disabled
+        CTPL-CODE Disabled
+            span AS $container
+                i::tumbler ({'disabled': true}) AS $tumbler
+            SET $node ($($container.firstChild))
+            SET $nodeButton ($node.find('.i-button'))
+
+        CTPL-TEST set 'disabled'
+            expect( $tumbler ).to.be.an.instanceof(Backbone.Model);
+            expect( $tumbler.get('disabled') ).to.be.true();
+            expect( $node.hasClass('i-tumbler_disabled') ).to.be.true;
+            expect( $nodeButton.hasClass('i-button__disabled') ).to.be.true;
+            $tumbler.set('disabled', false);
+            expect( $node.hasClass('i-tumbler_disabled') ).to.be.false;
+            expect( $nodeButton.hasClass('i-button__disabled') ).to.be.false;
+
+i-tumbler-example__on
+    CTPL-SUITE On
+        CTPL-CODE On
+            span AS $container
+                i::tumbler ({'on': true}) AS $tumbler
+            SET $node ($($container.firstChild))
+
+        CTPL-TEST set 'on'
+            expect( $tumbler ).to.be.an.instanceof(Backbone.Model);
+            expect( $tumbler.get('on') ).to.be.true();
+            expect( $node.hasClass('i-tumbler_state_on') ).to.be.true;
+            $tumbler.set('on', false);
+            expect( $node.hasClass('i-tumbler_state_on') ).to.be.false;

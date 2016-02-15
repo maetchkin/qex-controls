@@ -1,0 +1,36 @@
+i::tumbler $data
+    &"../i/i.js"
+    &"../i/i.less"
+    &"i-tumbler-model.js"
+    &"i-tumbler-view.js"
+    &"i-tumbler.less"
+    SET $block ("i-tumbler")
+    SET $model (new ns.models.tumbler($data))
+    div AS $tumbler
+        @class $block
+        @class +($block + "__size-" + $model.get("size"))
+        TEST ($model.get("disabled"))
+            @class +($block+"_disabled")
+        TEST ($model.get("on"))
+            @class +($block+"_state_on")
+        div
+            @class ($block + "__on")
+        div
+            @class ($block + "__button")
+            i::button ({
+                'size': $model.get('size'),
+                'disabled': $model.get('disabled')
+            }) AS $button
+        div
+            @class ($block + "__off")
+    JS
+        new ns.views.tumbler(
+            {
+                'el':       $tumbler,
+                'model':    $model,
+                'button':   $button
+            }
+        )
+    EXPOSE $model
+
+
