@@ -17,9 +17,13 @@
     padding: 0 1em;
 
     background: #FFF;
+    transition: background 0.1s ease-out 0s;
 
     &__action{
         background: @action-color;
+    }
+    &__action&__hover{
+        background: @action-hover-color;
     }
 
     &__hover{
@@ -37,7 +41,9 @@
     }
 
     &__disabled,
-    &__loading{
+    &__loading,
+    &__action{
+        &,
         &:focus,
         &:hover{
             border-color: transparent;
@@ -69,7 +75,6 @@
     }
 
     &__disabled, &__loading{
-        border-color: transparent;
         .text{
             color: #999;
         }
