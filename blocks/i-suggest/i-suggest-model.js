@@ -126,18 +126,16 @@ ns.models.suggest = Backbone.Model.extend(
 
         'onRender': function(){
             this.get('select').set('focus', void(0));
-            if(this.get('input')){
-                setTimeout(
-                    function(select){
-                        var rendered = select.get('rendered');
-                        if(rendered && rendered.length){
-                            select.set('focus', rendered[0] );
-                        }
-                    },
-                    50,
-                    this.get('select')
-                );
-            }
+            setTimeout(
+                function(select){
+                    var rendered = select.get('rendered');
+                    if(rendered && rendered.length){
+                        select.set('focus', rendered[0] );
+                    }
+                },
+                50,
+                this.get('select')
+            );
         },
 
         'setSelected': function(){
