@@ -81,6 +81,12 @@ i-suggest-example__data
     li.i-example__list-item
         CTPL-SUITE Data
             CTPL-CODE String
+                i::suggest ({
+                    'placeholder': 'test',
+                    'mode': 'check',
+                    'delim': ', ',
+                    'data': './examples/i-suggest/capitals.json'
+                })
                 i::suggest ('One,Two,Three') AS $suggest_string
                 CTPL-TEST set 'value'
                     expect( $suggest_string ).to.be.an.instanceof(Backbone.Model);

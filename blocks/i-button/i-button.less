@@ -80,13 +80,15 @@
         }
     }
 
-    &__disabled{
+    &__disabled,
+    &__disabled&__hover{
         cursor: default;
 
         background-color: @disabled-color;
     }
 
-    &__loading{
+    &__loading,
+    &__loading&__hover{
         .loading(@disabled-color);
         cursor: progress;
     }
