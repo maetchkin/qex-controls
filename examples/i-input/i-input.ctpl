@@ -13,6 +13,7 @@ i-input-example
             CALL i-input-example__disabled
             CALL i-input-example__placeholder
             CALL i-input-example__delay
+            CALL i-input-example__mode_textarea
 
 i-input-example__options
     h4
@@ -39,6 +40,10 @@ i-input-example__options
                 "debounce"
             dd
                 "Number. Debounce value in milliseconds, 0 by default"
+            dt
+                "mode"
+            dd
+                "String. 'textarea' or 'input'. 'input' by default"
 
 i-input-example__sizing
     CTPL-SUITE Sizing
@@ -209,6 +214,61 @@ i-input-example__delay
                 setTimeout(trigger, i * step, i, i === count);
             }
 
+i-input-example__mode_textarea
+    CTPL-SUITE Mode
+        CTPL-CODE Textarea
+            span AS $container
+                i::input ({
+                    'mode': 'textarea',
+                    'value': 'value'
+                }) AS $input
+            SET $node ($($container.firstChild))
+            SET $nodeInput ($node.find('.i-input__input'))
+            SET $nodeClear ($node.find('.i-input__clear'))
+        CTPL-TEST ASYNC set 'value'
+
+            var // check initial state
+                checkValue = function(){
+                    // check result is a Backbone.Model
+                    expect( $input ).to.be.an.instanceof(Backbone.Model);
+                    // check model value
+                    expect( $input.get('value') ).to.be.equal('value');
+                    // check DOM value
+                    expect( $nodeInput.val() ).to.be.equal('value');
+                    // check style
+                    var clearStyle = getComputedStyle( $nodeClear.get(0) , null);
+                    // check clear is displayed
+                    expect( clearStyle.display !== 'none'  ).to.be.true;
+                },
+                // create empty state checker
+                checkClear = function($input, value){
+                    // check models value to be empty
+                    expect( value ).to.be.equal('');
+                    // check DOM attribute to be empty
+                     expect( $nodeInput.val() ).to.be.equal('');
+                    // check class
+                    expect( $node.hasClass('i-input__empty') ).to.be.true;
+                    // check focus
+                    expect( $nodeInput.get(0) === document.activeElement ).to.be.true;
+
+                    var clearStyle = getComputedStyle( $nodeClear.get(0) , null);
+                    expect( clearStyle.display === 'none'  ).to.be.true;
+                    // subscribe checkEnd
+                    $input.once('change:value', checkEnd);
+                    // set value
+                    $input.set('value', 'value');
+                },
+                checkEnd = function($input, value){
+                    $nodeInput.blur();
+                    checkValue();
+                    done();
+                };
+            // start check
+            checkValue();
+            // subscribe checkClear
+            $input.once('change:value', checkClear);
+            // init clearing value
+            $nodeClear.trigger('click');
 
 
 

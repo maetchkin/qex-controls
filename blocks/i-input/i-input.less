@@ -15,19 +15,23 @@
         width: 100%;
         padding: 0 2.2em 0 .6em;
         border: 1px solid @border-color;
-        height: 2em;
+        line-height: 2em;
         font-size: 1em;
-        
+        &:hover{
+            border-color: @hover-border-color;
+        }
         &:focus{
             outline:none;
             border-color: @focus-color;
             box-shadow: inset 0 0 0 1px @focus-color;
         }
+
         
         &::-webkit-input-placeholder, &::-moz-placeholder{
             color: #999;
         }
     }
+
     
     &__clear{
         position: absolute;

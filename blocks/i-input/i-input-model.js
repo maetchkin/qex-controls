@@ -6,7 +6,9 @@ ns.models.input = Backbone.Model.extend(
             'size': 'M',
             'value': '',
             'disabled': false,
-            'debounce': 0
+            'debounce': 0,
+            'mode': 'input',
+            'rows': 2
         }
     }
 );

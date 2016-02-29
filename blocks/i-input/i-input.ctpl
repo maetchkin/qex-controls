@@ -14,12 +14,14 @@ i::input $data
             @class +($block + '__empty')
         TEST ($model.get('disabled'))
             @class +($block + '__disabled')
-        input AS $input
-            @class ($block + '__input')
-            @placeholder ($model.get('placeholder'))
-            @value ($model.get('value'))
-            TEST ($model.get('disabled'))
-                @disabled
+        CHOOSE
+            WHEN ($model.get('mode') == 'textarea')
+                textarea
+                    @rows ($model.get('rows'))
+                    i::input__input (this) $model
+            OTHERWISE
+                input
+                    i::input__input (this) $model
         div AS $clear
             @class ($block + '__clear')
             
@@ -33,3 +35,15 @@ i::input $data
 
     EXPOSE $model
                 
+i::input__input $el $model
+    ^$el
+        @class ('i-input__input')
+        @placeholder ($model.get('placeholder'))
+        TEST ($model.get('disabled'))
+            @disabled
+        CHOOSE
+            WHEN ($model.get('mode') == 'textarea')
+                ($model.get('value'))
+            OTHERWISE
+                @value ($model.get('value'))
+        
