@@ -36,7 +36,7 @@
     "dest": "stand"
   },
   "dependencies": {
-    "glob": "4.0.6",
+    "glob": "7.0.3",
     "exoskeleton": "0.7.0",
     "zepto": "git://github.com/madrobby/zepto.git",
     "qex-prism": "git://github.com/maetchkin/qex-prism.git"
