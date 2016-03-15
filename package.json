@@ -38,8 +38,7 @@
   "dependencies": {
     "glob": "7.0.3",
     "exoskeleton": "0.7.0",
-    "zepto": "git://github.com/madrobby/zepto.git",
-    "qex-prism": "git://github.com/maetchkin/qex-prism.git"
+    "zepto": "git://github.com/madrobby/zepto.git"
   },
   "devDependencies": {
     "autoprefixer-core": "5.2.1",
@@ -64,6 +63,7 @@
     "mocha": "2.1.0",
     "sinon": "1.14.1",
     "through2": "0.6.3",
-    "yargs": "3.6.0"
+    "yargs": "3.6.0",
+    "qex-prism": "git://github.com/maetchkin/qex-prism.git"
   }
 }
