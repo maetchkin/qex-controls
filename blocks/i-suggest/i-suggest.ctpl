@@ -23,15 +23,20 @@ i::suggest $data $options
     EXPOSE $model
 
 i-suggest-select $model
-    SET $options ({
-        "options":    $model.get('data'),
-        "size":       $model.get('size'),
-        "viewButton": $model.get('viewButton'),
-        "viewOption": $model.get('viewOption'),
-        "mode":    $model.get('mode'),
-        "disabled":   $model.get('disabled'),
-        "allowEmpty": true
-    })
+    SET $options (_.extend(
+        $model.pick([
+            'data',
+            'size',
+            'viewButton',
+            'viewOption',
+            'mode',
+            'disabled',
+            'popup'
+        ]),
+        {
+            "allowEmpty": true
+        }
+    }))
     i::select ($options) AS $select
     EXPOSE $select
 
