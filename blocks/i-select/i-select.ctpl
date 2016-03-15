@@ -10,7 +10,7 @@ i::select $data $options
 
     SET $block ("i-select")
     SET $model (ns.select($data, $options))
-    SET $popupOptions ($options && $options.popup || {})
+    SET $popupOptions ($model.get('popup') || {})
 
     div AS $select
         @class $block
