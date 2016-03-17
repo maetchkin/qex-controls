@@ -3,14 +3,12 @@ var offsetDim = {
     'width': 'offsetWidth'
 };
 
-//create a custom 'remove' event which is fired at all the elements removed by jQuery/Zepto
+//remove the popup if the owner is removed by jQuery/Zepto
 $.cleanData              ? 
     // jQuery
     $.cleanData = (function (origFn) {
         return function(elems) {
-            $(elems).each(function(){
-                $(this).triggerHandler('remove');    
-            });
+            removePopups($(elems));
             return origFn.apply(this, arguments);     
         };
     })($.cleanData)      :
@@ -21,13 +19,21 @@ $.cleanData              ?
                 return function() {
                     var elems = this.find('*');
                     method === 'remove' && (elems = elems.add(this));
-                    elems.triggerHandler('remove');
+                    removePopups(elems);
                     return origFn.apply(this, arguments);     
                 };
             })($.fn[method])
         }
     );
 
+function removePopups(elems) {
+    elems.each(
+        function() {
+            var popup = this['__popup'];
+            popup && popup.trigger && popup.trigger('destroy');
+        }
+    );
+}
 
 
 
@@ -190,7 +196,8 @@ ns.views.popup = Backbone.View.extend({
         this.model.get('autoclose') && this.once('show', this.addAutoclose);
         container.appendChild(this.el);
         this.isAppended = true;
-        this.$owner.one('remove', this.autodestroy);
+        this.$owner[0]['__popup'] = this;
+        this.on('destroy', this.autodestroy);
         this.$el.css('font-size', this.$owner.css('font-size'));
     },
     'autodestroy': function() {
