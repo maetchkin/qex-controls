@@ -137,6 +137,10 @@ ns.views.popup = Backbone.View.extend({
         this.model.set('side', side);
     },
     'setLocation': function() {
+        if (!this.$el.parent()[0]) {
+            return;
+        }
+
         var params = this.model.attributes,
             ownerRect = params.owner.getBoundingClientRect(),
             parentRect = this.$el.parent()[0].getBoundingClientRect(),
