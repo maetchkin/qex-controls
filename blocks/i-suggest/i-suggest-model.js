@@ -77,7 +77,7 @@ ns.models.suggest = Backbone.Model.extend(
                 data.url = function(){
                     return url.replace(
                         /%%input%%/,
-                        suggest.get('select').get('input').get('value')
+                        encodeURIComponent(suggest.get('select').get('input').get('value'))
                     );
                 }
             }
