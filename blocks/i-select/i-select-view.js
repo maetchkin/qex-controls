@@ -35,6 +35,11 @@ ns.views.select = Backbone.View.extend({
             'hide',
             this.popupHandler.bind(this, false)
         );
+        this.$popup.listenTo(
+            this.model,
+            'change:rendered',
+            this.$popup.position
+        );
         this.listenTo(
             this.model,
             'change:label',

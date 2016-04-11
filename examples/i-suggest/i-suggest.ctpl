@@ -86,8 +86,7 @@ i-suggest-example__data
                     'mode': 'check',
                     'delim': ', ',
                     'data': './examples/i-suggest/capitals.json'
-                })
-                i::suggest ('One,Two,Three') AS $suggest_string
+                }) AS $suggest_string
                 CTPL-TEST set 'value'
                     expect( $suggest_string ).to.be.an.instanceof(Backbone.Model);
                     expect( $suggest_string.get('data') ).to.be.an.instanceof(Backbone.Collection);
@@ -128,7 +127,10 @@ i-suggest-example__url
             CTPL-CODE pass value through a http request
                 i::suggest ({
                     'data': './examples/i-suggest/capitals.json?search=%%input%%',
-                    'min': 1
+                    'min': 1,
+                    'popup': {
+                        'align': 'end'
+                    }
                 }) AS $suggest__url_param
                 CTPL-TEST type checking
                     expect( $suggest__url_param ).to.be.an.instanceof(Backbone.Model);
