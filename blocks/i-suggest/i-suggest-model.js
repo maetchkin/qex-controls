@@ -189,9 +189,9 @@ ns.models.suggest = Backbone.Model.extend(
             select.set('filtered', filtered);
         },
 
-        'setSuggest': function(open){
+        'setSuggest': function(){
             this.setFiltered();
-            this.get('select').set('open', open!==false);
+            this.get('select').set('open', true);
         },
 
 

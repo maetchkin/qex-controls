@@ -81,6 +81,12 @@ ns.views.selectOptions = Backbone.View.extend({
             filtered= select.get('filtered'),
             rendered= [];
 
+        // render only when select is visible
+        if (!select.get('open')) {
+            select.set('rendered', false);
+            return;
+        }
+
         // concat.js
         options.forEach(
             function($option){
