@@ -81,12 +81,7 @@ i-suggest-example__data
     li.i-example__list-item
         CTPL-SUITE Data
             CTPL-CODE String
-                i::suggest ({
-                    'placeholder': 'test',
-                    'mode': 'check',
-                    'delim': ', ',
-                    'data': './examples/i-suggest/capitals.json'
-                }) AS $suggest_string
+                i::suggest ('One,Two,Three') AS $suggest_string
                 CTPL-TEST set 'value'
                     expect( $suggest_string ).to.be.an.instanceof(Backbone.Model);
                     expect( $suggest_string.get('data') ).to.be.an.instanceof(Backbone.Collection);
@@ -101,7 +96,7 @@ i-suggest-example__url
         CTPL-SUITE URL
             "Suggest element by URL with remote data request."
             CTPL-CODE set path to json
-                i::suggest ('./examples/i-suggest/capitals.json') AS $suggest__url
+                i::suggest './examples/i-suggest/capitals.json' AS $suggest__url
                 CTPL-TEST type checking, test data length
                     expect( $suggest__url ).to.be.an.instanceof(Backbone.Model);
                     expect( $suggest__url.get('data') ).to.be.an.instanceof(Backbone.Collection);
@@ -121,8 +116,7 @@ i-suggest-example__url
             CTPL-CODE check mode
                 i::suggest ({
                     'data': './examples/i-suggest/capitals.json',
-                    'mode': 'check',
-                    'disabled': true
+                    'mode': 'check'
                 }) AS $suggest__url_check
             CTPL-CODE pass value through a http request
                 i::suggest ({

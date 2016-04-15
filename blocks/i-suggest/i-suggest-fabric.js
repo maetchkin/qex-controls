@@ -3,22 +3,34 @@ ns.suggest = function(data, _options){
 
     var options = _options || {},
 
-        item = function(item){
-            return {'value':item};
-        },
-
         reURL = /^((?:(?:http|https):\/)?\.?\/.*)$/ ,
 
         parseURL = function(string){
             return string.match(reURL);
         },
 
+        parse = Object.prototype.toString.call(options.parse) === '[object Function]'
+            ? options.parse
+            : function(data) {
+                return data instanceof Object
+                    ? data
+                    : {
+                        'label': data,
+                        'value': data
+                    };
+            },
+        OptionsCollection = Backbone.Collection.extend({
+            'parse': function(data) {
+                return data.map(parse);
+            }
+        }),
+
         optionsCollection = function(data){
 
             if (typeof data === 'string'){
                 var url = parseURL(data);
                 if(url){
-                    var set     = new Backbone.Collection();
+                    var set     = new OptionsCollection();
                         set.url = data;
                     return [set, "url"];
                 } else {
@@ -36,7 +48,12 @@ ns.suggest = function(data, _options){
 
             if (Object.prototype.toString.call(data) === '[object Array]'){
                 return  [
-                    new Backbone.Collection(data.map(item)),
+                    new OptionsCollection(
+                        data,
+                        {
+                            'parse': true 
+                        }
+                    ),
                     "array"
                 ];
             } else

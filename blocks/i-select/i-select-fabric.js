@@ -1,5 +1,20 @@
 ns.select = function(data, _options){
     var options = _options || {},
+        parse = Object.prototype.toString.call(options.parse) === '[object Function]'
+            ? options.parse
+            : function(data) {
+                return data instanceof Object
+                    ? data
+                    : {
+                        'label': data,
+                        'value': data
+                    };
+            },
+        OptionsCollection = Backbone.Collection.extend({
+            'parse': function(data) {
+                return data.map(parse);
+            }
+        }),
         optionsCollection = function(data){
 
             if (typeof data === 'string'){
@@ -19,14 +34,11 @@ ns.select = function(data, _options){
 
             if (Object.prototype.toString.call(data) === '[object Array]'){
                 return  [
-                            new Backbone.Collection(
-                                data.map(
-                                    function(option){
-                                        return new Backbone.Model(
-                                            {label: option}
-                                        )
-                                    }
-                                )
+                            new OptionsCollection(
+                                data,
+                                {
+                                    'parse': true
+                                }
                             ),
                             "array"
                         ]
