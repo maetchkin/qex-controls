@@ -68,27 +68,13 @@ i-button-example__label
                 expect( $button.get('label') ).to.be.equal('click me');
                 // check label exists in DOM
                 expect( $node.find('.i-button__label').text() ).to.be.equal('click me');
-                // buttons view initialization is asynchronous and delayed until mouseover,
-                expect( $button.get('init') ).to.be.false;
-                // let's fire it on DOM node for further tests
-                $node.trigger( $.Event('mouseover') );
-                // check button is inited
-                expect( $button.get('init') ).to.be.true;
-                // check buttons pressed and callback binding
+                // check buttons callback binding
                 // create callback spy with Sinon.js
                 var action = sinon.spy();
                 // subscripe spy on button 'action' event
                 $button.on('action', action);
-                // fire mousedown
-                $node.trigger($.Event('mousedown'));
-                // check button is 'pressed'
-                expect( $node.hasClass('i-button__pressed') ).to.be.a.true;
-                // check mousedown do not produce callback invocation
-                expect( action.called ).to.be.a.false;
-                // fire mouseup
-                $node.trigger($.Event('mouseup'));
-                // check button is not 'pressed'
-                expect( $node.hasClass('i-button__pressed') ).to.be.a.false;
+                // fire click
+                $node.trigger($.Event('click'));
                 // also check if action was triggered
                 expect( action.called ).to.be.a.true;
                 expect( action.calledOnce ).to.be.a.true;
@@ -179,34 +165,23 @@ i-button-example__disabled
                 expect( $button.get('disabled') ).to.be.true();
 
                 // DOM state
-                expect( $node.attr('tabindex') ).to.equal('-1');
                 expect( $node.attr('disabled') ).to.be.ok;
-                expect( $node.hasClass('i-button__disabled') ).to.be.a.true;
-
+                
                 // init button
-                $node.trigger($.Event('mouseover'));
                 var action = sinon.spy();
                 $button.on('action', action);
 
-                // fire mousedown and check if pressed state is not set
-                $node.trigger($.Event('mousedown'));
-                expect( $node.hasClass('i-button__pressed') ).to.be.false;
-                // check 'action' will not firing on mouse up
-                $node.trigger($.Event('mouseup'));
+                // check 'action' will not fire on click
+                $node.trigger($.Event('click'));
                 expect( action.called ).to.be.false;
 
                 // check binding
                 $button.set('disabled', false);
                 // DOM state
-                expect( $node.attr('tabindex') ).to.equal('0');
                 expect( $node.attr('disabled') ).to.be.not.ok;
-                expect( $node.hasClass('i-button__disabled') ).to.be.a.false;
-
-                // fire mousedown and check if pressed state was set
-                $node.trigger($.Event('mousedown'));
-                expect( $node.hasClass('i-button__pressed') ).to.be.true;
-                // check 'action' will not firing on mouse up
-                $node.trigger($.Event('mouseup'));
+                
+                // check 'action' will fire on click
+                $node.trigger($.Event('click'));
                 expect( action.calledOnce ).to.be.a.true;
                 expect( action.calledOn($button) ).to.be.a.true;
 
@@ -226,32 +201,23 @@ i-button-example__loading
                 expect( $button.get('loading') ).to.be.true();
 
                 // DOM state
-                expect( $node.attr('tabindex') ).to.equal('-1');
                 expect( $node.attr('disabled') ).to.be.ok;
                 expect( $node.hasClass('i-button__loading') ).to.be.a.true;
                 // init
-                $node.trigger($.Event('mouseover'));
                 var action = sinon.spy();
                 $button.on('action', action);
-                // fire mousedown and check if pressed state is not set
-                $node.trigger($.Event('mousedown'));
-                expect( $node.hasClass('i-button__pressed') ).to.be.false;
                 // check if 'action' was not triggered
-                $node.trigger($.Event('mouseup'));
+                $node.trigger($.Event('click'));
                 expect( action.called ).to.be.false;
 
                 // check binding
                 $button.set('loading', false);
                 // DOM state
-                expect( $node.attr('tabindex') ).to.equal('0');
                 expect( $node.attr('disabled') ).to.be.not.ok;
                 expect( $node.hasClass('i-button__loading') ).to.be.a.false;
 
-                // fire mousedown and check if pressed state was set
-                $node.trigger($.Event('mousedown'));
-                expect( $node.hasClass('i-button__pressed') ).to.be.true;
-                // check 'action' will not firing on mouse up
-                $node.trigger($.Event('mouseup'));
+                // check 'action' will fire on click
+                $node.trigger($.Event('click'));
                 expect( action.calledOnce ).to.be.a.true;
                 expect( action.calledOn($button) ).to.be.a.true;
 

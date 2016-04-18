@@ -65,10 +65,10 @@ i-tumbler-example__disabled
             expect( $tumbler ).to.be.an.instanceof(Backbone.Model);
             expect( $tumbler.get('disabled') ).to.be.true();
             expect( $node.hasClass('i-tumbler_disabled') ).to.be.true;
-            expect( $nodeButton.hasClass('i-button__disabled') ).to.be.true;
+            expect( $nodeButton.attr('disabled') ).to.be.ok;
             $tumbler.set('disabled', false);
             expect( $node.hasClass('i-tumbler_disabled') ).to.be.false;
-            expect( $nodeButton.hasClass('i-button__disabled') ).to.be.false;
+            expect( $nodeButton.attr('disabled') ).to.be.not.ok;
 
 i-tumbler-example__on
     CTPL-SUITE On

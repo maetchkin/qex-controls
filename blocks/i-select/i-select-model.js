@@ -34,7 +34,7 @@ ns.models.select = Backbone.Model.extend(
         },
 
         'openHandler': function(select, value){
-            this.set('focus', void(0));
+            value && this.set('focus', void(0));
         },
 
         'selectedHandler': function(select, value){
@@ -72,14 +72,14 @@ ns.models.select = Backbone.Model.extend(
         },
 
         'selectFocused': function(){
-            if(this.get("focus")){
+            var open = this.get("open"),
+                focus = this.get("focus");
+            if(this.get("open") && this.get("focus")){
                 this.selectByCid(
                     this.get("focus")
                 );
             }
-            if (!this.isCheck()) {
-                this.toggleOpen(false);
-            }
+            this.toggleOpen(!open || this.isCheck() && focus);
         },
 
         'select': function(value){

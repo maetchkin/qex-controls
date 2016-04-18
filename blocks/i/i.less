@@ -1,12 +1,13 @@
 @border-color: rgba(0,0,0,0.2);
 @hover-border-color: fadein(@border-color, 10%);
-@focus-color: #fc0;
-@checked-color: #ffeba0;
+@focus-color: hsl(48,100%,50%);
+@checked-color: lighten(@focus-color, 30%);
 @pressed-color: #f3f1ed;
 @disabled-color: rgba(0, 0, 0, .08);
-@action-color: #ffdb4d;
-@action-hover-color: #ffd633;
-@action-pressed-color: #fc0;
+@action-color: lighten(@focus-color, 15%);
+@action-hover-color: lighten(@focus-color, 10%);
+@action-pressed-color: @focus-color;
+@action-focus-color: lighten(@focus-color, 20%);
 @off-color: rgba(0, 0, 0, .05);
 @disabled-on-color: rgba(0, 0, 0, .15);
 
@@ -29,6 +30,17 @@
     to {
         background-position: 0 0;
     }
+}
+
+@keyframes focus-ground {
+  from,
+  to {
+    background: @focus-color;
+  }
+  40%,
+  60% {
+    background: @action-focus-color;
+  }
 }
 
 .check{

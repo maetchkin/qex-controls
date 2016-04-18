@@ -7,24 +7,18 @@ i::button $data
     &"i-button.less"
     SET $block ("i-button")
     SET $model (ns.button($data))
-    div AS $button
-        @tabindex '0'
+    button AS $button
+        @type 'button'
         @class $block
         @class +($block + "__size-" + $model.get("size"))
         TEST ($model.get("loading"))
             @class +($block+"__loading")
-            @disabled
-            @tabindex '-1'
         TEST ($model.get("action"))
             @class +($block+"__action")
-        TEST ($model.get("pressed"))
-            @class +($block+"__pressed")
         TEST ($model.get("checked"))
             @class +($block+"__checked")
-        TEST ($model.get("disabled"))
-            @class +($block+"__disabled")
+        TEST ($model.isDisabled())
             @disabled
-            @tabindex '-1'
         div
             @class ($block+"__face")
             CHOOSE

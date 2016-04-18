@@ -1,6 +1,7 @@
 'use strict';
 
-var block = 'i-select';
+var block = 'i-select',
+    __block;
 
 ns.views.select = Backbone.View.extend({
     'events': {
@@ -47,11 +48,6 @@ ns.views.select = Backbone.View.extend({
         );
         this.listenTo(
             this.model,
-            'asyncInit',
-            this.proxyInit
-        );
-        this.listenTo(
-            this.model,
             'change:open',
             this.openHandler
         );
@@ -85,7 +81,12 @@ ns.views.select = Backbone.View.extend({
             case ns.keys.esc:
                 e.preventDefault();
                 this.model.set('open', false);
-            break;
+                break;
+            case ns.keys.enter:
+            case ns.keys.space:
+                e.preventDefault();
+                this.model.selectFocused();
+                break;
         }
     },
     'stop': function(e){
@@ -99,12 +100,15 @@ ns.views.select = Backbone.View.extend({
                 e.preventDefault();
                 e.stopPropagation();
                 (select.focusPrev() && this.scrollFocused(select.get('focus'), true)) || select.set('open', false);
-            break;
+                break;
             case ns.keys.down:
                 e.preventDefault();
                 e.stopPropagation();
                 select.get('open') ? (select.focusNext() && this.scrollFocused(select.get('focus'), false)) : select.set('open', true);
-            break;
+                break;
+            case ns.keys.enter:
+            case ns.keys.space:
+                e.preventDefault();
         }
     },
     'scrollFocused': function(cid, dir){
@@ -115,32 +119,39 @@ ns.views.select = Backbone.View.extend({
     },
     'popupHandler': function(open){
         this.$el.toggleClass( block + '__open', open);
+        
+        if (__block) {
+            return;
+        }
+
+        __block = true;
         this.model.set('open', open);
+        __block = false;
     },
     'openHandler': function(model, open) {
         if(!this.model.get('allowEmpty') && open){
-            this.$el.find('.i-button').not('[tabindex="-1"]').focus();
+            this.$el.find('.i-button').not('[disabled]').focus();
         }
+
+        if (__block) {
+            return;
+        }
+
+        __block = true;
         this.$popup[open ? 'show' : 'hide']();
-        open && this.$popup.position();
+        __block = false;
     },
     'buttonHandler': function(button, real) {
         if (this.model.get("focus")) {
             if( real ){
                 this.model.set("focus", void(0));
-                this.model.toggleOpen(false);
             } else {
                 this.model.selectFocused();
             }
-        } else {
-            this.model.toggleOpen();
         }
     },
     'selectedHandler': function(select, selected){
         this.$el.toggleClass( block + '__empty', (!selected || selected.length === 0));
-    },
-    'proxyInit': function(){
-        this.$button.trigger('asyncInit')
     },
     'proxyButton': function(e) {
         if(e.clientX){

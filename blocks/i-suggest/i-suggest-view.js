@@ -60,8 +60,8 @@ ns.views.suggest = Backbone.View.extend(
                         'mouseup':   this.stop,
                         'focus':     this.focus.bind(this, true),
                         'blur':      this.focus.bind(this, false),
-                        'keyup':     this.keyfilter.bind(this),
-                        'keydown':   this.keyfilter.bind(this)
+                        'keyup':     this.keyup.bind(this),
+                        'keydown':   this.keydown.bind(this),
                     });
 
                     $button.attr({'tabindex': -1});
@@ -79,22 +79,30 @@ ns.views.suggest = Backbone.View.extend(
             this.$el
                 .find('.i-button')
                 .toggleClass('i-button__pseudofocus', focus);
-            focus && this.model.get('select').trigger('asyncInit');
         },
 
         'stop': function(e){
             e.stopPropagation();
         },
 
-        'keyfilter': function(e){
+        'keydown': function(e){
             switch (e.which) {
-                case ns.keys.backspace:
-                    e.type === 'keyup' &&
-                        this.model.get('mode') === 'check' &&
-                        this.uncheckLast();
                 case ns.keys.space:
                     e.stopPropagation();
-                break;
+                    break;
+            }
+        },
+
+        'keyup': function(e){
+            switch (e.which) {
+                case ns.keys.backspace:
+                    this.model.get('mode') === 'check' &&
+                    this.uncheckLast();
+                    break;
+                case ns.keys.space:
+                    e.preventDefault();
+                    e.stopPropagation();
+                    break;
             }
         },
 

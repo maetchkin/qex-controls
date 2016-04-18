@@ -51,7 +51,7 @@ i-suggest-input $selected $select
     JS
         $select.set({
             'input': $input,
-            'open': false
+            'open': $select.isCheck() && $select.get('open')
         });
 
 

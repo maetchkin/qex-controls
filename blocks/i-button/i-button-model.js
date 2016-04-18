@@ -5,8 +5,8 @@ ns.models.button = Backbone.Model.extend(
             'checked':  false,
             'disabled': false,
             'loading':  false,
-            'template': void(0),
-            'init': false
+            'action':   false,
+            'template': void(0)
         },
         'isDisabled': function(){
             return this.get('disabled') || this.get('loading');

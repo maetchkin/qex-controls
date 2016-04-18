@@ -177,9 +177,9 @@ ns.views.popup = Backbone.View.extend({
         this.isAppended || this.append();
         e && e.preventDefault();
         this.$el.show();
-        this.position();
         this.$owner.parents().on('scroll resize', this.position);
         this.trigger('show');
+        this.position();
     },
     'hide': function() {
         this.$owner.parents().off('scroll resize', this.position);
@@ -233,12 +233,21 @@ ns.views.popup = Backbone.View.extend({
     },
     'listenToOwner': function(mode) {
         window.setTimeout(
-            $.fn.one.bind(
+            $.fn.on.bind(
                 this.$owner,
                 mode,
                 this.show
             ),
             0
+        );
+        this.once(
+            'show',
+            function() {
+                this.$owner.off(
+                    mode,
+                    this.show
+                );
+            }
         );
         this.once('hide', this.listenToOwner.bind(this, mode));
     },

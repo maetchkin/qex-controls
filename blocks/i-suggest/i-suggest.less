@@ -5,7 +5,11 @@
     & > .i-select > .i-button {
         cursor: hand;
 
-        &&__disabled {
+        &:active {
+            background: #FFF;
+        }
+
+        &:disabled {
             cursor: hand;
             border: 1px solid rgba(0, 0, 0, 0.2);
             background: #FFF;

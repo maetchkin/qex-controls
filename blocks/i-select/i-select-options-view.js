@@ -96,9 +96,9 @@ ns.views.selectOptions = Backbone.View.extend({
                 }
 
                 rendered.push($option.cid);
-
+                var focus = (select.get('focus') == $option.cid);
                 var li = top.li({
-                        'class':    block + ( !!index[$option.cid] ? ' '+block+'-selected' : '' ),
+                        'class':    block + ( !!index[$option.cid] ? ' '+block+'-selected' : '' ) + ( focus ? ' '+block+'-focus' : '' ),
                         'data-cid': $option.cid
                     });
 

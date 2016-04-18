@@ -19,30 +19,29 @@
     background: #FFF;
     transition: background 0.1s ease-out 0s;
 
-    &__action{
-        background: @action-color;
-    }
-    &__action&__hover{
-        background: @action-hover-color;
-    }
-
-    &__hover{
+    &:hover{
         border-color: @hover-border-color;
     }
 
-    &__pseudofocus{
+    &:active{
+        background: @pressed-color;
+
+    }
+
+    &:focus,
+    &&__pseudofocus{
         border-color: @focus-color;
         box-shadow: inset 0 0 0 1px @focus-color;
         outline:none;
     }
 
-    &::-moz-focus-inner {
-        border: 0;
+    &:disabled{
+        color: #999;
+        background-color: @disabled-color;
     }
 
-    &__disabled,
-    &__loading,
-    &__action{
+    &:disabled,
+    &&__action{
         &,
         &:focus,
         &:hover{
@@ -51,15 +50,40 @@
         }
     }
 
-    &__pressed{
-        background: @pressed-color;
+
+    &&__action:focus,
+    &&__action&__pseudofocus{
+        animation: focus-ground 1s linear infinite;
     }
 
-    &__checked&__pressed{
-        background: darken(@checked-color, 10%);
+    &&__action{
+        background: @action-color;
+        &:hover{
+            background: @action-hover-color;
+        }
+        &:active{
+            background: @action-pressed-color;
+            animation: none;
+        }
     }
-    &__action&__pressed{
-        background: @action-pressed-color;
+
+    
+
+    &&__checked{
+        background: @checked-color;
+
+        &:active{
+            background: darken(@checked-color, 10%);
+        }
+    }
+
+    &&__loading{
+        .loading(@disabled-color);
+        cursor: progress;
+    }
+    
+    &::-moz-focus-inner {
+        border: 0;
     }
 
     &__label{
@@ -70,30 +94,7 @@
         text-overflow: ellipsis;
     }
 
-    &__checked{
-        background: @checked-color;
-    }
-
-    &__disabled, &__loading{
-        .text{
-            color: #999;
-        }
-    }
-
-    &__disabled,
-    &__disabled&__hover{
-        cursor: default;
-
-        background-color: @disabled-color;
-    }
-
-    &__loading,
-    &__loading&__hover{
-        .loading(@disabled-color);
-        cursor: progress;
-    }
-
-    &__size{
+    &&__size{
         &-L{
             font-size: 1.25rem;
         }

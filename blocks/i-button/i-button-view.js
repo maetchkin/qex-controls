@@ -4,8 +4,6 @@ var changed = {},
             'keyup': 'keyAction',
             'mousedown': 'pressed',
             'mouseup': 'action',
-            'mouseout': 'mouseout',
-            'mouseover': 'mouseover',
             'click': 'stop',
             'focus': 'onfocus',
             'blur':  'onblur'
@@ -15,18 +13,14 @@ ns.views.button = Backbone.View.extend(
         'block': 'i-button',
 
         'events': {
-            'mouseover': 'asyncInit',
-            'focus': 'onfocus',
-            'blur':  'onblur'
+            'click': 'action'
         },
 
         'actions': {
-            'init':     ['setClass'],
             'action':   ['setClass'],
             'checked':  ['setClass'],
-            'disabled': ['setClass', 'disable'],
+            'disabled': ['disable'],
             'loading':  ['setClass', 'disable'],
-            'label':    ['renderFace'],
             'pseudofocus': ['setClass']
         },
 
@@ -41,11 +35,6 @@ ns.views.button = Backbone.View.extend(
             );
             this.listenTo(
                 this.model,
-                'asyncInit',
-                this.asyncInit
-            );
-            this.listenTo(
-                this.model,
                 'change',
                 this.onChange
             );
@@ -54,21 +43,6 @@ ns.views.button = Backbone.View.extend(
                 'update',
                 this.renderFace
             );
-        },
-
-        'asyncInit': function() {
-            if( !this.model.get('init') ){
-                this.delegateEvents(events);
-                this.model.set('init', true);
-            }
-        },
-
-        'onfocus': function(){
-            this.$el.addClass('i-button__pseudofocus');
-            this.asyncInit();
-        },
-        'onblur': function(){
-            this.$el.removeClass('i-button__pseudofocus');
         },
 
         'setActions': function(modifier) {
@@ -90,9 +64,6 @@ ns.views.button = Backbone.View.extend(
         },
 
         'stop': function(e) {
-            if (this.shouldIgnore(e)) {
-                return;
-            }
             e.preventDefault();
             e.stopPropagation();
         },
@@ -101,32 +72,8 @@ ns.views.button = Backbone.View.extend(
             return e && (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey || e.button > 0);
         },
 
-        'pressed': function(e) {
-            if (this.shouldIgnore(e)) {
-                return;
-            }
-            e && this.stop(e);
-            if (!this.model.isDisabled()) {
-                this.setClass('pressed', true);
-            }
-        },
-
-        'keyPressed': function(e) {
-            switch (e.which) {
-                case ns.keys.enter:
-                    this.enterPressed || this.pressed(e);
-                    this.enterPressed = true;
-                    break;
-                case ns.keys.space:
-                    this.spacePressed || this.pressed(e);
-                    this.spacePressed = true;
-                    break;
-            }
-        },
-
         'action': function(e) {
             var proxied = e.clientX > 0;
-            this.setClass('pressed', false);
             if (this.shouldIgnore(e)) {
                 return;
             }
@@ -140,39 +87,14 @@ ns.views.button = Backbone.View.extend(
             }
         },
 
-        'keyAction': function(e) {
-            switch (e.which) {
-                case ns.keys.enter:
-                    this.action(e);
-                    this.enterPressed = false;
-                    break;
-                case ns.keys.space:
-                    this.action(e);
-                    this.spacePressed = false;
-                    break;
-            }
-        },
-
-        'mouseout': function(e) {
-            this.setClass('hover', false);// async delay
-            !this.enterPressed && !this.spacePressed && this.setClass('pressed', false);
-        },
-
-        'mouseover': function(e) {
-            this.setClass('hover', true);// async delay
-            !this.enterPressed && !this.spacePressed;
-        },
-
         'setClass': function(modifier, value) {
             this.$el.toggleClass(this.block + '__' + modifier, !!value);
         },
         'disable': function(modifier, value) {
             if(this.model.isDisabled()){
                 this.$el.attr('disabled', true);
-                this.$el.attr('tabindex', '-1');
             } else {
                 this.$el.removeAttr('disabled');
-                this.$el.attr('tabindex', '0');
             }
         },
         'onChange': function() {

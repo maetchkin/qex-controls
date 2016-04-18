@@ -27,7 +27,9 @@ i::select $data $options
             'select':   $model
         }) AS $button
         JS
-            $popupOptions.owner = this;
+            $popupOptions.owner = this.firstChild;
+            $popupOptions.mode = 'click';
+
         i::popup $popupOptions AS $popup
             CALL i-select__options-list ($model) AS $optionsList
 
