@@ -7,7 +7,8 @@ var changed = {},
             'click': 'stop',
             'focus': 'onfocus',
             'blur':  'onblur'
-     };
+     },
+     rendering = false;
 ns.views.button = Backbone.View.extend(
     {
         'block': 'i-button',
@@ -107,14 +108,18 @@ ns.views.button = Backbone.View.extend(
             ) || this.renderFace();
         },
         'renderFace': function() {
+            if (rendering) {
+                return;
+            }
             var face = this.$('.i-button__face'),
                 template = this.model.get('template') || 'i-button__label';
                 face.empty();
-
+            rendering = true;
             $C.tpl[template].call(
                 face[0],
                 this.model
             );
+            rendering = false;
         }
     }
 );
