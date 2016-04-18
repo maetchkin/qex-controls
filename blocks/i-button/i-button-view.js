@@ -18,6 +18,7 @@ ns.views.button = Backbone.View.extend(
         },
 
         'actions': {
+            'label':    ['renderFace'],
             'action':   ['setClass'],
             'checked':  ['setClass'],
             'disabled': ['disable'],
@@ -105,16 +106,22 @@ ns.views.button = Backbone.View.extend(
                 {}.hasOwnProperty.bind(
                     this.actions
                 )
-            ) || this.renderFace();
+            ) || this.renderFaceD();
         },
-        'renderFace': function() {
+        'renderFaceD': function() {
             if (rendering) {
                 return;
             }
+            rendering = true;
+            window.setTimeout(
+                this.renderFace.bind(this),
+                0
+            );
+        },
+        'renderFace': function() {
             var face = this.$('.i-button__face'),
                 template = this.model.get('template') || 'i-button__label';
                 face.empty();
-            rendering = true;
             $C.tpl[template].call(
                 face[0],
                 this.model
