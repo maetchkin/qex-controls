@@ -49,7 +49,8 @@ ns.models.popup = Backbone.Model.extend(
             'tailAlign': 'center',
             'tailOffset': 0,
             'autoclose': true,
-            'delay': 500
+            'delay': 500,
+            'disabled': false
         }
     }
 );

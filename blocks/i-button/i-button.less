@@ -2,7 +2,7 @@
     @import (reference) "../i/i.less";
 
     cursor: pointer;
-    
+    display: inline-block;
     user-select: none;
     white-space: nowrap;
 
@@ -31,12 +31,13 @@
         outline:none;
     }
 
-    &:disabled{
+    &[disabled]{
         color: rgba(0,0,0,0.5);
+        cursor: default;
         background-color: @disabled-color;
     }
 
-    &:disabled,
+    &[disabled],
     &&__action{
         &,
         &:focus,
@@ -72,7 +73,7 @@
             background: darken(@checked-color, 10%);
         }
 
-        &:disabled{
+        &[disabled]{
             background: @disabled-on-color;
         }
     }

@@ -174,6 +174,9 @@ ns.views.popup = Backbone.View.extend({
         params.tail && this.styleTail();
     },
     'show': function(e) {
+        if (this.model.get('disabled')) {
+            return;
+        }
         this.isAppended || this.append();
         e && e.preventDefault();
         this.$el.show();

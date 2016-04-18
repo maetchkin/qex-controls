@@ -169,6 +169,7 @@ ns.views.select = Backbone.View.extend({
         var disabled = this.model.get('disabled');
         this.$el.toggleClass( block + '__disabled', !!disabled);
         this.$button.set('disabled', disabled);
+        this.$popup.model.set('disabled', disabled);
     },
     'proxyLoading': function() {
         var loading = this.model.get('loading');

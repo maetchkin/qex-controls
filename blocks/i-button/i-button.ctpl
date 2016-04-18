@@ -5,10 +5,34 @@ i::button $data
     &"i-button-model.js"
     &"i-button-view.js"
     &"i-button.less"
-    SET $block ("i-button")
     SET $model (ns.button($data))
-    button AS $button
-        @type 'button'
+    CHOOSE
+        WHEN ($model.get('fake'))
+            div AS $button
+                @tabindex '0'
+                i::button__face (this) $model
+        OTHERWISE
+            button AS $button
+                @type 'button'
+                i::button__face (this) $model
+
+    JS
+        new ns.views.button(
+            {
+                'el': $button,
+                'model': $model
+            }
+        );
+
+    EXPOSE $model
+
+i-button__label $model
+    span.i-button__label
+        ($model.get("label"))
+
+i::button__face $parent $model
+    SET $block ("i-button")
+    ^$parent
         @class $block
         @class +($block + "__size-" + $model.get("size"))
         TEST ($model.get("loading"))
@@ -26,17 +50,3 @@ i::button $data
                     CALL ($model.get("template")) ($model)
                 OTHERWISE
                     CALL i-button__label ($model)
-
-    JS
-        new ns.views.button(
-            {
-                'el': $button,
-                'model': $model
-            }
-        );
-
-    EXPOSE $model
-
-i-button__label $model
-    span.i-button__label
-        ($model.get("label"))

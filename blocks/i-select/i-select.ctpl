@@ -24,11 +24,13 @@ i::select $data $options
             'size':     $model.get('size'),
             'disabled': $model.get('disabled'),
             'template': $model.get('viewButton') ? "i-select__button" : void(0),
-            'select':   $model
+            'select':   $model,
+            'fake':     true
         }) AS $button
         JS
             $popupOptions.owner = this.firstChild;
             $popupOptions.mode = 'click';
+            $popupOptions.disabled = $model.get('disabled');
 
         i::popup $popupOptions AS $popup
             CALL i-select__options-list ($model) AS $optionsList
