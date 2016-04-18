@@ -12,6 +12,9 @@ ns.select = function(data, _options){
             },
         OptionsCollection = Backbone.Collection.extend({
             'parse': function(data) {
+                if (Object.prototype.toString.call(data) !== '[object Array]') {
+                    data = [data];
+                }
                 return data.map(parse);
             }
         }),
