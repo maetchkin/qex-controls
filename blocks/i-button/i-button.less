@@ -32,7 +32,7 @@
     }
 
     &:disabled{
-        color: #999;
+        color: rgba(0,0,0,0.5);
         background-color: @disabled-color;
     }
 
@@ -70,6 +70,10 @@
 
         &:active{
             background: darken(@checked-color, 10%);
+        }
+
+        &:disabled{
+            background: @disabled-on-color;
         }
     }
 
