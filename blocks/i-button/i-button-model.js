@@ -7,7 +7,7 @@ ns.models.button = Backbone.Model.extend(
             'loading':  false,
             'action':   false,
             'template': void(0),
-            'fake':     true
+            'fake':     false
         },
         'isDisabled': function(){
             return this.get('disabled') || this.get('loading');
