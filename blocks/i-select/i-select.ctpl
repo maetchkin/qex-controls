@@ -20,7 +20,7 @@ i::select $data $options
             @class +($block + "__disabled")
 
         i::button ({
-            'label':    $model.get('label'),
+            'label':    $model.get('label') || $model.get('placeholder'),
             'size':     $model.get('size'),
             'disabled': $model.get('disabled'),
             'template': $model.get('viewButton') ? "i-select__button" : void(0),
