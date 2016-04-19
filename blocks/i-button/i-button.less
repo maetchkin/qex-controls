@@ -50,12 +50,14 @@
 
     &&__action:focus,
     &&__action&__pseudofocus{
-        animation: focus-ground 1s linear infinite;
+        &:not([disabled]) {
+            animation: focus-ground 1s linear infinite;
+        }
     }
 
     &&__action{
         background: @action-color;
-        &:hover{
+        &:hover:not([disabled]) {
             background: @action-hover-color;
         }
         &:active{
