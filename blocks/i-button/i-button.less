@@ -55,9 +55,9 @@
         }
     }
 
-    &&__action{
+    &&__action:not([disabled]){
         background: @action-color;
-        &:hover:not([disabled]) {
+        &:hover {
             background: @action-hover-color;
         }
         &:active{
