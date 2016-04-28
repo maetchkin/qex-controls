@@ -1,0 +1,102 @@
+i-check-example
+    ul.i-example__list
+        li.i-example__list-item
+            CTPL-SHOW Usage
+                i::check /* ( options ) */
+            CALL i-check-example__options
+            CALL i-check-example__sizing
+            CALL i-check-example__disabled
+            CALL i-check-example__on
+
+i-check-example__options
+    h4
+        "Options"
+    p
+        dl
+            dt
+                "size"
+            dd
+                "String. L or M. M by default"
+            dt
+                "disabled"
+            dd
+                "Boolean. false by default"
+            dt
+                "on"
+            dd
+                "Boolean. false by default"
+            dt
+                "label"
+            dd
+                "String"
+            dt
+                "template"
+            dd
+                "Custom conkitty template name"
+
+i-check-example__sizing
+    CTPL-SUITE Sizing
+        CTPL-CODE Sizing scale
+            div.i-example__button-sizing
+                div AS $Lsize
+                    @style "width:32%"
+                    i::check ({
+                        'size': 'L',
+                        'label': 'L'
+                    })
+                div AS $Msize
+                    @style "width:32%"
+                    i::check ({
+                        'size': 'M',
+                        'label': 'M'
+                    })
+
+        CTPL-TEST test L > M
+            var $L  = $($Lsize.firstChild),
+                $M  = $($Msize.firstChild);
+            // check classes
+            expect( $L.hasClass('i-check__size-L')  ).to.be.true;
+            expect( $M.hasClass('i-check__size-M')  ).to.be.true;
+            // check size
+            expect( $L.height() > $M.height()  ).to.be.true;
+
+
+i-check-example__disabled
+    CTPL-SUITE Disabled
+        CTPL-CODE Disabled
+            span AS $container
+                i::check ({
+                    'disabled': true,
+                    'label': 'Disabled'
+                }) AS $check
+            SET $node ($($container.firstChild))
+            SET $nodeButton ($node.find('.i-button'))
+
+        CTPL-TEST set 'disabled'
+            expect( $check ).to.be.an.instanceof(Backbone.Model);
+            expect( $check.get('disabled') ).to.be.true();
+            expect( $node.hasClass('i-check_disabled') ).to.be.true;
+            expect( $nodeButton.attr('disabled') ).to.be.ok;
+            $check.set('disabled', false);
+            expect( $node.hasClass('i-check_disabled') ).to.be.false;
+            expect( $nodeButton.attr('disabled') ).to.be.not.ok;
+
+i-check-example__on
+    CTPL-SUITE On
+        CTPL-CODE On
+            span AS $container
+                i::check ({
+                    'on': true,
+                    'label': 'Label is clickable'
+                }) AS $check
+            SET $node ($($container.firstChild))
+            SET $nodeButton ($node.find('.i-button'))
+
+        CTPL-TEST set 'on'
+            expect( $check ).to.be.an.instanceof(Backbone.Model);
+            expect( $check.get('on') ).to.be.true();
+            expect( $node.hasClass('i-check_state_on') ).to.be.true;
+            expect( $nodeButton.hasClass('i-button__checked') ).to.be.true;
+            $check.set('on', false);
+            expect( $node.hasClass('i-check_state_on') ).to.be.false;
+            expect( $nodeButton.hasClass('i-button__checked') ).to.be.false;

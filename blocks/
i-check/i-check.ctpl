@@ -1,0 +1,37 @@
+i::check $data
+    &"../i/i.js"
+    &"../i/i.less"
+    &"i-check-model.js"
+    &"i-check-view.js"
+    &"i-check.less"
+    SET $block ("i-check")
+    SET $model (new ns.models.check($data))
+    div AS $check
+        @class $block
+        @class +($block + "__size-" + $model.get("size"))
+        TEST ($model.get("disabled"))
+            @class +($block+"_disabled")
+        TEST ($model.get("on"))
+            @class +($block+"_state_on")
+        div
+            @class ($block + "__button")
+            i::button ({
+                'size': $model.get('size'),
+                'checked': $model.get('on'),
+                'disabled': $model.get('disabled')
+            }) AS $button
+        div
+            @class ($block + "__label")
+            CALL ($model.get("template")) ($model)
+    JS
+        new ns.views.check(
+            {
+                'el':       $check,
+                'model':    $model,
+                'button':   $button
+            }
+        )
+    EXPOSE $model
+
+i-check__label $model
+    ($model.get("label"))

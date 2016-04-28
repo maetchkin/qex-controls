@@ -174,13 +174,18 @@ ns.models.suggest = Backbone.Model.extend(
 
         'setFiltered': function(){
             var select = this.get('select'),
+                input = select.get('input'),
                 filter = this.get('filter') && (typeof this.get('filter') === 'function') ? this.get('filter') : this.filter,
                 filtered = {};
+
+            if (!input) {
+                return;
+            }
 
             this.get('data').models.forEach(
                 function (option) {
 
-                    if ( ! filter.call(this, option, select.get('input').get('value') ) ) {
+                    if ( ! filter.call(this, option, input.get('value') ) ) {
                         filtered[option.cid] = true;
                     }
                 },
