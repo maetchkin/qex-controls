@@ -65,6 +65,10 @@ i-popup-example
                         "delay"
                     dd
                         "Time in ms. 500 by default"
+                    dt
+                        "className"
+                    dd
+                        "Space-separated list of classes"
 
 
 

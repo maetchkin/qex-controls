@@ -4,6 +4,7 @@ i::popup $data
     &"i-popup-view.js"
     SET $model ("get" in $data ? $data : new ns.models.popup($data))
     div.i-popup AS $popup
+        @class +($model.get('className'))
         TEST ($model.get('tail'))
             div.i-popup__tail
         PAYLOAD

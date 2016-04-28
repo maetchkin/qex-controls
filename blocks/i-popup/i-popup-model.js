@@ -50,7 +50,8 @@ ns.models.popup = Backbone.Model.extend(
             'tailOffset': 0,
             'autoclose': true,
             'delay': 500,
-            'disabled': false
+            'disabled': false,
+            'className': ''
         }
     }
 );
