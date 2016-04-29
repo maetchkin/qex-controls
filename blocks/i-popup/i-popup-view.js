@@ -180,12 +180,24 @@ ns.views.popup = Backbone.View.extend({
         this.isAppended || this.append();
         e && e.preventDefault();
         this.$el.show();
-        this.$owner.parents().on('scroll resize', this.position);
+        this.$owner
+            .parents()
+            .add(window)
+            .on(
+                'scroll resize',
+                this.position
+            );
         this.trigger('show');
         this.position();
     },
     'hide': function() {
-        this.$owner.parents().off('scroll resize', this.position);
+        this.$owner
+            .parents()
+            .add(window)
+            .off(
+                'scroll resize',
+                this.position
+            );
         this.$el.hide();
         this.trigger('hide');
         
