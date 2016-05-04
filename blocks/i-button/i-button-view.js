@@ -7,8 +7,7 @@ var changed = {},
             'click': 'stop',
             'focus': 'onfocus',
             'blur':  'onblur'
-     },
-     rendering = false;
+     }
 ns.views.button = Backbone.View.extend(
     {
         'block': 'i-button',
@@ -109,10 +108,10 @@ ns.views.button = Backbone.View.extend(
             ) || this.renderFaceD();
         },
         'renderFaceD': function() {
-            if (rendering) {
+            if (this.rendering) {
                 return;
             }
-            rendering = true;
+            this.rendering = true;
             window.setTimeout(
                 this.renderFace.bind(this),
                 0
@@ -127,7 +126,7 @@ ns.views.button = Backbone.View.extend(
                 face[0],
                 this.model
             );
-            rendering = false;
+            this.rendering = false;
         }
     }
 );
