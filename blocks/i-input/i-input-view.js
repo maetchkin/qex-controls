@@ -79,7 +79,8 @@ ns.views.input = Backbone.View.extend(
         'readInput': function(input){
             input.model.set('value', input.$input.val());
         },
-        'clear': function() {
+        'clear': function(e) {
+            e.stopPropagation();
             this.$input.val('');
             this.$input.focus();
             this.$input.trigger('input');

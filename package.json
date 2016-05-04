@@ -1,6 +1,6 @@
 {
   "name": "qex-controls",
-  "version": "0.8.5",
+  "version": "0.9.0",
   "main": "./index.js",
   "scripts": {
     "build": "gulp",

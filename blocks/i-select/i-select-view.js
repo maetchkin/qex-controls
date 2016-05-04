@@ -106,6 +106,9 @@ ns.views.select = Backbone.View.extend({
                 e.stopPropagation();
                 select.get('open') ? (select.focusNext() && this.scrollFocused(select.get('focus'), false)) : select.set('open', true);
                 break;
+            case ns.keys.backspace:
+                e.target.tagName == 'INPUT' || e.preventDefault();
+                break;
             case ns.keys.enter:
             case ns.keys.space:
                 e.preventDefault();

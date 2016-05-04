@@ -121,7 +121,8 @@ ns.views.button = Backbone.View.extend(
         'renderFace': function() {
             var face = this.$('.i-button__face'),
                 template = this.model.get('template') || 'i-button__label';
-                face.empty();
+            this.el.focus();
+            face.empty();
             $C.tpl[template].call(
                 face[0],
                 this.model

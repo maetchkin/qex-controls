@@ -49,24 +49,24 @@
                 }
             }
 
-            & > .i-input {
-                & > .i-input__input {
-                    border: 0;
-                    padding: 0;
-                    background: transparent;
-                    &:focus {
-                        box-shadow: none;
-                    }
-                }
-                & > .i-input__clear{
-                    display: none;
+            & > .i-input > .i-input__input {
+                padding-left: 0;
+                border: 0;
+                background: transparent;
+                &:focus {
+                    box-shadow: none;
                 }
             }
         }
     }
 
-    &&__param > .i-select:after {
-        display: none;
+    &&__param > .i-select{
+        & > .i-button{
+            padding-right: 0;
+        }
+        &:after {
+            display: none;
+        }
     }
 
     &&__loading > .i-select:after {
@@ -87,6 +87,20 @@
         right: calc(.5rem);
     }
 
+    &&__loading > .i-select > .i-button > .i-button__face > .i-input > .i-input__clear{
+        display: none;
+    }
+
+    &:not(.i-suggest__param){
+        & > .i-select > .i-button > .i-button__face > .i-input{
+            & > .i-input__input {
+                padding-right: 0;
+            }
+            & > .i-input__clear{
+                display: none;
+            }
+        } 
+    }
 }
 
 
