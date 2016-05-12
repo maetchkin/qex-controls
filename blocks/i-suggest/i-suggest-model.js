@@ -140,7 +140,7 @@ ns.models.suggest = Backbone.Model.extend(
 
         'setSelected': function(){
             var select = this.get('select');
-            select.set('filtered',{});
+            this.get('mode') === 'check' || this.select.set('filtered',{});
             this.set('selected', select.get('selected'));
             setTimeout(
                 function(){
