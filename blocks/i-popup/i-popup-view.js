@@ -41,6 +41,7 @@ ns.views.popup = Backbone.View.extend({
     'initialize': function() {
         var mode = this.model.get('mode');
         this.$owner = $(this.model.get('owner'));
+        this.$owner[0]['__popup'] = this;
         this.show = this.show.bind(this);
         this.setShowTimeout = this.setShowTimeout.bind(this);
         this.clearShowTimeout = this.clearShowTimeout.bind(this);
@@ -215,7 +216,6 @@ ns.views.popup = Backbone.View.extend({
         this.model.get('autoclose') && this.once('show', this.addAutoclose);
         container.appendChild(this.el);
         this.isAppended = true;
-        this.$owner[0]['__popup'] = this;
         this.on('destroy', this.autodestroy);
         this.$el.css('font-size', this.$owner.css('font-size'));
     },
