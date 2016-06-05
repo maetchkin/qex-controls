@@ -177,7 +177,7 @@ ns.views.popup = Backbone.View.extend({
         params.tail && this.styleTail();
     },
     'show': function(e) {
-        if (this.model.get('disabled')) {
+        if (this.model.get('disabled') || this.destroyed) {
             return;
         }
         this.isAppended || this.append();
@@ -206,6 +206,9 @@ ns.views.popup = Backbone.View.extend({
         
     },
     'append': function() {
+        if (this.destroyed) {
+            return;
+        }
         var container = this.$owner.closest('.i-popup')[0] || document.body;
         this.model.getDimensions();
         this.position = this.position.bind(this);
@@ -221,6 +224,7 @@ ns.views.popup = Backbone.View.extend({
     'autodestroy': function() {
         this.hide();
         this.remove();
+        this.destroyed = true;
     },
     'addAutoclose': function() {
         window.setTimeout(
