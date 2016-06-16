@@ -81,6 +81,11 @@ ns.views.selectOptions = Backbone.View.extend({
             filtered= select.get('filtered'),
             rendered= [];
 
+        this.model.get('allowEmpty') || this.model.set(
+          'disabled',
+          !options.length
+        );
+
         // render only when select is visible
         if (!select.get('open')) {
             select.set('rendered', false);
@@ -115,10 +120,7 @@ ns.views.selectOptions = Backbone.View.extend({
                         ).end();
             }
         );
-        this.model.get('allowEmpty') || this.model.set(
-            'disabled',
-            !options.length
-        );
+
         top.end();
         select.set('rendered', rendered);
     },
